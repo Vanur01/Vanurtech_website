@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with base URL
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080/api/v1',
+  baseURL: 'https://backend.vanurmedia.com/api/v1',
     // baseURL: 'https://backend.vanurmedia.com/api/v1',
   headers: {
     'Content-Type': 'application/json',
