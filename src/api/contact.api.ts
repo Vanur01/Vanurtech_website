@@ -3,11 +3,11 @@ import axiosInstance from './axios.config';
 // Contact form data interface
 export interface ContactFormData {
   name: string;
-  email: string;
+  email?: string;
   phone: string;
   company?: string;
-  services: string[];
-  message: string;
+  services?: string[];
+  message?: string;
 }
 
 // Contact response interface
@@ -17,11 +17,11 @@ export interface ContactResponse {
   message: string;
   result: {
     name: string;
-    email: string;
+    email?: string;
     phone:string;
     company?: string;
-    services: string[];
-    message: string;
+    services?: string[];
+    message?: string;
     _id: string;
     createdAt: string;
     updatedAt: string;

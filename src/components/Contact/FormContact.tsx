@@ -24,7 +24,7 @@ export default function FormContact() {
     'CRM Solutions',
     'Graphics Design',
     'SEO Services',
-    'Digital Marketing'
+   
   ];
 
   const handleInterestToggle = (interest: string) => {
@@ -133,7 +133,7 @@ export default function FormContact() {
               </div>
               <div>
                 <label className="block text-white text-sm mb-3 font-medium">
-                  Email <span className="text-purple-500">*</span>
+                  Email 
                 </label>
                 <input
                   type="email"
@@ -186,13 +186,13 @@ export default function FormContact() {
             {/* Message */}
             <div>
               <label className="block text-white text-sm mb-3 font-medium">
-                Message <span className="text-purple-500">*</span>
+                Message 
               </label>
               <textarea
                 placeholder="What's on your mind?"
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
-                required
+                
                 rows={5}
                 className="w-full bg-transparent border-2 border-gray-700 rounded-xl text-white placeholder-gray-500 p-4 focus:border-purple-500 focus:outline-none transition-colors resize-none"
               />

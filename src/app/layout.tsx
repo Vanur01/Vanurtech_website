@@ -3,6 +3,11 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FacebookPixel from "../components/FacebookPixel";
+import GoogleTag from "@/components/GoogleTag";
+
+
+
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -21,7 +26,7 @@ export const metadata: Metadata = {
   },
   description: "Vanur Media is a leading web development agency specializing in custom web applications , mobile apps, SEO optimization, and innovative digital solutions for businesses worldwide.",
   keywords: [
-    "digital marketing agency",
+    // "digital marketing agency",
     "web development",
     "mobile app development",
     "SEO services",
@@ -189,16 +194,21 @@ export default function RootLayout({
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://backend.vanurmedia.com" />
+        <link rel="preconnect" href="https://backend.vanurmedia.com"/>
         
-        {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://backend.vanurmedia.com" />
       </head>
       <body
         className={`${montserrat.variable} antialiased`}
       >
+        {/* ✅ Tracking scripts FIRST */}
+        <GoogleTag/>
+        <FacebookPixel />
+
+        {/* ✅ UI */}
         <Navbar />
+
         <main id="main-content" role="main">
           {children}
         </main>

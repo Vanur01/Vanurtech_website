@@ -6,73 +6,65 @@ import { ExternalLink } from 'lucide-react';
 import { projectApi, Project, categoryApi, Category } from '@/api';
 
 export default function ProjectsGrid() {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [allProjects, setAllProjects] = useState<Project[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearch, setDebouncedSearch] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const itemsPerPage = 24;
 
 
+  const [openPopup, setOpenPopup] = useState(false);
+  const [selectedWebsite, setSelectedWebsite] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Debounce search term
+  /* debounce search */
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(searchTerm);
       setCurrentPage(1);
     }, 500);
-
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
-  // Fetch categories once
+  /* fetch categories */
   useEffect(() => {
     const fetchCategories = async () => {
-      try {
-        const categoriesResponse = await categoryApi.getAllCategories({ limit: 100 });
-        if (categoriesResponse.success && categoriesResponse.result && Array.isArray(categoriesResponse.result)) {
-          const validCategories = categoriesResponse.result.filter(
-            (cat): cat is Category => typeof cat === 'object' && cat !== null && 'name' in cat
-          );
-          setCategories(validCategories);
-        }
-      } catch (err: any) {
-        console.error('Failed to fetch categories:', err);
-      }
+      const res = await categoryApi.getAllCategories({ limit: 100 });
+      if (res.success) setCategories(res.result);
     };
-
     fetchCategories();
   }, []);
 
-  // Fetch projects with search only
+  /* fetch projects */
   useEffect(() => {
     const fetchProjects = async () => {
       setIsLoading(true);
-      setError('');
-      
+      setError("");
       try {
-        const projectsResponse = await projectApi.getAllProjects({
+        const res = await projectApi.getAllProjects({
           page: 1,
           limit: 1000,
           search: debouncedSearch,
         });
-
-        if (projectsResponse.success) {
-          setAllProjects(projectsResponse.result.projects);
-        }
+        if (res.success) setAllProjects(res.result.projects);
       } catch (err: any) {
-        setError(err.message || 'Failed to fetch projects');
+        setError(err.message || "Failed to fetch projects");
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchProjects();
   }, [debouncedSearch]);
+  
+
+
 
   
  // Frontend filtering by category
@@ -351,6 +343,75 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps) {
+
+  const [openPopup, setOpenPopup] = useState(false);
+  const [selectedWebsite, setSelectedWebsite] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [formError, setFormError] = useState("");
+   const [formSuccess, setFormSuccess] = useState("");
+
+
+
+  const handleVisitClick = (website: string) => {
+  setSelectedWebsite(website);
+  setOpenPopup(true);
+};
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  setFormError("");
+  setFormSuccess("");
+
+  if (!name.trim()) {
+    setFormError("Name is required");
+    return;
+  }
+
+  if (!/^[6-9]\d{9}$/.test(phone)) {
+    setFormError("Please enter a valid Indian phone number");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    const res = await fetch("https://backend.vanurmedia.com/api/v1/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setFormError(data.message || "Something went wrong");
+      return;
+    }
+
+    // ✅ success
+    setFormSuccess("Thank you! Redirecting to website…");
+
+    setTimeout(() => {
+      if (selectedWebsite) {
+        window.open(selectedWebsite, "_blank");
+      }
+      setOpenPopup(false);
+      setName("");
+      setPhone("");
+      setFormSuccess("");
+    }, 1500);
+
+  } catch (err) {
+    setFormError("Server error. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
   return (
     <div
       className="group relative h-full"
@@ -385,15 +446,15 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
           
           {/* Visit Website Button */}
           {project.website && (
-            <a
-              href={project.website}
-              target="_blank"
+            <button
+              onClick={() => handleVisitClick(project.website!)}
+              
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
             >
               <span>Visit Website</span>
               <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-            </a>
+            </button>
           )}
         </div>
 
@@ -419,6 +480,66 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
         className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none"
         style={{ zIndex: -1 }}
       ></div>
+      {openPopup && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full max-w-md rounded-2xl bg-[#14001f] p-8 space-y-6"
+    >
+      
+
+      <h2 className="text-2xl font-bold text-white">
+        Enter your details
+      </h2>
+
+      <input
+        value={name}
+    onChange={(e) => setName(e.target.value)}
+    placeholder="Name"
+        className="w-full bg-transparent border-b border-white/30 text-white py-2 outline-none"
+      />
+
+      <input
+          value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    placeholder="Phone"
+        className="w-full bg-transparent border-b border-white/30 text-white py-2 outline-none"
+      />
+
+       {formError && (
+    <div className="w-full rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-red-400 text-sm flex items-center gap-2">
+      <span className="text-red-400">✖</span>
+      {formError}
+    </div>
+  )}
+
+  {/* Success Message */}
+  {formSuccess && (
+    <div className="w-full rounded-xl bg-green-500/10 border border-green-500/30 px-4 py-3 text-green-400 text-sm flex items-center gap-2">
+      <span className="text-green-400">✔</span>
+      {formSuccess}
+    </div>
+  )}
+
+
+      <button
+        disabled={loading}
+        className="w-full rounded-full bg-purple-600 py-3 text-white"
+      >
+        {loading ? "Submitting..." : "Submit & Continue"}
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setOpenPopup(false)}
+        className="w-full text-sm text-white/60"
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
+)}
+
     </div>
   );
 }

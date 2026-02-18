@@ -2,13 +2,13 @@ import axios from 'axios';
 
 // Create axios instance with base URL
 const axiosInstance = axios.create({
-  baseURL: 'https://backend.vanurmedia.com/api/v1',
-    // baseURL: 'https://backend.vanurmedia.com/api/v1',
+    baseURL: 'https://backend.vanurmedia.com/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },
   timeout: 10000, // 10 seconds timeout
 });
+
 
 // Request interceptor
 axiosInstance.interceptors.request.use(

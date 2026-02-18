@@ -132,7 +132,7 @@ export default function ServicesSection() {
     {
       id: 6,
       category: "Growth & Engagement",
-      title: "Digital Marketing",
+      title: " Marketing",
       icon: Smartphone,
       features: [
         {
@@ -140,7 +140,7 @@ export default function ServicesSection() {
           description: "transform your site into native mobile apps",
         },
         {
-          title: "Custom Mobile App Development:",
+          title: "Custom App:",
           description: "feature-rich apps for iOS and Android",
         },
         {
@@ -150,7 +150,7 @@ export default function ServicesSection() {
         {
           title: "Integrated Features & Real-time Sync:",
           description: "live updates and seamless data synchronization",
-        },
+        },  
       ],
     },
   ];
