@@ -1,4 +1,5 @@
 "use client";
+import DOMPurify from "dompurify";
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -17,8 +18,7 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import CTASection from "@/components/CTASection";
 import { useParams } from "next/navigation";
 import { blogApi, Blog } from "@/api";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+
 
 const BlogDetailPage = () => {
   const params = useParams();
@@ -157,11 +157,12 @@ const BlogDetailPage = () => {
           className="w-full h-96 object-cover rounded-2xl mb-12"
         />
 
-        <div className="prose prose-invert max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {post.content}
-          </ReactMarkdown>
-        </div>
+       <div
+  className="prose prose-invert max-w-none"
+  dangerouslySetInnerHTML={{
+    __html: DOMPurify.sanitize(post.content),
+  }}
+/>
       </div>
 
       <CTASection />

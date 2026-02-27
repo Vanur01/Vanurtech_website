@@ -78,6 +78,9 @@ export default function BlogGrid() {
     });
   };
 
+const stripHtml = (html: string) =>
+  html.replace(/<[^>]*>?/gm, '');
+
   return (
     <div className="min-h-screen py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8" style={{ backgroundColor: '#0A0012' }}>
       <div className="max-w-7xl mx-auto">
@@ -181,7 +184,9 @@ export default function BlogGrid() {
                             
                             <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">
                               {blog.content.substring(0, 100)}...
-                            </p>
+                            </p><p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">
+  {stripHtml(blog.content).substring(0, 100)}...
+</p>
 
                             {/* Tags */}
                             <div className="flex flex-wrap gap-2 mb-4">

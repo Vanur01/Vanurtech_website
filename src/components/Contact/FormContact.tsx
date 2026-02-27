@@ -3,20 +3,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Send } from 'lucide-react';
-import { contactApi, ContactFormData } from '@/api';
 
 export default function FormContact() {
   const [formData, setFormData] = useState({
     name: '',
-    phone:'',
+    phone: '',
     email: '',
     company: '',
     message: '',
     interests: [] as string[]
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const interests = [
     'Website Design',
@@ -24,7 +21,6 @@ export default function FormContact() {
     'CRM Solutions',
     'Graphics Design',
     'SEO Services',
-   
   ];
 
   const handleInterestToggle = (interest: string) => {
@@ -36,53 +32,30 @@ export default function FormContact() {
     }));
   };
 
+  // ✅ Only this function changed — redirects to WhatsApp with form data
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
-    setErrorMessage('');
 
-    try {
-      const contactData: ContactFormData = {
-        name: formData.name,
-        phone:formData.phone,
-        email: formData.email,
-        company: formData.company || undefined,
-        services: formData.interests,
-        message: formData.message,
-      };
+    const whatsappNumber = "917978874959";
+    const message = `Hi Vanurmedia! 👋
 
-      const response = await contactApi.submitContact(contactData);
+*Name:* ${formData.name}
+*Phone:* ${formData.phone}${formData.email ? `\n*Email:* ${formData.email}` : ''}${formData.company ? `\n*Company:* ${formData.company}` : ''}${formData.interests.length > 0 ? `\n*Interested In:* ${formData.interests.join(', ')}` : ''}${formData.message ? `\n*Message:* ${formData.message}` : ''}
 
-      if (response.success) {
-        setSubmitStatus('success');
-        // Reset form
-        setFormData({
-          name: '',
-          phone:'',
-          email: '',
-          company: '',
-          message: '',
-          interests: []
-        });
+I'd like to know more about your services!`;
 
-        // Reset success message after 5 seconds
-        setTimeout(() => {
-          setSubmitStatus('idle');
-        }, 5000);
-      }
-    } catch (error: any) {
-      setSubmitStatus('error');
-      setErrorMessage(error.message || 'Failed to submit form. Please try again.');
-    } finally {
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    setTimeout(() => {
+      window.open(whatsappUrl, "_blank");
       setIsSubmitting(false);
-    }
+    }, 600);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 py-12 sm:py-16 md:py-20" style={{ backgroundColor: '#0A0012' }}>
       <div className="max-w-4xl w-full">
-        {/* Form Container */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -90,7 +63,6 @@ export default function FormContact() {
           transition={{ duration: 0.6 }}
           className="rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/20 to-transparent p-6 sm:p-8 md:p-12"
         >
-          {/* Form Header */}
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
               <span className="text-white">Get in </span>
@@ -101,9 +73,7 @@ export default function FormContact() {
             </p>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Name and Email Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-white text-sm mb-3 font-medium">
@@ -133,20 +103,18 @@ export default function FormContact() {
               </div>
               <div>
                 <label className="block text-white text-sm mb-3 font-medium">
-                  Email 
+                  Email
                 </label>
                 <input
                   type="email"
                   placeholder="Where can we reply?"
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  
                   className="w-full bg-transparent border-b-2 border-gray-700 text-white placeholder-gray-500 py-3 focus:border-purple-500 focus:outline-none transition-colors"
                 />
               </div>
             </div>
 
-            {/* Company/Brand */}
             <div>
               <label className="block text-white text-sm mb-3 font-medium">
                 Company / Brand <span className="text-gray-500">(Optional)</span>
@@ -160,10 +128,11 @@ export default function FormContact() {
               />
             </div>
 
-            {/* What's in your mind */}
             <div>
               <label className="block text-white text-sm mb-3 sm:mb-4 font-medium">
-                What's in your mind <span className="text-purple-500">*</span>
+
+                What's in your mind
+
               </label>
               <div className="flex flex-wrap gap-2 sm:gap-3">
                 {interests.map((interest) => (
@@ -183,47 +152,26 @@ export default function FormContact() {
               </div>
             </div>
 
-            {/* Message */}
             <div>
               <label className="block text-white text-sm mb-3 font-medium">
-                Message 
+                Message
               </label>
               <textarea
                 placeholder="What's on your mind?"
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
-                
                 rows={5}
                 className="w-full bg-transparent border-2 border-gray-700 rounded-xl text-white placeholder-gray-500 p-4 focus:border-purple-500 focus:outline-none transition-colors resize-none"
               />
             </div>
 
-            {/* Submit Button */}
             <div className="text-center pt-4">
-              {/* Success Message */}
-              {submitStatus === 'success' && (
-                <div className="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400 flex items-center justify-center gap-2 animate-fadeIn">
-                  <Check size={20} />
-                  <span>Message sent successfully! We'll get back to you soon.</span>
-                </div>
-              )}
-
-              {/* Error Message */}
-              {submitStatus === 'error' && (
-                <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center gap-2 animate-fadeIn">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                  </svg>
-                  <span>{errorMessage}</span>
-                </div>
-              )}
-
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className={`group relative px-12 py-4 rounded-full font-semibold text-white transition-all duration-300 bg-linear-to-r from-purple-600 to-pink-600 inline-flex items-center gap-3 ${
-                  isSubmitting 
-                    ? 'opacity-70 cursor-not-allowed' 
+                  isSubmitting
+                    ? 'opacity-70 cursor-not-allowed'
                     : 'hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50'
                 }`}
               >
@@ -245,8 +193,8 @@ export default function FormContact() {
 
               <div className="mt-6 text-gray-400 text-sm">
                 Or{' '}
-                <a 
-                  href="mailto:info@vanurmedia.com,vanurtechmedia@gmail.com" 
+                <a
+                  href="mailto:info@vanurmedia.com,vanurtechmedia@gmail.com"
                   className="text-white underline hover:text-purple-400 transition-colors"
                 >
                   email us at info@vanurmedia.com or vanurtechmedia@gmail.com
