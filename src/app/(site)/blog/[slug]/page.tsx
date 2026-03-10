@@ -1,5 +1,4 @@
 "use client";
-import DOMPurify from "dompurify";
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -8,13 +7,6 @@ import {
   Clock,
   Tag,
   ArrowLeft,
-  Share2,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Activity,
-  Eye,
-  TrendingUp,
   BookOpen,
   Flame,
 } from "lucide-react";
@@ -23,6 +15,7 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import CTASection from "@/components/CTASection";
 import { useParams } from "next/navigation";
 import { blogApi, Blog } from "@/api";
+import BlogContent from "@/components/Blog/BlogContent"; // ← NEW IMPORT
 
 /* ─────────────────────────────────────────
    Recent-Activity sidebar data shape
@@ -105,7 +98,6 @@ const RecentActivitySidebar = ({
 
   return (
     <aside className="w-full">
-      {/* ── sticky wrapper ── */}
       <div className="sticky top-24 space-y-3">
         {/* Header */}
         <div className="flex items-center gap-2 mb-5">
@@ -134,75 +126,67 @@ const RecentActivitySidebar = ({
           ) : activities.filter((a) => a.slug !== currentSlug).length === 0 ? (
             <div className="text-[11px] text-gray-500 text-center py-4">No recent blogs found.</div>
           ) : (
-                activities
-                .filter((a) => a.slug !== currentSlug)
-                .slice(0, 10)
-                .map((item, idx) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, x: 16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.07, duration: 0.35 }}
-                  >
-                    <Link href={`/blog/${item.slug}`}>
-                      <div
+            activities
+              .filter((a) => a.slug !== currentSlug)
+              .slice(0, 10)
+              .map((item, idx) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.07, duration: 0.35 }}
+                >
+                  <Link href={`/blog/${item.slug}`}>
+                    <div
+                      className="
+                        group relative flex items-start gap-3 p-3 rounded-xl
+                        bg-[#120020]/60 border border-purple-900/30
+                        hover:border-purple-500/50 hover:bg-purple-900/20
+                        transition-all duration-200 cursor-pointer
+                      "
+                    >
+                      <span
                         className="
-                          group relative flex items-start gap-3 p-3 rounded-xl
-                          bg-[#120020]/60 border border-purple-900/30
-                          hover:border-purple-500/50 hover:bg-purple-900/20
-                          transition-all duration-200 cursor-pointer
+                          absolute left-0 top-3 bottom-3 w-[3px] rounded-r-full
+                          bg-purple-600/40 group-hover:bg-purple-400
+                          transition-colors duration-200
                         "
+                      />
+                      <span
+                        className="shrink-0 text-[11px] font-bold text-purple-600/60 group-hover:text-purple-400 mt-0.5 w-4 text-center transition-colors"
+                        style={{ fontFamily: "'Space Mono', monospace" }}
                       >
-                        {/* Left accent bar */}
-                        <span
-                          className="
-                            absolute left-0 top-3 bottom-3 w-[3px] rounded-r-full
-                            bg-purple-600/40 group-hover:bg-purple-400
-                            transition-colors duration-200
-                          "
-                        />
-
-                        {/* Index number */}
-                        <span
-                          className="shrink-0 text-[11px] font-bold text-purple-600/60 group-hover:text-purple-400 mt-0.5 w-4 text-center transition-colors"
-                          style={{ fontFamily: "'Space Mono', monospace" }}
-                        >
-                          {String(idx + 1).padStart(2, "0")}
-                        </span>
-
-                        {/* Body */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-1.5 mb-1">
-                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-800/50 text-purple-300 font-medium tracking-wide">
-                              {item.category}
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-800/50 text-purple-300 font-medium tracking-wide">
+                            {item.category}
+                          </span>
+                          {item.trending && (
+                            <span className="flex items-center gap-0.5 text-[10px] text-orange-400 font-medium">
+                              <Flame size={9} /> Hot
                             </span>
-                            {item.trending && (
-                              <span className="flex items-center gap-0.5 text-[10px] text-orange-400 font-medium">
-                                <Flame size={9} /> Hot
-                              </span>
-                            )}
-                          </div>
-
-                          <p className="text-[13px] text-gray-200 font-medium leading-snug line-clamp-2 group-hover:text-white transition-colors">
-                            {item.title}
-                          </p>
-
-                          <div className="flex items-center gap-3 mt-1.5 text-[11px] text-gray-500">
-                            <span className="flex items-center gap-1">
-                              <Clock size={10} /> {item.readingTime}m read
-                            </span>
-                          </div>
-                          {/* Published date + time */}
-                          <div className="flex items-center gap-1 mt-1 text-[10px] text-purple-500/70">
-                            <Calendar size={9} />
-                            <span>{formatPublishedDate(item.publishedAt)}</span>
-                            <span className="ml-auto text-gray-600">{timeAgo(item.publishedAt)}</span>
-                          </div>
+                          )}
+                        </div>
+                        <p className="text-[13px] text-gray-200 font-medium leading-snug line-clamp-2 group-hover:text-white transition-colors">
+                          {item.title}
+                        </p>
+                        <div className="flex items-center gap-3 mt-1.5 text-[11px] text-gray-500">
+                          <span className="flex items-center gap-1">
+                            <Clock size={10} /> {item.readingTime}m read
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1 mt-1 text-[10px] text-purple-500/70">
+                          <Calendar size={9} />
+                          <span>{formatPublishedDate(item.publishedAt)}</span>
+                          <span className="ml-auto text-gray-600">{timeAgo(item.publishedAt)}</span>
                         </div>
                       </div>
-                    </Link>
-                  </motion.div>
-                ))
+                    </div>
+                  </Link>
+                </motion.div>
+              ))
           )}
         </div>
 
@@ -291,9 +275,8 @@ const BlogDetailPage = () => {
   return (
     <div className="bg-[#0B0011]">
 
-      {/* ── HERO: full-width background band ── */}
+      {/* ── HERO ── */}
       <div className="relative w-full overflow-hidden bg-[#0A0012]">
-        {/* Sparkles fills entire hero band */}
         <div className="absolute inset-0 pointer-events-none">
           <SparklesCore
             id="tsparticlesfullpage"
@@ -306,7 +289,6 @@ const BlogDetailPage = () => {
           />
         </div>
 
-        {/* Hero content: two columns (meta left, sidebar right) */}
         <div className="relative top-20 z-10 max-w-7xl mx-auto px-6 py-10">
           <div className="flex flex-col lg:flex-row gap-12 items-start">
 
@@ -357,7 +339,6 @@ const BlogDetailPage = () => {
                 ))}
               </div>
 
-              {/* Cover image sits right below tags, inside the hero band */}
               <div className="mt-8">
                 <img
                   src={post.coverImage}
@@ -367,7 +348,7 @@ const BlogDetailPage = () => {
               </div>
             </div>
 
-            {/* RIGHT: sidebar — top-aligned with hero content */}
+            {/* RIGHT: sidebar */}
             <div className="w-full lg:w-[340px] shrink-0">
               <RecentActivitySidebar currentSlug={slug} />
             </div>
@@ -376,20 +357,13 @@ const BlogDetailPage = () => {
         </div>
       </div>
 
-      {/* ── ARTICLE BODY: aligned under left column only ── */}
+      {/* ── ARTICLE BODY ── */}
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-12">
           <article className="flex-1 min-w-0 py-10">
-            <div
-              className="prose prose-invert max-w-none"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(post.content, {
-                  ADD_TAGS: ["style"],
-                }),
-              }}
-            />
+            {/* ↓ ONLY CHANGE: replaced dangerouslySetInnerHTML div with BlogContent */}
+            <BlogContent content={post.content} slug={post.slug} />
           </article>
-          {/* spacer to keep article width matching hero layout */}
           <div className="hidden lg:block w-[340px] shrink-0" />
         </div>
       </div>
