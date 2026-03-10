@@ -182,11 +182,11 @@ const stripHtml = (html: string) =>
                               {blog.title}
                             </h3>
                             
-                            <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">
+                            {/* <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">
                               {blog.content.substring(0, 100)}...
                             </p><p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">
   {stripHtml(blog.content).substring(0, 100)}...
-</p>
+</p> */}
 
                             {/* Tags */}
                             <div className="flex flex-wrap gap-2 mb-4">

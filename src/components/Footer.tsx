@@ -112,7 +112,7 @@ export default function Footer() {
                 <Twitter size={20} className="sm:w-6 sm:h-6" />
               </a> */}
               <a
-                href="https://www.facebook.com/profile.php?id=61551470674556"
+                href="https://www.facebook.com/profile.php?id=61551081436589"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-purple-300 transition-colors"
