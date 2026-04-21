@@ -17,7 +17,7 @@ const serviceLinks = [
   { href: "/website-development-company-india", label: "Website Development" },
   { href: "/mobile-app-development-company-india", label: "Mobile App Development" },
   { href: "/saas-development-company-india", label: "SaaS Development" },
-  { href: "/crm-development-company-india", label: "CRM Development" },
+  { href: "/crm-erp-development-company-india", label: "CRM & ERP Development" },
   { href: "/ai-business-automation-india", label: "AI Business Automation" },
   { href: "/seo-services-india", label: "SEO Services" },
   { href: "/ui-ux-design-services-india", label: "UI/UX Design" },
@@ -67,9 +67,8 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed z-[2999] top-0 left-0 right-0 transition-all duration-300 ${
-        scrolled ? "bg-[#0B0011]/95 backdrop-blur-md shadow-lg" : "bg-transparent"
-      }`}
+      className={`fixed z-[2999] top-0 left-0 right-0 transition-all duration-300 ${scrolled ? "bg-[#0B0011]/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">

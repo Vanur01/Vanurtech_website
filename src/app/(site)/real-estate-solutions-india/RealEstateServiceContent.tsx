@@ -29,21 +29,21 @@ export default function RealEstateServiceContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-zinc-400 text-sm md:text-base">
           <p>
             Explore more industry-specific solutions? Check out our{" "}
-            <Link 
-              href="/small-medium-business-solutions-india" 
+            <Link
+              href="/small-medium-business-solutions-india"
               className="text-[#D3B4FF] hover:text-white transition-colors duration-300 underline underline-offset-4"
             >
               SMB Solutions
             </Link>,{" "}
-            <Link 
-              href="/crm-development-company-india" 
+            <Link
+              href="/crm-development-company-india"
               className="text-[#D3B4FF] hover:text-white transition-colors duration-300 underline underline-offset-4"
             >
               CRM Development
             </Link>{" "}
             and{" "}
-            <Link 
-              href="/ai-business-automation-india" 
+            <Link
+              href="/ai-business-automation-india"
               className="text-[#D3B4FF] hover:text-white transition-colors duration-300 underline underline-offset-4"
             >
               AI Automation

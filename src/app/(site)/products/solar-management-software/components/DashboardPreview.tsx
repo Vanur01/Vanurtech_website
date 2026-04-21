@@ -64,7 +64,7 @@ export function DashboardPreview() {
 
             {/* Screenshot */}
             <Image
-              src="/images/product/WhatsApp Image 2026-04-15 at 12.22.48 PM.jpeg"
+              src="/images/product/WhatsApp Image 2026-04-21 at 5.21.51 PM.jpeg"
               alt="Solar Management Software — Head Office Dashboard"
               width={1200}
               height={675}

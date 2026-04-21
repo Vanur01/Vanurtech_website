@@ -4,6 +4,7 @@ import React from "react";
 import { Sun, DollarSign, MessageCircle, Users, Sparkles, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const products = [
   {
@@ -141,7 +142,7 @@ export default function ProductsList() {
                   {/* Finance Dashboard Preview */}
                   {product.id === 2 && (
                     <div className="rounded-xl overflow-hidden border border-blue-500/20 shadow-lg shadow-blue-500/10">
-                      <div className="bg-gray-50 flex" style={{ minHeight: 190 }}>
+                      <div className="bg-gray-50 flex h-[210px]">
                         {/* Sidebar */}
                         <div className="bg-[#2563eb] w-28 flex-shrink-0 p-2 flex flex-col gap-1">
                           {["Finance Dashboard", "Sales", "Clients", "Quotations", "Invoices", "Sales Orders", "Payment Received", "Delivery Challans"].map((item, i) => (
@@ -198,7 +199,7 @@ export default function ProductsList() {
                   {product.id === 3 && (
                     <div className="rounded-xl overflow-hidden border border-purple-500/20 shadow-lg shadow-purple-500/10 relative">
                       {/* Blurred chat background */}
-                      <div className="relative bg-[#e5ddd5] p-3 overflow-hidden" style={{ minHeight: 200 }}>
+                      <div className="relative bg-[#e5ddd5] p-3 overflow-hidden h-[210px]">
                         {/* Background chat bubbles (blurred) */}
                         <div className="absolute inset-0 p-3 flex flex-col gap-2 blur-[2px] opacity-60 select-none pointer-events-none">
                           <div className="self-start bg-white rounded-xl rounded-tl-none px-3 py-1.5 max-w-[60%] shadow-sm">
@@ -253,62 +254,21 @@ export default function ProductsList() {
 
                   {/* Solar Dashboard Preview */}
                   {product.id === 1 && (
-                    <div className="rounded-xl overflow-hidden border border-yellow-500/20 shadow-lg shadow-yellow-500/10">
-                      <div className="bg-white/95 p-3">
-                        {/* Mini top bar */}
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-1.5">
-                            <div className="w-5 h-5 rounded-full bg-orange-500 flex items-center justify-center">
-                              <Sun size={10} className="text-white" />
-                            </div>
-                            <span className="text-[10px] font-bold text-orange-500">solar</span>
-                            <span className="text-[8px] text-gray-400">software</span>
-                          </div>
-                          <div className="flex gap-1">
-                            {["Today", "Weekly", "Monthly"].map((t) => (
-                              <span key={t} className={`text-[8px] px-2 py-0.5 rounded border ${t === "Today" ? "bg-orange-500 text-white border-orange-500" : "text-gray-400 border-gray-200"}`}>{t}</span>
-                            ))}
-                          </div>
-                        </div>
-                        <p className="text-[9px] font-semibold text-orange-500 mb-0.5">Head Office Dashboard</p>
-                        <p className="text-[8px] text-gray-400 mb-3">Welcome back! Here&apos;s your performance summary</p>
-                        {/* Stats grid */}
-                        <div className="grid grid-cols-4 gap-1.5 mb-1.5">
-                          {[
-                            { label: "Total Visits", val: "0", color: "text-orange-500" },
-                            { label: "Missed Leads", val: "0", color: "text-red-500" },
-                            { label: "Registrations", val: "0", color: "text-green-500" },
-                            { label: "Bank Loan Apply", val: "0", color: "text-blue-500" },
-                          ].map((s) => (
-                            <div key={s.label} className="bg-white rounded-lg border border-gray-100 p-1.5 shadow-sm">
-                              <p className={`text-sm font-bold ${s.color}`}>{s.val}</p>
-                              <p className="text-[7px] text-gray-400 leading-tight">{s.label}</p>
-                              <p className="text-[7px] text-gray-300 mt-0.5">→ 0%</p>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="grid grid-cols-4 gap-1.5">
-                          {[
-                            { label: "Doc Submission", val: "0", color: "text-orange-400" },
-                            { label: "Disbursement", val: "₹0", color: "text-teal-500" },
-                            { label: "Installation", val: "0", color: "text-green-500" },
-                            { label: "Team Members", val: "1", color: "text-purple-500" },
-                          ].map((s) => (
-                            <div key={s.label} className="bg-white rounded-lg border border-gray-100 p-1.5 shadow-sm">
-                              <p className={`text-sm font-bold ${s.color}`}>{s.val}</p>
-                              <p className="text-[7px] text-gray-400 leading-tight">{s.label}</p>
-                              <p className="text-[7px] text-gray-300 mt-0.5">→ 0%</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                    <div className="rounded-xl overflow-hidden border border-yellow-500/20 shadow-lg shadow-yellow-500/10 bg-white h-[210px] flex items-start">
+                      <Image 
+                        src="/images/product/WhatsApp Image 2026-04-21 at 5.21.51 PM.jpeg"
+                        alt="Solar Management Software Dashboard"
+                        width={600}
+                        height={400}
+                        className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-105"
+                      />
                     </div>
                   )}
 
                   {/* HRMS Field Tracking Preview */}
                   {product.id === 4 && (
                     <div className="rounded-xl overflow-hidden border border-blue-500/20 shadow-lg shadow-blue-500/10">
-                      <div className="bg-gray-100 flex" style={{ minHeight: 190 }}>
+                      <div className="bg-gray-100 flex h-[210px]">
                         {/* Sidebar */}
                         <div className="bg-[#2563eb] w-24 flex-shrink-0 p-2 flex flex-col gap-1">
                           {["Document", "Bank Loan", "Loan Pending", "Disbursement", "Installation", "Missed Leads", "Attendance", "Location Visit", "Expense"].map((item, i) => (
@@ -354,20 +314,20 @@ export default function ProductsList() {
                             <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
                               <defs>
                                 <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#aaa" strokeWidth="0.5"/>
+                                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#aaa" strokeWidth="0.5" />
                                 </pattern>
                               </defs>
                               <rect width="100%" height="100%" fill="url(#grid)" />
                             </svg>
                             {/* Roads */}
                             <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                              <line x1="60%" y1="0" x2="55%" y2="100%" stroke="#fff" strokeWidth="4" opacity="0.7"/>
-                              <line x1="0" y1="40%" x2="100%" y2="45%" stroke="#fff" strokeWidth="3" opacity="0.6"/>
-                              <line x1="30%" y1="0" x2="25%" y2="100%" stroke="#d1c9be" strokeWidth="2" opacity="0.5"/>
+                              <line x1="60%" y1="0" x2="55%" y2="100%" stroke="#fff" strokeWidth="4" opacity="0.7" />
+                              <line x1="0" y1="40%" x2="100%" y2="45%" stroke="#fff" strokeWidth="3" opacity="0.6" />
+                              <line x1="30%" y1="0" x2="25%" y2="100%" stroke="#d1c9be" strokeWidth="2" opacity="0.5" />
                               {/* Route path */}
-                              <polyline points="55,10 52,25 50,40 48,55 46,70 44,85" stroke="#dc2626" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+                              <polyline points="55,10 52,25 50,40 48,55 46,70 44,85" stroke="#dc2626" strokeWidth="2.5" fill="none" strokeLinecap="round" />
                               {/* Start dot */}
-                              <circle cx="55" cy="10" r="4" fill="#dc2626"/>
+                              <circle cx="55" cy="10" r="4" fill="#dc2626" />
                             </svg>
                             {/* Route view popup */}
                             <div className="absolute top-1 left-1 bg-white rounded-lg shadow-md px-2 py-1">
