@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Rocket,
   Phone,
@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { ctaApi } from "@/api";
 import { motion, AnimatePresence } from "framer-motion";
+import { COUNTRIES } from "@/constants/countries";
 
 interface CTAModalProps {
   isOpen: boolean;
@@ -22,7 +23,22 @@ interface CTAModalProps {
 }
 
 export function CTAModal({ isOpen, onClose }: CTAModalProps) {
+  const [countryLabel, setCountryLabel] = useState("IN");
+  const selectedCountry = COUNTRIES.find(c => c.label === countryLabel) || COUNTRIES[0];
   const [mobile, setMobile] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<{
@@ -43,8 +59,10 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
       return;
     }
 
-    if (!/^[0-9]{10}$/.test(mobile)) {
-      showNotification("error", "Please enter a valid 10-digit mobile number");
+    const fullMobile = `${selectedCountry.code}${mobile}`;
+    const cleanMobile = fullMobile.replace(/[\s\-()]/g, "");
+    if (!/^\+?[0-9]{7,15}$/.test(cleanMobile)) {
+      showNotification("error", "Please enter a valid mobile number");
       return;
     }
 
@@ -54,7 +72,7 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
       // Sending name in the message field if the API specifically requires 'message'
       // or we can update the API later if needed.
       const response = await ctaApi.submitCTA({
-        mobile,
+        mobile: cleanMobile,
         message: name.trim(),
       });
 
@@ -83,16 +101,18 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
             onClick={onClose}
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
           />
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-lg overflow-hidden rounded-2xl sm:rounded-3xl border border-purple-500/20 bg-[#0B0011] p-5 sm:p-10 shadow-2xl"
+            className="relative w-full max-w-lg rounded-2xl sm:rounded-3xl border border-purple-500/20 bg-[#0B0011] p-5 sm:p-10 shadow-2xl"
           >
             {/* Background Orbs */}
-            <div className="absolute -top-24 -left-24 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl" />
-            <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-pink-600/20 rounded-full blur-3xl" />
+            <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none">
+              <div className="absolute -top-24 -left-24 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl" />
+              <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-pink-600/20 rounded-full blur-3xl" />
+            </div>
 
             {/* Header */}
             <div className="relative mb-6 sm:mb-10 flex items-start justify-between">
@@ -102,11 +122,11 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
                   Free Consultation
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">
-                  Let&apos;s Build Something <br /> 
+                  Let&apos;s Build Something <br />
                   <span className="bg-linear-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Great Together</span>
                 </h2>
               </div>
-              <button 
+              <button
                 onClick={onClose}
                 className="p-2 rounded-xl bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all shrink-0"
               >
@@ -121,11 +141,10 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${
-                    notification.type === "success" 
-                    ? "bg-green-500/10 border-green-500/20 text-green-400" 
+                  className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${notification.type === "success"
+                    ? "bg-green-500/10 border-green-500/20 text-green-400"
                     : "bg-red-500/10 border-red-500/20 text-red-400"
-                  }`}
+                    }`}
                 >
                   {notification.type === "success" ? <CheckCircle className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
                   <p className="text-sm">{notification.message}</p>
@@ -148,17 +167,61 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
                 />
               </div>
 
-              <div className="relative group">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400">
-                  <Phone size={18} />
+              <div className="flex gap-2 sm:gap-3">
+                <div className="relative w-[100px] sm:w-[115px] shrink-0" ref={dropdownRef}>
+                  <button
+                    type="button"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="w-full h-full bg-purple-900/10 border border-purple-500/10 rounded-2xl py-4 px-3 sm:px-4 text-white text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all flex items-center justify-between"
+                  >
+                    <img
+                      src={selectedCountry.flag}
+                      alt="flag"
+                      className="w-5 sm:w-6 h-auto rounded-[2px] object-cover shrink-0"
+                    />
+                    <span className="font-medium tracking-tight mx-1">{selectedCountry.code}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-400 shrink-0"><path d="m6 9 6 6 6-6" /></svg>
+                  </button>
+
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <motion.ul
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="absolute top-[calc(100%+8px)] left-0 mt-0 w-[140px] sm:w-[160px] max-h-52 overflow-y-auto bg-[#0B0011] border border-purple-500/20 rounded-xl shadow-2xl z-[100] p-2 custom-scrollbar"
+                      >
+                        {COUNTRIES.map((c) => (
+                          <li
+                            key={c.label}
+                            onClick={() => {
+                              setCountryLabel(c.label);
+                              setIsDropdownOpen(false);
+                            }}
+                            className="flex items-center gap-3 p-3 hover:bg-purple-500/20 rounded-lg cursor-pointer transition-colors"
+                          >
+                            <img src={c.flag} alt="flag" className="w-6 h-auto rounded-[2px] object-cover" />
+                            <span className="text-white text-sm font-medium">{c.code} ({c.label})</span>
+                          </li>
+                        ))}
+                        {/* Spacer to ensure the last item is fully visible and not cut off by padding */}
+                        <li className="h-2 w-full shrink-0" aria-hidden="true" />
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
                 </div>
-                <input
-                  type="tel"
-                  placeholder="Your Phone Number"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                  className="w-full bg-purple-900/10 border border-purple-500/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all"
-                />
+                <div className="relative group flex-1">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400">
+                    <Phone size={18} />
+                  </div>
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                    className="w-full bg-purple-900/10 border border-purple-500/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all"
+                  />
+                </div>
               </div>
 
               <button

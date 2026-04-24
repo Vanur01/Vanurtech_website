@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Rocket,
   Phone,
@@ -15,9 +15,25 @@ import {
 } from "lucide-react";
 import { ctaApi } from "@/api";
 import { motion, AnimatePresence } from "framer-motion";
+import { COUNTRIES } from "@/constants/countries";
 
 export default function CTASection() {
+  const [countryLabel, setCountryLabel] = useState("IN");
+  const selectedCountry = COUNTRIES.find(c => c.label === countryLabel) || COUNTRIES[0];
   const [mobile, setMobile] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<{
@@ -38,8 +54,10 @@ export default function CTASection() {
       return;
     }
 
-    if (!/^[0-9]{10}$/.test(mobile)) {
-      showNotification("error", "Please enter a valid 10-digit mobile number");
+    const fullMobile = `${selectedCountry.code}${mobile}`;
+    const cleanMobile = fullMobile.replace(/[\s\-()]/g, "");
+    if (!/^\+?[0-9]{7,15}$/.test(cleanMobile)) {
+      showNotification("error", "Please enter a valid mobile number");
       return;
     }
 
@@ -47,7 +65,7 @@ export default function CTASection() {
 
     try {
       const response = await ctaApi.submitCTA({
-        mobile,
+        mobile: cleanMobile,
         message: name.trim(), // Sending name in the message field
       });
 
@@ -74,10 +92,12 @@ export default function CTASection() {
   ];
 
   return (
-    <div id="consultation" className="relative mt-0 mb-6 w-full bg-[#0B0011] px-4 pt-8 md:pt-10 pb-10 sm:pb-14 md:pb-20 overflow-hidden">
+    <div id="consultation" className="relative mt-0 mb-6 w-full bg-[#0B0011] px-4 pt-8 md:pt-10 pb-10 sm:pb-14 md:pb-20">
       {/* Background Orbs */}
-      <div className="absolute top-0 -left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 -right-1/4 w-[500px] h-[500px] bg-pink-600/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 -left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 -right-1/4 w-[500px] h-[500px] bg-pink-600/10 rounded-full blur-[100px]" />
+      </div>
 
       {/* Toast Notification */}
       <AnimatePresence>
@@ -190,18 +210,62 @@ export default function CTASection() {
                 </div>
 
                 {/* Mobile Number Input */}
-                <div className="relative group">
-                  <div className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 text-purple-400 group-focus-within:text-pink-400 transition-colors">
-                    <Phone size={18} />
+                <div className="flex gap-2 sm:gap-3">
+                  <div className="relative w-[100px] sm:w-[115px] shrink-0" ref={dropdownRef}>
+                    <button
+                      type="button"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      className="w-full h-full bg-purple-900/20 border border-purple-500/20 rounded-xl sm:rounded-2xl py-3.5 sm:py-4 px-3 sm:px-4 text-white text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all flex items-center justify-between"
+                    >
+                      <img
+                        src={selectedCountry.flag}
+                        alt="flag"
+                        className="w-5 sm:w-6 h-auto rounded-[2px] object-cover shrink-0"
+                      />
+                      <span className="font-medium tracking-tight mx-1">{selectedCountry.code}</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-400 shrink-0"><path d="m6 9 6 6 6-6" /></svg>
+                    </button>
+
+                    <AnimatePresence>
+                      {isDropdownOpen && (
+                        <motion.ul
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="absolute top-[calc(100%+8px)] left-0 w-[140px] sm:w-[160px] max-h-52 overflow-y-auto bg-[#0B0011] border border-purple-500/20 rounded-xl shadow-2xl z-[100] p-2 custom-scrollbar"
+                        >
+                          {COUNTRIES.map((c) => (
+                            <li
+                              key={c.label}
+                              onClick={() => {
+                                setCountryLabel(c.label);
+                                setIsDropdownOpen(false);
+                              }}
+                              className="flex items-center gap-3 p-3 hover:bg-purple-500/20 rounded-lg cursor-pointer transition-colors"
+                            >
+                              <img src={c.flag} alt="flag" className="w-6 h-auto rounded-[2px] object-cover" />
+                              <span className="text-white text-sm font-medium">{c.code} ({c.label})</span>
+                            </li>
+                          ))}
+                          {/* Spacer to ensure the last item is fully visible and not cut off by padding */}
+                          <li className="h-2 w-full shrink-0" aria-hidden="true" />
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
                   </div>
-                  <input
-                    type="tel"
-                    placeholder="Mobile Number"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                    required
-                    className="w-full bg-purple-900/20 border border-purple-500/20 rounded-xl sm:rounded-2xl py-3.5 sm:py-4 pl-12 sm:pl-14 pr-4 sm:pr-5 text-white text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-gray-500"
-                  />
+                  <div className="relative group flex-1">
+                    <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-purple-400 group-focus-within:text-pink-400 transition-colors">
+                      <Phone size={18} />
+                    </div>
+                    <input
+                      type="tel"
+                      placeholder="Mobile Number"
+                      value={mobile}
+                      onChange={(e) => setMobile(e.target.value)}
+                      required
+                      className="w-full bg-purple-900/20 border border-purple-500/20 rounded-xl sm:rounded-2xl py-3.5 sm:py-4 pl-10 sm:pl-12 pr-4 sm:pr-5 text-white text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-gray-500"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex justify-center pt-2 sm:pt-4">
