@@ -24,9 +24,9 @@ export default function SaaSDevServiceContent() {
       <FeaturesSection />
       <BenefitsSection />
       <GlobalTargeting />
-      <WhyChooseUsSection />
+      <WhyChooseUsSection onConsultClick={onConsultClick} />
 
-      <div className="py-24 bg-white/2">
+      <div className="py-12 bg-white/2">
         <Partners />
       </div>
 
@@ -35,15 +35,15 @@ export default function SaaSDevServiceContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-zinc-400 text-sm md:text-base">
           <p>
             Looking for more solutions? Explore our{" "}
-            <Link 
-              href="/crm-development-company-india" 
+            <Link
+              href="/crm-development-company-india"
               className="text-[#D3B4FF] hover:text-white transition-colors duration-300 underline underline-offset-4"
             >
               CRM Development in India
             </Link>{" "}
             and{" "}
-            <Link 
-              href="/website-development-company-india" 
+            <Link
+              href="/website-development-company-india"
               className="text-[#D3B4FF] hover:text-white transition-colors duration-300 underline underline-offset-4"
             >
               Website Development Services

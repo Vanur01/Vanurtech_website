@@ -63,25 +63,25 @@ export default function ServicesList() {
     {
       id: 3,
       category: "Scale & Automation",
-      title: "CRM & SaaS Solutions",
-      link: "/crm-development-company-india",
+      title: "CRM & ERP Solutions",
+      link: "/crm-erp-development-company-india",
       icon: Layers,
       features: [
         {
-          title: "Customizable CRM Solutions:",
-          description: "tailored to your business workflows and processes",
+          title: "Custom CRM & ERP Development:",
+          description: "tailored systems for sales, operations & resource planning",
         },
         {
-          title: "Seamless Software Integration:",
-          description: "connect with existing tools and platforms",
+          title: "Seamless Module Integration:",
+          description: "connect finance, HR, inventory & CRM in one platform",
         },
         {
           title: "Advanced Analytics & Reporting:",
-          description: "data-driven insights for better decisions",
+          description: "real-time dashboards and data-driven business insights",
         },
         {
-          title: "Automated Workflows System:",
-          description: "streamline operations and boost productivity",
+          title: "Automated Workflows & Processes:",
+          description: "eliminate manual tasks and boost operational efficiency",
         },
       ],
     },
@@ -214,12 +214,12 @@ export default function ServicesList() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 py-12 sm:py-16 md:py-20"
+      className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 py-8 sm:py-10 md:py-12"
       style={{ backgroundColor: "#0A0012" }}
     >
       <div className="max-w-7xl w-full">
-        <div className="mb-16 sm:mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-8">
+        <div className="mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-6">
             <Sparkles size={16} className="text-purple-400" />
             <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
               Strategic Service Ecosystem
@@ -247,7 +247,7 @@ export default function ServicesList() {
               <Link href={services[0].link} className="block group h-full">
                 <div
                   id="website-design"
-                  className="h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[380px] lg:h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(1)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -287,7 +287,7 @@ export default function ServicesList() {
               <Link href={services[1].link} className="block group h-full">
                 <div
                   id="mobile-app"
-                  className="h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[380px] lg:h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(2)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -330,7 +330,7 @@ export default function ServicesList() {
               <Link href={services[2].link} className="block group h-full">
                 <div
                   id="crm-saas"
-                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[340px] lg:h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(3)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -370,7 +370,7 @@ export default function ServicesList() {
               <Link href={services[3].link} className="block group h-full">
                 <div
                   id="graphics-design"
-                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[340px] lg:h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(4)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -415,7 +415,7 @@ export default function ServicesList() {
               <Link href={services[4].link} className="block group h-full">
                 <div
                   id="seo-services"
-                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[340px] lg:h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(5)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -457,7 +457,7 @@ export default function ServicesList() {
               <Link href={services[5].link} className="block group h-full">
                 <div
                   id="ui-ux"
-                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[340px] lg:h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(6)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -500,7 +500,7 @@ export default function ServicesList() {
               <Link href={services[6].link} className="block group h-full">
                 <div
                   id="ai-automation"
-                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[340px] lg:h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(7)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -540,7 +540,7 @@ export default function ServicesList() {
               <Link href={services[7].link} className="block group h-full">
                 <div
                   id="cyber-security"
-                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[340px] lg:h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-6 sm:p-8 md:p-10 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(8)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >

@@ -56,76 +56,76 @@ export default function ImpactStats({ onConsultClick }: { onConsultClick?: () =>
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#0B0011" }}>
+    <section className="py-10 sm:py-14 md:py-16 relative overflow-hidden" style={{ backgroundColor: "#0B0011" }}>
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-10 sm:mb-14 md:mb-16">
           {/* Left Side - Content */}
-          <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-sm">
-              <Sparkles size={16} className="text-purple-500" />
-              <span className="text-purple-300 text-sm font-medium tracking-tight">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-sm">
+              <Sparkles size={14} className="text-purple-500 shrink-0" />
+              <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-tight">
                 Built for Business Growth. Powered by AI & Experience.
               </span>
             </div>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.1]">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.1]">
               Helping Businesses Solve <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">Real Operational Challenges</span>
             </h2>
 
-            <p className="text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl">
-              With over 10+ years of experience, we specialize in building intelligent software solutions that solve real-world business challenges — from lead management to operations automation.
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl">
+              With over 10+ years of experience, we specialize in building intelligent software solutions that solve real-world business challenges from lead management to operations automation.
             </p>
 
             {/* Replacement Contact Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-2 sm:pt-4">
               <button
                 onClick={onConsultClick}
-                className="group flex items-center gap-2 px-6 py-3 bg-linear-to-r from-purple-600 to-pink-600 rounded-xl text-white font-semibold transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] active:scale-95"
+                className="group flex items-center justify-center gap-2 px-5 sm:px-6 py-3 bg-linear-to-r from-purple-600 to-pink-600 rounded-xl text-white font-semibold transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] active:scale-95 text-sm sm:text-base"
               >
-                <PhoneCall size={18} className="group-hover:rotate-12 transition-transform" />
+                <PhoneCall size={16} className="group-hover:rotate-12 transition-transform shrink-0" />
                 Get a Quick Call Back
               </button>
               <Link
                 href="https://wa.me/7978874959?text=Hi%20Vanurmedia!%20I'm%20interested%20in%20your%20services.%20Could%20you%20share%20more%20details?"
                 target="_blank"
-                className="group flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-white font-semibold transition-all hover:bg-white/10 active:scale-95"
+                className="group flex items-center justify-center gap-2 px-5 sm:px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-white font-semibold transition-all hover:bg-white/10 active:scale-95 text-sm sm:text-base"
               >
-                <MessageCircle size={18} />
+                <MessageCircle size={16} className="shrink-0" />
                 Chat on WhatsApp
               </Link>
             </div>
           </div>
 
           {/* Right Side - Visual Stats Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="group p-8 rounded-3xl border border-white/5 bg-white/2 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
-              <h3 className="text-4xl md:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform origin-left">300+</h3>
-              <p className="text-purple-300 text-lg">Projects Delivered</p>
+          <div className="grid grid-cols-2 gap-4 sm:gap-6">
+            <div className="group p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/5 bg-white/2 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform origin-left">300+</h3>
+              <p className="text-purple-300 text-sm sm:text-lg">Projects Delivered</p>
             </div>
 
-            <div className="group p-8 rounded-3xl border border-white/5 bg-white/2 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 sm:mt-12">
-              <h3 className="text-4xl md:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform origin-left">50k+</h3>
-              <p className="text-purple-300 text-lg">Hours of Development</p>
+            <div className="group p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/5 bg-white/2 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 sm:mt-12">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform origin-left">50k+</h3>
+              <p className="text-purple-300 text-sm sm:text-lg">Hours of Development</p>
             </div>
 
-            <div className="group p-8 rounded-3xl border border-white/5 bg-white/2 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
-              <h3 className="text-4xl md:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform origin-left">99%</h3>
-              <p className="text-purple-300 text-lg">Client Satisfaction</p>
+            <div className="group p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/5 bg-white/2 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform origin-left">99%</h3>
+              <p className="text-purple-300 text-sm sm:text-lg">Client Satisfaction</p>
             </div>
 
-            <div className="group p-8 rounded-3xl border border-white/5 bg-white/2 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 sm:mt-12">
-              <h3 className="text-2xl md:text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform origin-left">AI-Driven</h3>
-              <p className="text-purple-300 text-lg">Business Solutions</p>
+            <div className="group p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/5 bg-white/2 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 sm:mt-12">
+              <h3 className="text-xl sm:text-2xl md:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform origin-left">AI-Driven</h3>
+              <p className="text-purple-300 text-sm sm:text-lg">Business Solutions</p>
             </div>
           </div>
         </div>
 
         {/* Problem -> Solution Section Reverted to Two Boxes */}
-        <div className="mt-20 border-t border-white/5 pt-20">
-          <div className="text-center mb-20 space-y-4">
+        <div className="mt-12 border-t border-white/5 pt-12">
+          <div className="text-center mb-12 space-y-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -140,7 +140,7 @@ export default function ImpactStats({ onConsultClick }: { onConsultClick?: () =>
             </motion.div>
             <h3 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-[1.1]">
               Bridge the Gap: <br className="md:hidden" />
-              From <span className="text-gray-500 underline decoration-red-500/30 underline-offset-8">Chaos</span> to{" "}
+              From <span className="text-gray-500 underline decoration-red-500/30 underline-offset-4 md:underline-offset-8">Chaos</span> to{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">Precision</span>
             </h3>
             <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
@@ -155,18 +155,18 @@ export default function ImpactStats({ onConsultClick }: { onConsultClick?: () =>
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="p-10 rounded-[2.5rem] bg-white/2 border border-red-500/10 backdrop-blur-sm relative overflow-hidden group hover:bg-white/5 transition-colors"
+              className="p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-white/2 border border-red-500/10 backdrop-blur-sm relative overflow-hidden group hover:bg-white/5 transition-colors"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 blur-3xl rounded-full" />
 
-              <h4 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center border border-red-500/20">
-                  <XCircle size={22} className="text-red-500" />
+              <h4 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-3">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-red-500/10 flex items-center justify-center border border-red-500/20 shrink-0">
+                  <XCircle size={20} className="text-red-500" />
                 </div>
                 The Operational Pain:
               </h4>
 
-              <ul className="space-y-6">
+              <ul className="space-y-4 sm:space-y-6">
                 {comparisons.map((item, idx) => (
                   <motion.li
                     key={idx}
@@ -174,7 +174,7 @@ export default function ImpactStats({ onConsultClick }: { onConsultClick?: () =>
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * idx }}
                     viewport={{ once: true }}
-                    className="flex items-start gap-4 text-gray-400 text-lg group/item transition-colors hover:text-gray-300"
+                    className="flex items-start gap-3 sm:gap-4 text-gray-400 text-base sm:text-lg group/item transition-colors hover:text-gray-300"
                   >
                     <span className="mt-2.5 w-2 h-2 rounded-full bg-red-500/30 shrink-0 group-hover/item:scale-125 transition-transform" />
                     {item.problem}
@@ -201,20 +201,20 @@ export default function ImpactStats({ onConsultClick }: { onConsultClick?: () =>
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="relative p-10 rounded-[2.5rem] bg-linear-to-br from-[#12001A] to-[#0B0011] border border-purple-500/20 backdrop-blur-xl overflow-hidden shadow-2xl shadow-purple-500/20"
+                className="relative p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-linear-to-br from-[#12001A] to-[#0B0011] border border-purple-500/20 backdrop-blur-xl overflow-hidden shadow-2xl shadow-purple-500/20"
               >
                 {/* Floating Glow Orbs */}
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-600/20 blur-[80px] rounded-full animate-pulse" />
                 <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-600/10 blur-[80px] rounded-full animate-pulse" />
 
-                <h4 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-500/20 flex items-center justify-center border border-purple-500/40 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-                    <CheckCircle2 size={24} className="text-purple-400" />
+                <h4 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-purple-500/20 flex items-center justify-center border border-purple-500/40 shadow-[0_0_15px_rgba(168,85,247,0.3)] shrink-0">
+                    <CheckCircle2 size={22} className="text-purple-400" />
                   </div>
                   Your Custom Solution:
                 </h4>
 
-                <ul className="space-y-6">
+                <ul className="space-y-4 sm:space-y-6">
                   {comparisons.map((item, idx) => (
                     <motion.li
                       key={idx}
@@ -222,7 +222,7 @@ export default function ImpactStats({ onConsultClick }: { onConsultClick?: () =>
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.3 + (0.1 * idx) }}
                       viewport={{ once: true }}
-                      className="flex items-center gap-4 text-gray-100 text-lg group/item"
+                      className="flex items-center gap-3 sm:gap-4 text-gray-100 text-base sm:text-lg group/item"
                     >
                       <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20 group-hover/item:bg-purple-500/30 group-hover/item:scale-110 group-hover/item:border-purple-400 transition-all duration-300">
                         <ArrowRight size={18} className="text-purple-400 group-hover/item:translate-x-1 transition-transform" />

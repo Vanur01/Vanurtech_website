@@ -356,58 +356,79 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
     setOpenPopup(true);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormError("");
-    setFormSuccess("");
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setFormError("");
+  setFormSuccess("");
 
-    if (!name.trim()) {
-      setFormError("Name is required");
+  // ✅ Validation
+  if (!name.trim()) {
+    setFormError("Name is required");
+    return;
+  }
+
+  if (!/^[6-9]\d{9}$/.test(phone)) {
+    setFormError("Please enter a valid Indian phone number");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    // ✅ Save lead (optional but good)
+    const res = await fetch(`${API_BASE}/api/v1/lead`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setFormError(data.message || "Something went wrong");
       return;
     }
-    if (!/^[6-9]\d{9}$/.test(phone)) {
-      setFormError("Please enter a valid Indian phone number");
-      return;
+
+    // ✅ Save token
+    if (data.token) {
+      localStorage.setItem(LEAD_TOKEN_KEY, data.token);
+      localStorage.setItem(LEAD_EXPIRY_KEY, (Date.now() + ONE_DAY).toString());
     }
 
-    try {
-      setLoading(true);
+    setFormSuccess("Redirecting to WhatsApp...");
 
-      const res = await fetch(`${API_BASE}/api/v1/lead`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone }),
-      });
+    // ✅ WhatsApp redirect
+    setTimeout(() => {
+      const whatsappNumber = "917978874959";
 
-      const data = await res.json();
+      const message = `Hi Vanurmedia! 👋
 
-      if (!res.ok) {
-        setFormError(data.message || "Something went wrong");
-        return;
-      }
+*Name:* ${name}
+*Phone:* ${phone}
 
-      if (data.token) {
-        localStorage.setItem(LEAD_TOKEN_KEY, data.token);
-        localStorage.setItem(LEAD_EXPIRY_KEY, (Date.now() + ONE_DAY).toString());
-      }
+I'm interested in this project:
+*Project:* ${project.title}
+*Website:* ${selectedWebsite}
 
-      setFormSuccess("Thank you! Redirecting to website…");
+Please share more details.`;
 
-      setTimeout(() => {
-        if (selectedWebsite) window.open(selectedWebsite, "_blank");
-        setOpenPopup(false);
-        setName("");
-        setPhone("");
-        setFormSuccess("");
-      }, 1500);
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-    } catch {
-      setFormError("Server error. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+      window.open(whatsappUrl, "_blank");
 
+      // reset
+      setOpenPopup(false);
+      setName("");
+      setPhone("");
+      setFormSuccess("");
+    }, 1000);
+
+  } catch {
+    setFormError("Server error. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div
       className="group relative h-full"

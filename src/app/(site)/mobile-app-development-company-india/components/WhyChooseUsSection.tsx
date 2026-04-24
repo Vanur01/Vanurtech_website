@@ -11,7 +11,7 @@ import {
   CheckCircle2
 } from "lucide-react";
 
-export function WhyChooseUsSection() {
+export function WhyChooseUsSection({ onConsultClick }: { onConsultClick?: () => void }) {
   const points = [
     {
       title: "Experts in Mobile UX",
@@ -56,14 +56,14 @@ export function WhyChooseUsSection() {
   ];
 
   return (
-    <section className="py-20 bg-[#0A0014] relative overflow-hidden">
+    <section className="py-12 sm:py-20 bg-[#0A0014] relative overflow-hidden">
       {/* Subtle Glows */}
       <div className="absolute top-1/2 left-0 w-64 h-64 bg-purple-600/5 blur-[100px] rounded-full" />
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-pink-600/5 blur-[100px] rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-14">
+        <div className="mb-8 sm:mb-14 text-center lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ export function WhyChooseUsSection() {
             <span className="text-purple-300 text-sm font-medium tracking-wide">Why Choose Us</span>
           </motion.div>
 
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 text-center lg:text-left">
             <motion.h2
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -158,14 +158,7 @@ export function WhyChooseUsSection() {
             </div>
             
             <button
-               onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  window.location.href = '/contact';
-                }
-              }}
+               onClick={onConsultClick}
               className="relative z-10 mt-6 w-full py-3 bg-white text-black font-bold rounded-xl text-sm hover:bg-purple-500 hover:text-white transition-all active:scale-95 shadow-lg group-hover:shadow-purple-500/20"
             >
               Start Your App

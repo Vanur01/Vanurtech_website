@@ -38,18 +38,18 @@ export default function AboutHero() {
   ];
 
   return (
-    <div className="relative mx-auto flex h-screen w-full max-w-7xl flex-col items-center justify-center overflow-hidden rounded-3xl">
-      <div className="relative z-20 px-4 text-start max-w-5xl">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-6">
-          <Sparkles size={16} className="text-purple-400" />
+    <div className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-center overflow-hidden rounded-3xl px-4 sm:px-6 py-24 sm:py-0">
+      <div className="relative z-20 text-start max-w-5xl w-full">
+        <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-5 sm:mb-6">
+          <Sparkles size={14} className="text-purple-400" />
           <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
             About Vanurtech Media
           </span>
         </div>
-        <h1 className="text-balance text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+        <h1 className="text-balance text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
           Build Intelligent Digital Solutions That Solve <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">Real Business Problems</span>
         </h1>
-        <p className="mt-8 text-lg md:text-xl text-gray-300 max-w-3xl leading-relaxed font-light">
+        <p className="mt-5 sm:mt-8 text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl leading-relaxed font-light">
           At Vanurtech Media, we help businesses transform their operations, sales, and growth 
           using AI-powered custom software, CRM systems, and scalable digital solutions.
         </p>

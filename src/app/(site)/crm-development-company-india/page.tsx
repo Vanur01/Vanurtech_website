@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import CRMDevServiceContent from "./CRMDevServiceContent";
 
 export const metadata: Metadata = {
-  title: "Custom CRM Development Company in India | Lead Management Software",
-  description: "Build custom CRM software for your business with lead management, sales automation & AI insights. Trusted CRM development company in India for SMEs.",
+  title: "Custom CRM Development Company in India | Lead & Sales Management Software",
+  description: "Build custom CRM software for your business with lead management, sales automation, pipeline tracking & AI insights. Trusted CRM development company in India for SMEs.",
   alternates: {
     canonical: "/crm-development-company-india",
   },

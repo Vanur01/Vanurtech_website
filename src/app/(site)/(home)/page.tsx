@@ -16,24 +16,41 @@ const WhyChooseUs = dynamic(() => import('@/components/Home/WhyChooseUs'), { ssr
 const FeaturedProjects = dynamic(() => import('@/components/Home/FeaturedProjects'), { ssr: true });
 const IndustrySolutions = dynamic(() => import('@/components/Home/IndustrySolutions'), { ssr: true });
 
+const PageContent = React.memo(({ onConsultClick }: { onConsultClick: () => void }) => {
+  return (
+    <>
+      <HeroSection onConsultClick={onConsultClick} />
+      <TrustedBrands />
+      <ImpactStats onConsultClick={onConsultClick} />
+      <FeaturedProjects />
+      <ServicesSection onConsultClick={onConsultClick} />
+      <IndustrySolutions />
+      <WorkflowSection />
+      <TestimonialsSection />
+      <WhyChooseUs onConsultClick={onConsultClick} />
+      <CTASection />
+    </>
+  );
+});
+PageContent.displayName = 'PageContent';
+
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const handleConsultClick = React.useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const handleCloseModal = React.useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
 
   return (
     <>
       <PageLoader />
       <div className="bg-[#0B0011]">
-        <HeroSection onConsultClick={() => setIsModalOpen(true)} />
-        <TrustedBrands />
-        <ImpactStats onConsultClick={() => setIsModalOpen(true)} />
-        <FeaturedProjects />
-        <ServicesSection onConsultClick={() => setIsModalOpen(true)} />
-        <IndustrySolutions />
-        <WorkflowSection />
-        <TestimonialsSection />
-        <WhyChooseUs onConsultClick={() => setIsModalOpen(true)} />
-        <CTASection />
-        <CTAModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <PageContent onConsultClick={handleConsultClick} />
+        <CTAModal isOpen={isModalOpen} onClose={handleCloseModal} />
       </div>
     </>
   );

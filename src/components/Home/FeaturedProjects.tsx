@@ -52,12 +52,12 @@ export default function FeaturedProjects() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-8 py-20"
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 py-10 sm:py-12"
       style={{ backgroundColor: "#0A0012" }}
     >
       <div className="max-w-7xl w-full">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-8 md:mb-10">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -86,7 +86,7 @@ export default function FeaturedProjects() {
 
           <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto">
             A glimpse into some of the impactful digital experiences we’ve
-            crafted across industries — from website design to custom
+            crafted across industries from website design to custom
             applications.
           </p>
 
@@ -271,7 +271,7 @@ export default function FeaturedProjects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mt-20 mb-10"
+          className="text-center mt-12 mb-6"
         >
           <div className="flex flex-col items-center text-center px-4">
 
@@ -285,7 +285,7 @@ export default function FeaturedProjects() {
 
             <p className="mt-4 text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl">
               Every scroll reveals thoughtful design, intuitive UX, and purposeful
-              development — crafted to keep users engaged and businesses ahead.
+              development crafted to keep users engaged and businesses ahead.
             </p>
           </div>
 
@@ -294,11 +294,11 @@ export default function FeaturedProjects() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center gap-3 px-8 py-4 mt-10 rounded-full text-white font-semibold text-lg border border-purple-500 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50"
+                className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 mt-10 rounded-full text-white font-semibold text-sm sm:text-lg border border-purple-500 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50"
               >
                 <span className="relative z-10">Land on Projects</span>
                 <svg
-                  className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                  className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

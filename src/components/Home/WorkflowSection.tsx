@@ -5,7 +5,6 @@ import { Timeline } from "@/components/ui/timeline";
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-
 export default function WorkflowSection() {
   const data = [
     {
@@ -54,7 +53,7 @@ export default function WorkflowSection() {
         <div>
           <div className="mb-6 sm:mb-8 rounded-xl sm:rounded-2xl border border-purple-900/30 bg-linear-to-br from-purple-950/20 to-transparent p-4 sm:p-6">
             <p className="text-sm text-gray-300 md:text-base leading-relaxed">
-             We craft clean UI, intuitive UX, and brand-aligned visuals that don't just look stunning but are engineered for performance. Our focus is on creating seamless user journeys that drive measurable engagement and align with your brand's digital identity.
+              We craft clean UI, intuitive UX, and brand-aligned visuals that don't just look stunning but are engineered for performance. Our focus is on creating seamless user journeys that drive measurable engagement and align with your brand's digital identity.
             </p>
           </div>
 
@@ -120,16 +119,16 @@ export default function WorkflowSection() {
   return (
     <div className="w-full bg-[#0B0011]">
       {/* Header Section */}
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:px-8 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 md:px-8 lg:py-14">
         <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-8"
         >
           <Sparkles size={16} className="text-purple-400" />
           <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
-             Our Workflow
+            Our Workflow
           </span>
         </motion.div>
 
@@ -158,7 +157,7 @@ export default function WorkflowSection() {
       </div>
 
       {/* Timeline */}
-      <div className="pb-20">
+      <div className="pb-12">
         <Timeline data={data} />
       </div>
     </div>

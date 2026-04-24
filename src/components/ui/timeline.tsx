@@ -48,7 +48,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
             key={index}
             className="flex flex-col md:flex-row justify-between gap-6 sm:gap-8 pt-10 sm:pt-12 md:gap-20 md:pt-24"
           >
-            <div className="sticky top-20 sm:top-24 md:top-40 z-40 flex max-w-xs flex-col items-center self-start w-full md:w-auto md:flex-row lg:max-w-sm">
+            <div className="sticky top-16 sm:top-20 md:top-40 z-40 flex max-w-xs flex-col items-center self-start w-full md:w-auto md:flex-row lg:max-w-sm">
               <div className="absolute left-2 sm:left-3 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white md:left-3">
                 {item.icon ? (
                   <div className="flex h-full w-full items-center justify-center text-purple-600">
@@ -63,7 +63,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               </h3>
             </div>
 
-            <div className="relative w-full pl-20 sm:pl-12 pr-4 md:w-1/2 md:pl-4">
+            <div className="relative w-full pl-14 sm:pl-16 pr-4 md:w-1/2 md:pl-4">
               <h3 className="mb-3 sm:mb-4 block text-left text-xl sm:text-2xl font-bold text-neutral-500 md:hidden">
                 {item.title}
               </h3>

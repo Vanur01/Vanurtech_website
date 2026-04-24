@@ -17,7 +17,7 @@ export function HeroSection({ onConsultClick }: { onConsultClick?: () => void })
         {/* Animated Beams (Streaks) */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Vertical Streaks */}
-          {[...Array(25)].map((_, i) => (
+          {[...Array(10)].map((_, i) => (
             <motion.div
               key={`v-${i}`}
               initial={{ top: "-20%", left: `${Math.random() * 100}%`, opacity: 0 }}
@@ -26,16 +26,16 @@ export function HeroSection({ onConsultClick }: { onConsultClick?: () => void })
                 opacity: [0, 1, 1, 0],
               }}
               transition={{
-                duration: 2 + Math.random() * 2,
+                duration: 5 + Math.random() * 4,
                 repeat: Infinity,
-                delay: Math.random() * 5,
+                delay: Math.random() * 8,
                 ease: "linear",
               }}
               className={`absolute w-px h-32 bg-linear-to-b from-transparent ${i % 3 === 0 ? 'via-purple-500' : i % 3 === 1 ? 'via-cyan-500' : 'via-blue-500'} to-transparent blur-[1px] shadow-[0_0_8px_rgba(168,85,247,0.4)]`}
             />
           ))}
           {/* Horizontal Streaks */}
-          {[...Array(20)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={`h-${i}`}
               initial={{ left: "-20%", top: `${Math.random() * 100}%`, opacity: 0 }}
@@ -44,9 +44,9 @@ export function HeroSection({ onConsultClick }: { onConsultClick?: () => void })
                 opacity: [0, 1, 1, 0],
               }}
               transition={{
-                duration: 2.5 + Math.random() * 2,
+                duration: 6 + Math.random() * 4,
                 repeat: Infinity,
-                delay: Math.random() * 5,
+                delay: Math.random() * 8,
                 ease: "linear",
               }}
               className={`absolute h-px w-40 bg-linear-to-r from-transparent ${i % 2 === 0 ? 'via-pink-500' : 'via-indigo-500'} to-transparent blur-[1px] shadow-[0_0_8px_rgba(236,72,153,0.4)]`}
@@ -65,10 +65,10 @@ export function HeroSection({ onConsultClick }: { onConsultClick?: () => void })
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-8 max-w-max mx-auto"
           >
-            <Sparkles size={16} className="text-purple-400" />
-            <span className="text-purple-300 text-sm font-medium tracking-wide">
+            <Sparkles size={16} className="text-purple-400 shrink-0" />
+            <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
               Leading SaaS Solutions in India
             </span>
           </motion.div>
@@ -89,7 +89,7 @@ export function HeroSection({ onConsultClick }: { onConsultClick?: () => void })
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-gray-400 text-xl max-w-3xl mx-auto mb-12 leading-relaxed"
+            className="text-gray-400 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 sm:px-0"
           >
             We build SEO-optimized, fast, and high-converting SaaSs for businesses. Get custom SaaS development services in India for global clients.
           </motion.p>
@@ -98,18 +98,18 @@ export function HeroSection({ onConsultClick }: { onConsultClick?: () => void })
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0"
           >
             <button
               onClick={onConsultClick}
-              className="px-8 py-4 bg-linear-to-r from-purple-600 to-pink-600 hover:scale-105 rounded-full text-white font-semibold text-lg transition-all duration-300 shadow-lg shadow-purple-500/25 flex items-center gap-2 tracking-wide"
+              className="w-full sm:w-auto px-5 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-purple-600 to-pink-600 hover:scale-105 rounded-full text-white font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg shadow-purple-500/25 flex items-center justify-center gap-2 whitespace-nowrap"
             >
               Get Started Today
               <ArrowRight size={20} />
             </button>
             <Link
               href="/projects"
-              className="px-8 py-4 bg-white/5 hover:bg-white/10 hover:border-white/30 border border-white/10 rounded-full text-white font-semibold text-lg transition-all duration-300 backdrop-blur-sm tracking-wide"
+              className="w-full sm:w-auto px-5 sm:px-8 py-3 sm:py-4 bg-white/5 hover:bg-white/10 hover:border-white/30 border border-white/10 rounded-full text-white font-semibold text-sm sm:text-base transition-all duration-300 backdrop-blur-sm text-center whitespace-nowrap"
             >
               View Our Portfolio
             </Link>

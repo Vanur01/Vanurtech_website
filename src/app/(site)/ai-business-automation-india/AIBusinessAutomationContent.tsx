@@ -27,10 +27,10 @@ export default function AIBusinessAutomationContent() {
       <AIUseCases />
       <BenefitsSection />
       <GlobalTargeting />
-      <WhyChooseUsSection />
+      <WhyChooseUsSection onConsultClick={onConsultClick} />
       <MiniCaseStudy />
 
-      <div className="py-24 bg-white/2 border-t border-white/5">
+      <div className="py-12 bg-white/2 border-t border-white/5">
         <Partners />
       </div>
 
@@ -39,21 +39,21 @@ export default function AIBusinessAutomationContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-zinc-400 text-sm md:text-base">
           <p>
             Looking for more solutions? Explore our{" "}
-            <Link 
-              href="/crm-development-company-india" 
+            <Link
+              href="/crm-development-company-india"
               className="text-[#D3B4FF] hover:text-white transition-colors duration-300 underline underline-offset-4"
             >
               CRM Development
             </Link>,{" "}
-            <Link 
-              href="/website-development-company-india" 
+            <Link
+              href="/website-development-company-india"
               className="text-[#D3B4FF] hover:text-white transition-colors duration-300 underline underline-offset-4"
             >
               Website Engineering
             </Link>{" "}
             and{" "}
-            <Link 
-              href="/seo-services-india" 
+            <Link
+              href="/seo-services-india"
               className="text-[#D3B4FF] hover:text-white transition-colors duration-300 underline underline-offset-4"
             >
               SEO Campaigns

@@ -20,7 +20,7 @@ export default function Footer() {
       style={{ backgroundColor: "#0B0011" }}
     >
       <div
-        className="max-w-7xl mx-auto rounded-3xl p-8 md:p-12 overflow-hidden relative"
+        className="max-w-7xl mx-auto rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 overflow-hidden relative"
         style={{
           background: "linear-gradient(135deg, #6B21A8 0%, #4C1D95 100%)",
         }}
@@ -29,7 +29,7 @@ export default function Footer() {
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
 
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-12 relative z-10">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-6 sm:gap-8 mb-10 sm:mb-12 relative z-10">
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
               <Image
@@ -51,7 +51,7 @@ export default function Footer() {
           </div>
           <div className="max-w-md">
             <p className="text-purple-100 text-base leading-relaxed opacity-90">
-              Specializing in premium Website Development, Custom CRM, SaaS Solutions, 
+              Specializing in premium Website Development, Custom CRM, SaaS Solutions,
               and AI-driven Business Automation to scale your enterprise globally.
             </p>
           </div>
@@ -61,11 +61,11 @@ export default function Footer() {
         <div className="border-t border-white/20 mb-12"></div>
 
         {/* Footer Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 relative z-10">
           {/* Contact Information Section */}
           <div className="space-y-6">
             <h3 className="text-white text-lg font-bold">Contact Us</h3>
-            
+
             <div className="space-y-4">
               <div className="flex items-start gap-3 group">
                 <MapPin size={20} className="text-purple-300 mt-1 shrink-0 group-hover:text-white transition-colors" />
@@ -152,7 +152,7 @@ export default function Footer() {
           {/* Find Us Section */}
           <div className="space-y-6">
             <h3 className="text-white text-lg font-bold">Find Us</h3>
-            <div className="rounded-2xl overflow-hidden border border-white/20 aspect-video group relative">
+            <div className="rounded-2xl overflow-hidden border border-white/20 aspect-video relative">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.461613126023!2d85.85367567495925!3d20.281151481187703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19098d17fb7bbf%3A0x156cc539fe9c5433!2sVanurtech%20media%20Pvt.%20Ltd.-%20Software%20Development%20Company%20Bhubaneswar%2C%20India!5e0!3m2!1sen!2sin!4v1763795212984!5m2!1sen!2sin"
                 width="100%"
@@ -160,18 +160,8 @@ export default function Footer() {
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
-                className="grayscale contrast-125 opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                className="w-full h-full"
               ></iframe>
-              <a
-                href="https://maps.app.goo.gl/spJrdpJyv8zwmu7HA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <span className="px-3 py-1.5 bg-white text-purple-700 text-xs font-bold rounded-lg flex items-center gap-2">
-                  View Map <ExternalLink size={12} />
-                </span>
-              </a>
             </div>
             <a
               href="https://maps.app.goo.gl/spJrdpJyv8zwmu7HA"
@@ -186,7 +176,7 @@ export default function Footer() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-16 pt-8 border-t border-white/20 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
+        <div className="mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/20 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
           <p className="text-purple-200 text-xs">
             &copy; {currentYear} Vanurtech Media Pvt. Ltd. All rights reserved.
           </p>

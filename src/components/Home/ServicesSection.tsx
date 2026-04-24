@@ -71,25 +71,25 @@ export default function ServicesSection({ onConsultClick }: { onConsultClick?: (
     {
       id: 3,
       category: "Scale & Automation",
-      title: "CRM & SaaS Solutions",
-      link: "/crm-development-company-india",
+      title: "CRM & ERP Solutions",
+      link: "/crm-erp-development-company-india",
       icon: Layers,
       features: [
         {
-          title: "Cloud-Native SaaS:",
-          description: "scalable multi-tenant platforms built for global performance",
-        },
-        {
-          title: "Bespoke CRM Systems:",
+          title: "Custom CRM Development:",
           description: "tailored workflows to manage your unique business sales pipeline",
         },
         {
-          title: "Subscription Management:",
-          description: "integrated recurring billing and membership automation systems",
+          title: "ERP System Integration:",
+          description: "unify finance, HR, inventory & operations in one powerful platform",
+        },
+        {
+          title: "Real-Time Dashboards:",
+          description: "actionable insights and analytics to drive smarter business decisions",
         },
         {
           title: "Process Automation:",
-          description: "intelligent tools to eliminate manual data entry and save resources",
+          description: "intelligent tools to eliminate manual tasks and boost productivity",
         },
       ],
     },
@@ -122,13 +122,13 @@ export default function ServicesSection({ onConsultClick }: { onConsultClick?: (
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 py-12 sm:py-16 md:py-20"
+      className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 py-8 sm:py-10 md:py-12"
       style={{ backgroundColor: "#0A0012" }}
     >
       <div className="max-w-7xl w-full">
         {/* Header */}
-        <div className="mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-8">
+        <div className="mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-6">
             <Sparkles size={16} className="text-purple-400" />
             <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
               Strategic Service Ecosystem
@@ -155,7 +155,7 @@ export default function ServicesSection({ onConsultClick }: { onConsultClick?: (
             <CometCard className="w-full lg:w-1/2">
               <Link href={services[0].link} className="block group">
                 <div
-                  className="h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[380px] sm:min-h-[420px] lg:h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(1)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -194,7 +194,7 @@ export default function ServicesSection({ onConsultClick }: { onConsultClick?: (
             <CometCard className="w-full lg:w-1/2">
               <Link href={services[1].link} className="block group">
                 <div
-                  className="h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[380px] sm:min-h-[420px] lg:h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(2)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -236,7 +236,7 @@ export default function ServicesSection({ onConsultClick }: { onConsultClick?: (
             <CometCard className="w-full lg:w-[60%]">
               <Link href={services[2].link} className="block group">
                 <div
-                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[320px] sm:min-h-[360px] lg:h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(3)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -276,7 +276,7 @@ export default function ServicesSection({ onConsultClick }: { onConsultClick?: (
             <CometCard className="w-full lg:w-[40%]">
               <Link href={services[3].link} className="block group">
                 <div
-                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  className="min-h-[320px] sm:min-h-[360px] lg:h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
                   onMouseEnter={() => setHoveredCard(4)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
@@ -316,7 +316,7 @@ export default function ServicesSection({ onConsultClick }: { onConsultClick?: (
           {/* CTA Card - Full Width */}
           <CometCard className="w-full">
             <div
-              className="h-[200px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 group relative overflow-hidden flex flex-col items-center justify-center text-center"
+              className="min-h-[160px] sm:h-[200px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 group relative overflow-hidden flex flex-col items-center justify-center text-center"
               onMouseEnter={() => setHoveredCard(7)}
               onMouseLeave={() => setHoveredCard(null)}
             >

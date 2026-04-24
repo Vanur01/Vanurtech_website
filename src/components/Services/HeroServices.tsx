@@ -30,7 +30,7 @@ export default function HeroServices() {
   ];
 
   return (
-    <div className="relative pt-24 pb-12 w-full overflow-hidden" style={{ backgroundColor: '#0A0012' }}>
+    <div className="relative pt-24 sm:pt-32 md:pt-36 pb-8 w-full overflow-hidden" style={{ backgroundColor: '#0A0012' }}>
       {/* Sparkles Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none">
         <SparklesCore
@@ -49,12 +49,12 @@ export default function HeroServices() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8">
-        <div className="text-center max-w-4xl mx-auto mb-16 sm:mb-24">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-5"
           >
             <Sparkles size={16} className="text-purple-400" />
             <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
@@ -80,7 +80,7 @@ export default function HeroServices() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-gray-300 text-base md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            From vision to execution — Vanutech Media crafts bold digital experiences through strategy, design, code, and beyond.
+            From vision to execution Vanutech Media crafts bold digital experiences through strategy, design, code, and beyond.
           </motion.p>
 
           <motion.div
@@ -117,11 +117,21 @@ export default function HeroServices() {
 
                     {/* Icon Box */}
                     <div 
-                      className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 cursor-pointer bg-linear-to-br from-purple-600 to-indigo-600 shadow-2xl shadow-purple-500/20"
+                      className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl sm:rounded-3xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 cursor-pointer bg-linear-to-br from-purple-600 to-indigo-600 shadow-2xl shadow-purple-500/20"
                     >
                       <service.icon 
-                        size={32} 
-                        className="text-white sm:w-12 sm:h-12"
+                        size={28}
+                        className="text-white sm:hidden"
+                        strokeWidth={2}
+                      />
+                      <service.icon 
+                        size={36}
+                        className="text-white hidden sm:block md:hidden"
+                        strokeWidth={2}
+                      />
+                      <service.icon 
+                        size={44}
+                        className="text-white hidden md:block"
                         strokeWidth={2}
                       />
                     </div>

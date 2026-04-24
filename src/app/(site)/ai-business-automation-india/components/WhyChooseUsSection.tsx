@@ -11,7 +11,7 @@ import {
   CheckCircle2
 } from "lucide-react";
 
-export function WhyChooseUsSection() {
+export function WhyChooseUsSection({ onConsultClick }: { onConsultClick?: () => void }) {
   const points = [
     {
       title: "10+ Years Experience",
@@ -56,14 +56,14 @@ export function WhyChooseUsSection() {
   ];
 
   return (
-    <section className="py-20 bg-[#0A0014] relative overflow-hidden flex items-center">
+    <section className="py-12 sm:py-20 bg-[#0A0014] relative overflow-hidden">
       {/* Subtle Glows */}
       <div className="absolute top-1/2 left-0 w-64 h-64 bg-purple-600/5 blur-[100px] rounded-full" />
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-pink-600/5 blur-[100px] rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         {/* Header */}
-        <div className="mb-14">
+        <div className="mb-8 sm:mb-14 text-center lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -74,15 +74,16 @@ export function WhyChooseUsSection() {
             <span className="text-purple-300 text-sm font-medium tracking-wide">Why Choose Us</span>
           </motion.div>
 
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6">
             <motion.h2
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.1]"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.1]"
             >
-              Your AI Transformation <br className="hidden lg:block"/>
+              Your AI Transformation{" "}
+              <br className="hidden lg:block"/>
               <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-500">Partner</span>
             </motion.h2>
 
@@ -108,7 +109,7 @@ export function WhyChooseUsSection() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05 }}
               whileHover={{ y: -5 }}
-              className={`group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 overflow-hidden ${point.borderColor} hover:bg-white/10 hover:shadow-[0_0_30px_rgba(168,85,247,0.1)]`}
+              className={`group relative p-5 sm:p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 overflow-hidden ${point.borderColor} hover:bg-white/10 hover:shadow-[0_0_30px_rgba(168,85,247,0.1)]`}
             >
               <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               
@@ -132,7 +133,7 @@ export function WhyChooseUsSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
             whileHover={{ scale: 1.02 }}
-            className="group relative p-6 rounded-2xl border border-purple-500/30 bg-linear-to-br from-purple-600/20 to-transparent backdrop-blur-xl flex flex-col justify-between overflow-hidden"
+            className="group relative p-5 sm:p-6 rounded-2xl border border-purple-500/30 bg-linear-to-br from-purple-600/20 to-transparent backdrop-blur-xl flex flex-col justify-between overflow-hidden"
           >
             <motion.div 
                animate={{ 
@@ -158,9 +159,7 @@ export function WhyChooseUsSection() {
             </div>
             
             <button
-              onClick={() => {
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={onConsultClick}
               className="relative z-10 mt-6 w-full py-3 bg-white text-black font-bold rounded-xl text-sm hover:bg-purple-500 hover:text-white transition-all active:scale-95 shadow-lg group-hover:shadow-purple-500/20"
             >
               Start Your AI Project

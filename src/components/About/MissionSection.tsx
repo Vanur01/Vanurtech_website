@@ -10,7 +10,7 @@ const PuzzleAssembly = ({ images, color = "purple" }: { images: string[], color?
     : "from-blue-600/40 to-emerald-600/40 border-blue-500/30 shadow-blue-500/10";
     
   return (
-    <div className="relative w-[320px] h-[320px] sm:w-[500px] sm:h-[500px] flex items-center justify-center">
+    <div className="relative w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] md:w-[500px] md:h-[500px] flex items-center justify-center">
       {/* Background Atmosphere Glow */}
       <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-${color === "purple" ? "purple" : "blue"}-500/[0.05] blur-[120px] -z-10`} />
 
@@ -102,9 +102,9 @@ export default function MissionSection() {
   ];
 
   return (
-    <div className="py-24 sm:py-32 md:py-48 flex flex-col items-center justify-center px-4 md:px-8 relative overflow-hidden" style={{ backgroundColor: '#0A0012' }}>
+    <div className="py-14 sm:py-20 md:py-28 flex flex-col items-center justify-center px-4 md:px-8 relative overflow-hidden" style={{ backgroundColor: '#0A0012' }}>
       
-      <div className="max-w-7xl w-full relative z-10 space-y-40 md:space-y-64">
+      <div className="max-w-7xl w-full relative z-10 space-y-20 md:space-y-32">
         
         {/* Mission Row: Content Untouched, Graphics Repetitive Trigger */}
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
@@ -120,7 +120,7 @@ export default function MissionSection() {
             </motion.div>
             <div className="space-y-8">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
-                Our Mission – Simplifying Business Through <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">Technology</span>
+                Our Mission Simplifying Business Through <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">Technology</span>
               </h2>
               <div className="space-y-6 text-gray-400 text-lg md:text-xl leading-relaxed font-light">
                 <p>Our mission is to <span className="text-white font-medium">empower businesses</span> with smart, scalable, and easy-to-use software solutions that simplify operations and drive growth.</p>
@@ -150,7 +150,7 @@ export default function MissionSection() {
             </motion.div>
             <div className="space-y-8">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
-                Our Vision – Becoming a <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">Global AI Solution Provider</span>
+                Our Vision Becoming a <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">Global AI Solution Provider</span>
               </h2>
               <div className="space-y-6 text-gray-400 text-lg md:text-xl leading-relaxed font-light">
                 <p>We envision becoming a <span className="text-white font-medium">global leader</span> in AI-powered business solutions, helping organizations across <span className="text-white">India, USA, UK, and Canada</span> transform their operations through innovation and technology.</p>

@@ -20,69 +20,69 @@ const solutions = [
     title: "Small & Medium Businesses (SMEs)",
     description: "Custom ERP, automated billing systems, and localized digital ecosystems built for rapid growth and efficiency.",
     icon: Briefcase,
-    color: "from-emerald-500 to-teal-500",
+    color: "from-violet-600 to-purple-600",
     tag: "Growth Ready",
-    link: "/crm-development-company-india"
+    link: "/small-medium-business-solutions-india"
   },
   {
     title: "Real Estate & Lead Management",
     description: "Advanced property tracking, automated lead follow-ups, and agent performance dashboards for high-volume firms.",
     icon: Building2,
-    color: "from-blue-500 to-cyan-500",
+    color: "from-violet-600 to-purple-600",
     tag: "Revenue Max",
-    link: "/crm-development-company-india"
+    link: "/real-estate-solutions-india"
   },
   {
     title: "Solar & Renewable Energy",
     description: "End-to-end installation tracking, field team reporting, and automated energy calculation tools for solar installers.",
     icon: Sun,
-    color: "from-yellow-400 to-orange-500",
+    color: "from-violet-600 to-purple-600",
     tag: "Green Scale",
-    link: "/crm-development-company-india"
+    link: "/solar-renewable-solutions-india"
   },
   {
     title: "Education & Institutes",
     description: "Automated student enrollment, high-performance learning portals, and integrated fee management systems.",
     icon: GraduationCap,
-    color: "from-purple-500 to-pink-500",
+    color: "from-violet-600 to-purple-600",
     tag: "Elite Learning",
-    link: "/crm-development-company-india"
+    link: "/education-institute-solutions-india"
   },
   {
     title: "Healthcare & Clinics",
     description: "Scalable patient scheduling, electronic health records (EHR), and automated patient follow-up systems.",
     icon: Activity,
-    color: "from-red-500 to-rose-600",
+    color: "from-violet-600 to-purple-600",
     tag: "Care Flow",
-    link: "/crm-development-company-india"
+    link: "/healthcare-clinic-solutions-india"
   },
   {
     title: "Travel & Hospitality",
     description: "Custom booking engines, dynamic itinerary management, and AI-driven personalized travel experiences.",
     icon: MapPin,
-    color: "from-orange-500 to-amber-600",
+    color: "from-violet-600 to-purple-600",
     tag: "Global Reach",
-    link: "/crm-development-company-india"
+    link: "/travel-hospitality-solutions-india"
   }
 ];
 
 export default function IndustrySolutions() {
   return (
-    <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#0B0011" }}>
+    <section className="py-14 relative overflow-hidden" style={{ backgroundColor: "#0B0011" }}>
       {/* Background Orbs */}
-      <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-pink-600/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-violet-600/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-        <div className="mb-16">
+        <div className="mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/20 bg-violet-500/5 backdrop-blur-md mb-6"
           >
-            <Factory size={16} className="text-purple-400" />
-            <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
+            <Factory size={16} className="text-violet-400" />
+            <span className="text-violet-300 text-xs sm:text-sm font-medium tracking-wide">
               Industry Verticals
             </span>
           </motion.div>
@@ -123,13 +123,13 @@ export default function IndustrySolutions() {
                   rotateY: -3,
                   transition: { duration: 0.4 }
                 }}
-                className="group p-8 rounded-[2rem] border border-white/10 bg-[#0B0011]/90 backdrop-blur-2xl transition-all duration-500 relative flex flex-col w-full min-h-[400px] overflow-hidden perspective-1000 active:scale-95"
+                className="group p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 bg-[#0B0011]/90 backdrop-blur-2xl transition-all duration-500 relative flex flex-col w-full min-h-[320px] sm:min-h-[400px] overflow-hidden perspective-1000 active:scale-95"
               >
                 {/* Dynamic Hover Glow */}
                 <div className={`absolute inset-0 bg-linear-to-br ${item.color} opacity-0 group-hover:opacity-15 blur-[100px] transition-opacity duration-700 pointer-events-none`} />
 
                 {/* Icon Container */}
-                <div className="relative mb-10 z-10 w-fit">
+                <div className="relative mb-6 sm:mb-10 z-10 w-fit">
                   <div className={`absolute -inset-6 bg-linear-to-br ${item.color} opacity-0 group-hover:opacity-40 blur-3xl transition-all duration-700 scale-50 group-hover:scale-110`} />
                   <div className={`w-16 h-16 rounded-2xl bg-linear-to-br ${item.color} p-[1.5px] relative overflow-hidden group-hover:rotate-12 transition-transform duration-700 shadow-2xl`}>
                     <div className="w-full h-full rounded-[15px] bg-[#0B0011] flex items-center justify-center relative z-10">
@@ -142,7 +142,7 @@ export default function IndustrySolutions() {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mb-4 leading-tight relative z-10 group-hover:text-purple-400 transition-colors">
+                <h3 className="text-2xl font-bold text-white mb-4 leading-tight relative z-10 group-hover:text-violet-400 transition-colors">
                   {item.title}
                   <div className={`h-[3px] w-0 group-hover:w-full bg-linear-to-r ${item.color} transition-all duration-500 mt-2 rounded-full shadow-[0_0_10px_${item.color.split(' ')[1]}]`} />
                 </h3>
@@ -151,9 +151,9 @@ export default function IndustrySolutions() {
                   {item.description}
                 </p>
 
-                <div className="flex items-center gap-3 text-purple-400 font-bold group-hover:text-purple-300 group-hover:gap-6 transition-all uppercase tracking-widest text-[11px] relative z-10">
-                  <Sparkles size={16} className="fill-purple-400/30 group-hover:rotate-90 transition-transform duration-700" />
-                  <span className="drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">{item.tag}</span>
+                <div className="flex items-center gap-3 text-violet-400 font-bold group-hover:text-violet-300 group-hover:gap-6 transition-all uppercase tracking-widest text-[11px] relative z-10">
+                  <Sparkles size={16} className="fill-violet-400/30 group-hover:rotate-90 transition-transform duration-700" />
+                  <span className="drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">{item.tag}</span>
                 </div>
 
                 {/* Ghost icon bg */}

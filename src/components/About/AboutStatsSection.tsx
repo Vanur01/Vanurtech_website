@@ -50,14 +50,14 @@ export default function AboutStatsSection() {
   ];
 
   return (
-    <div className="py-24 sm:py-32 flex items-center justify-center px-4 sm:px-6 md:px-8 relative overflow-hidden" style={{ backgroundColor: '#07000D' }}>
+    <div className="py-14 sm:py-20 flex items-center justify-center px-4 sm:px-6 md:px-8 relative overflow-hidden" style={{ backgroundColor: '#07000D' }}>
       {/* Background Decorative Glows */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-pink-600/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl w-full relative z-10">
         {/* Stats Grid - Top Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 mb-32 border-b border-white/5 pb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 mb-16 border-b border-white/5 pb-12">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -67,7 +67,7 @@ export default function AboutStatsSection() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className={`text-center px-4 ${index !== stats.length - 1 ? 'lg:border-r border-white/10' : ''}`}
             >
-              <div className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-white via-white to-purple-400">
+              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-white via-white to-purple-400">
                 {stat.value}
               </div>
               <div className="text-gray-400 text-xs md:text-sm uppercase tracking-widest font-bold opacity-70">
@@ -91,9 +91,9 @@ export default function AboutStatsSection() {
 
             <div className="relative rounded-[2.4rem] overflow-hidden bg-[#0A0012]">
               <img
-                src="https://images.unsplash.com/photo-1544256718-3bcf237f3974?q=80&w=1000&h=800&auto=format&fit=crop"
-                alt="AI Development"
-                className="w-full h-[350px] md:h-[550px] object-cover transition-all duration-1000 hover:scale-110 shadow-2xl"
+                src="/images/about/WhatsApp Image 2026-04-15 at 3.31.34 PM.jpeg"
+                alt="About Vanurtech"
+                className="w-full h-[260px] sm:h-[350px] md:h-[550px] object-cover transition-all duration-1000 hover:scale-110 shadow-2xl"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#0A0012] via-transparent to-transparent opacity-80" />
 
@@ -103,7 +103,7 @@ export default function AboutStatsSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="absolute bottom-8 left-8 right-8 p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex items-center gap-5"
+                className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8 p-4 sm:p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex items-center gap-3 sm:gap-5"
               >
                 <div className="relative">
                   <div className="h-14 w-14 rounded-2xl overflow-hidden bg-white/10 backdrop-blur-md border border-white/20 p-2 flex items-center justify-center">
@@ -147,7 +147,7 @@ export default function AboutStatsSection() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight"
               >
-                Who We Are – <br />
+                Who We Are <br />
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">
                   AI-Powered Business Solutions
                 </span>
@@ -162,13 +162,13 @@ export default function AboutStatsSection() {
               className="space-y-6 text-gray-400 text-base md:text-lg leading-relaxed font-light"
             >
               <p>
-                Vanurtech Media is not just another development agency — we are your <span className="text-white font-medium">Strategic Growth Partner</span>. Based in the heart of India’s tech landscape, we empower businesses to leapfrog competition through AI-driven intelligence.
+                Vanurtech Media is not just another development agency we are your <span className="text-white font-medium">Strategic Growth Partner</span>. Based in the heart of India’s tech landscape, we empower businesses to leapfrog competition through AI-driven intelligence.
               </p>
               <p>
                 From custom CRM ecosystems that close deals faster to SaaS platforms that redefine industries, we build software that <span className="text-purple-400 font-medium italic">actually works</span> for your bottom line.
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 sm:gap-6 pt-4">
                 <div className="p-4 rounded-xl bg-white/2 border border-white/5 hover:border-purple-500/30 transition-colors">
                   <div className="text-purple-400 font-bold mb-1">AI Driven</div>
                   <div className="text-xs text-gray-500">Intelligent workflows that scale operations automatically.</div>

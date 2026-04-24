@@ -88,7 +88,7 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-purple-500/20 bg-[#0B0011] p-6 sm:p-10 shadow-2xl"
+            className="relative w-full max-w-lg overflow-hidden rounded-2xl sm:rounded-3xl border border-purple-500/20 bg-[#0B0011] p-5 sm:p-10 shadow-2xl"
           >
             {/* Background Orbs */}
             <div className="absolute -top-24 -left-24 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl" />
