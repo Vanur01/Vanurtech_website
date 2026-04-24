@@ -46,7 +46,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         {data.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col md:flex-row justify-between gap-6 sm:gap-8 pt-10 sm:pt-12 md:gap-20 md:pt-40"
+            className="flex flex-col md:flex-row justify-between gap-6 sm:gap-8 pt-10 sm:pt-12 md:gap-20 md:pt-24"
           >
             <div className="sticky top-20 sm:top-24 md:top-40 z-40 flex max-w-xs flex-col items-center self-start w-full md:w-auto md:flex-row lg:max-w-sm">
               <div className="absolute left-2 sm:left-3 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white md:left-3">

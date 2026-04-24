@@ -62,25 +62,27 @@ export default function FeaturedProjects() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-purple-500 mb-6 sm:mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-8"
           >
-            <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-            <span className="text-purple-400 italic text-xs sm:text-sm">
-              Featured Projects
+            <Sparkles size={16} className="text-purple-400" />
+            <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
+              Featured Case Studies
             </span>
           </motion.div>
 
-          <motion.h1
+          <motion.h2
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight"
           >
             <span className="text-white">Our Work That</span>
             <br className="hidden sm:block" />
-            <span className="text-purple-500 italic">Speaks</span>
-            <span className="text-white"> for Itself</span>
-          </motion.h1>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">
+              {" "}Speaks{" "}
+            </span>
+            <span className="text-white">for Itself</span>
+          </motion.h2>
 
           <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto">
             A glimpse into some of the impactful digital experiences we’ve
@@ -271,18 +273,21 @@ export default function FeaturedProjects() {
           transition={{ duration: 0.6 }}
           className="text-center mt-20 mb-10"
         >
-      <div className="flex flex-col items-center text-center px-4">
-  
-  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-    <span className="text-white block">Glide Through Our</span>
-    <span className="text-purple-500 italic block">Infinite Creations</span>
-  </h2>
+          <div className="flex flex-col items-center text-center px-4">
 
-  <p className="mt-4 text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl">
-    Every scroll reveals thoughtful design, intuitive UX, and purposeful
-    development — crafted to keep users engaged and businesses ahead.
-  </p>
-</div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+              <span className="text-white">Glide Through Our</span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">
+                Infinite Creations
+              </span>
+            </h2>
+
+            <p className="mt-4 text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl">
+              Every scroll reveals thoughtful design, intuitive UX, and purposeful
+              development — crafted to keep users engaged and businesses ahead.
+            </p>
+          </div>
 
           <div className="flex items-center justify-center gap-4">
             <Link href="/work">

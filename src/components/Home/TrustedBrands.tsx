@@ -2,6 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 
 export default function TrustedBrands() {
   const clientImages = [
@@ -41,34 +44,73 @@ export default function TrustedBrands() {
     >
       <div className="max-w-full w-full">
         {/* Header Text */}
-        <div className="text-center mx-5 mb-16">
-  <h1 className="text-xl md:text-3xl lg:text-4xl font-bold leading-tight">
-    <span className="text-white">
-      Transforming Ideas into{" "}
-    </span>
-    <span className="text-purple-500 italic">
-      Powerful Digital Experiences
-    </span>
-  </h1>
+        <div className="text-center mx-5 mb-16 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-sm self-center"
+          >
+            <span className="text-xs md:text-sm font-medium text-purple-300 tracking-wide">
+              Trusted by 200+ Businesses Worldwide
+            </span>
+          </motion.div>
 
-  <p className="mt-4 text-sm md:text-base lg:text-lg text-gray-300 max-w-3xl mx-auto">
-    We design & build high-performance websites, mobile apps, and digital platforms
-    that help businesses grow faster.
-  </p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight lg:leading-[1.1]"
+          >
+            Build AI-Powered{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">
+              Custom Software, CRM & SaaS Solutions
+            </span>{" "}
+            That Solve Real Business Problems
+          </motion.h2>
 
-  <p className="mt-6 text-gray-400 sm:text-lg">
-    <span className="text-purple-400">✦</span> Trusted by{" "}
-    <span className="text-white font-semibold">200+ innovators</span>{" "}
-    worldwide. <span className="text-purple-400">✦</span>
-  </p>
-</div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-lg md:text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light"
+          >
+            We design & build high-performance websites, mobile apps, and digital platforms that help businesses grow faster.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto text-left md:px-10"
+          >
+            {[
+              { label: "Custom CRM for Lead & Sales Management", href: "/crm-development-company-india" },
+              { label: "AI Calling & Follow-up Automation", href: "/ai-business-automation-india" },
+              { label: "SaaS Platforms for Business Growth", href: "/saas-development-company-india" },
+              { label: "Mobile & Web Apps for End-to-End Operations", href: "/website-development-company-india" },
+            ].map((item, index) => (
+              <Link key={index} href={item.href} className="flex items-center gap-3 group/link">
+                <CheckCircle2 className="w-5 h-5 text-purple-500 shrink-0 group-hover/link:scale-110 transition-transform" />
+                <span className="text-gray-300 text-base md:text-lg hover:text-purple-400 transition-colors">
+                  {item.label}
+                </span>
+              </Link>
+            ))}
+          </motion.div>
+        </div>
+
+
+
+
+
 
 
         {/* Logo Scrolling Rows */}
-        <div className="space-y-4 overflow-hidden">
+        <div className="space-y-4 overflow-hidden py-10">
           {/* First Row - Scroll Right to Left */}
           <div className="relative">
-            <div className="flex animate-scroll-left gap-4">
+            <div className="flex animate-scroll-left pause-on-hover gap-4">
               {[...firstRow, ...firstRow, ...firstRow].map((logo, index) => (
                 <div
                   key={index}
@@ -90,7 +132,7 @@ export default function TrustedBrands() {
 
           {/* Second Row - Scroll Left to Right */}
           <div className="relative">
-            <div className="flex animate-scroll-right gap-4">
+            <div className="flex animate-scroll-right pause-on-hover gap-4">
               {[...secondRow, ...secondRow, ...secondRow].map((logo, index) => (
                 <div
                   key={index}
@@ -110,49 +152,6 @@ export default function TrustedBrands() {
             </div>
           </div>
         </div>
-
-        <style jsx>{`
-          @keyframes scroll-left {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-33.333%);
-            }
-          }
-
-          @keyframes scroll-right {
-            0% {
-              transform: translateX(-33.333%);
-            }
-            100% {
-              transform: translateX(0);
-            }
-          }
-
-          .animate-scroll-left {
-            animation: scroll-left 10s linear infinite;
-          }
-
-          .animate-scroll-right {
-            animation: scroll-right 10s linear infinite;
-          }
-
-          /* Slower animation on small screens for better readability */
-          @media (max-width: 640px) {
-            .animate-scroll-left {
-              animation-duration: 15s;
-            }
-            .animate-scroll-right {
-              animation-duration: 15s;
-            }
-          }
-
-          .animate-scroll-left:hover,
-          .animate-scroll-right:hover {
-            animation-play-state: paused;
-          }
-        `}</style>
       </div>
     </div>
   );

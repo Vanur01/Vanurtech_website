@@ -2,8 +2,14 @@
 import React from "react";
 import { HeroParallax } from "../ui/hero-parallax";
 
-export function HeroSection() {
-  return <HeroParallax products={products} />;
+import { CTAModal } from "../CTAModal";
+
+export function HeroSection({ onConsultClick }: { onConsultClick?: () => void }) {
+  return (
+    <>
+      <HeroParallax products={products} onConsultClick={onConsultClick} />
+    </>
+  );
 }
 
 export const products = [

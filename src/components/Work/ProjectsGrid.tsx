@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { projectApi, Project, categoryApi, Category } from '@/api';
 
-const API_BASE = "https://backend.vanurmedia.com";
+const API_BASE = "https://vanurtech-backend-admin-2-8vsl.onrender.com";
 
 const LEAD_TOKEN_KEY = "leadToken";
 const LEAD_EXPIRY_KEY = "leadTokenExpiry";
@@ -90,11 +90,11 @@ export default function ProjectsGrid() {
   const filteredProjects = selectedCategory === 'All'
     ? allProjects
     : allProjects.filter(project => {
-        const categoryId = typeof project.category === 'string'
-          ? project.category
-          : project.category?._id;
-        return categoryId === selectedCategory;
-      });
+      const categoryId = typeof project.category === 'string'
+        ? project.category
+        : project.category?._id;
+      return categoryId === selectedCategory;
+    });
 
   // Count projects per category
   const categoryCountMap = React.useMemo(() => {
@@ -171,11 +171,10 @@ export default function ProjectsGrid() {
             <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide w-full lg:w-auto">
               <button
                 onClick={() => { setSelectedCategory('All'); setCurrentPage(1); }}
-                className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
-                  selectedCategory === 'All'
+                className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${selectedCategory === 'All'
                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
                     : 'bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white'
-                }`}
+                  }`}
               >
                 All
               </button>
@@ -183,11 +182,10 @@ export default function ProjectsGrid() {
                 <button
                   key={category._id}
                   onClick={() => { setSelectedCategory(category._id); setCurrentPage(1); }}
-                  className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
-                    selectedCategory === category._id
+                  className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${selectedCategory === category._id
                       ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
                       : 'bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white'
-                  }`}
+                    }`}
                 >
                   {category.name}
                 </button>

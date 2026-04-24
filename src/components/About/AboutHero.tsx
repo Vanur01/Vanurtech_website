@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ThreeDMarquee } from "@/components/ui/3d-marquee";
+import { Sparkles } from "lucide-react";
 
 export default function AboutHero() {
   const images = [
@@ -38,19 +39,20 @@ export default function AboutHero() {
 
   return (
     <div className="relative mx-auto flex h-screen w-full max-w-7xl flex-col items-center justify-center overflow-hidden rounded-3xl">
-      <div className="relative z-20 px-4 text-start">
-        <p className="mb-4 text-sm font-medium uppercase tracking-wider text-purple-400 md:text-base">
-          Our Mission
+      <div className="relative z-20 px-4 text-start max-w-5xl">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-6">
+          <Sparkles size={16} className="text-purple-400" />
+          <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
+            About Vanurtech Media
+          </span>
+        </div>
+        <h1 className="text-balance text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+          Build Intelligent Digital Solutions That Solve <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">Real Business Problems</span>
+        </h1>
+        <p className="mt-8 text-lg md:text-xl text-gray-300 max-w-3xl leading-relaxed font-light">
+          At Vanurtech Media, we help businesses transform their operations, sales, and growth 
+          using AI-powered custom software, CRM systems, and scalable digital solutions.
         </p>
-        <h1 className="mx-auto max-w-4xl text-balance text-3xl font-bold text-white md:text-5xl lg:text-6xl">
-          Build bold digital experiences.
-        </h1>
-        <h1 className="mx-auto max-w-4xl text-balance text-3xl font-bold text-white md:text-5xl lg:text-6xl">
-          Stay agile.
-        </h1>
-        <h1 className="mx-auto max-w-4xl text-balance text-3xl font-bold text-white md:text-5xl lg:text-6xl">
-          Stay tech-agnostic.
-        </h1>
       </div>
 
       {/* Overlay */}

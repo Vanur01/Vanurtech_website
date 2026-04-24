@@ -12,12 +12,14 @@ import Link from "next/link";
 
 export const HeroParallax = ({
   products,
+  onConsultClick,
 }: {
   products: {
     title: string;
     link: string;
     thumbnail: string;
   }[];
+  onConsultClick?: () => void;
 }) => {
   const firstRow = products.slice(0, 5);
   const secondRow = products.slice(5, 10);
@@ -58,7 +60,7 @@ export const HeroParallax = ({
       ref={ref}
       className="h-[190vh] md:h-[230vh] lg:h-[270vh] overflow-hidden antialiased relative flex flex-col self-auto perspective-[1000px] transform-3d"
     >
-      <Header />
+      <Header onConsultClick={onConsultClick} />
       <motion.div
         style={{
           rotateX,
@@ -91,12 +93,27 @@ export const HeroParallax = ({
   );
 };
 
-export const Header = () => {
+import { Rocket, PhoneCall, Briefcase } from "lucide-react";
+
+export const Header = ({ onConsultClick }: { onConsultClick?: () => void }) => {
   const services = ["Web Design", "Mobile Apps", "CRM & Automation"];
 
   return (
     <div className="max-w-7xl relative mx-auto py-10 md:py-20 px-4 w-full z-50 flex items-center justify-center min-h-screen">
-      <div className="text-center w-full">
+      <div className="text-center w-full flex flex-col items-center">
+        {/* Experience Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-sm mb-8"
+        >
+          <Rocket className="w-3 h-3 text-purple-400 animate-pulse" />
+          <span className="text-[10px] md:text-xs font-semibold text-purple-300 tracking-widest">
+            10+ Years Experience | Innovating for Global Brands
+          </span>
+        </motion.div>
+
         {/* Services - Top */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -125,57 +142,50 @@ export const Header = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-4 md:mb-6 flex flex-col items-center justify-center gap-1 md:gap-2"
+          className="mb-8 md:mb-10 flex flex-col items-center justify-center gap-1 md:gap-2"
         >
-          {/* Mobile Layout (VANUR TECH in one row, MEDIA below) */}
-          <div className="flex flex-col items-center justify-center gap-1 sm:hidden">
-            <div className="flex items-baseline gap-2">
-              <h1 className="text-4xl font-bold text-white tracking-widest">
+          <div className="flex flex-col lg:flex-row items-center lg:items-baseline justify-center gap-1 md:gap-4">
+            <div className="flex items-baseline gap-2 md:gap-3">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl md:text-6xl font-bold text-white tracking-widest">
                 VANUR
               </h1>
-              <span className="text-4xl font-light text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">
+              <span className="text-3xl sm:text-4xl lg:text-5xl md:text-6xl font-light text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">
                 TECH
               </span>
             </div>
-            <span className="text-lg font-light text-white/90 tracking-widest">
-              MEDIA
+            <span className="text-lg sm:text-xl lg:text-2xl font-light text-white/90 tracking-[0.4em] uppercase">
+              Media
             </span>
           </div>
+        </motion.div>
 
-          {/* Tablet Layout (VANUR TECH in one row, MEDIA below) */}
-          <div className="hidden sm:flex lg:hidden flex-col items-center justify-center gap-2">
-            <div className="flex items-baseline gap-3">
-              <h1 className="text-5xl font-bold text-white tracking-widest">
-                VANUR
-              </h1>
-              <span className="text-5xl font-light text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">
-                TECH
-              </span>
-            </div>
-            <span className="text-2xl font-light text-white/90 tracking-widest">
-              MEDIA
-            </span>
-          </div>
-
-          {/* Desktop Layout (horizontal with spacing) */}
-          <div className="hidden lg:flex items-baseline justify-center gap-4">
-            <h1 className="text-6xl md:text-7xl font-bold text-white tracking-widest">
-              VANUR
-            </h1>
-            <div className="flex flex-col items-center">
-              <span className="text-6xl md:text-7xl font-light text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">
-                T E C H
-              </span>
-              <span className="text-xl md:text-3xl font-light text-white/90 tracking-widest">
-                M E D I A
-              </span>
-            </div>
-          </div>
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex flex-wrap items-center justify-center gap-4 pt-4"
+        >
+          <button
+            onClick={onConsultClick}
+            className="group relative px-6 py-3 sm:px-8 bg-linear-to-r from-purple-600 to-pink-600 rounded-full text-white text-sm font-semibold transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(147,51,234,0.4)] active:scale-95 flex items-center gap-2"
+          >
+            <PhoneCall className="w-4 h-4 transition-transform group-hover:rotate-12" />
+            Get Free Consultation
+          </button>
+          <Link
+            href="/projects"
+            className="px-6 py-3 sm:px-8 rounded-full border border-white/10 bg-white/5 text-white text-sm font-semibold backdrop-blur-md transition-all hover:bg-white/10 hover:border-white/30 active:scale-95 flex items-center gap-2"
+          >
+            <Briefcase className="w-4 h-4" />
+            View Our Work
+          </Link>
         </motion.div>
       </div>
     </div>
   );
 };
+
 
 export const ProductCard = ({
   product,

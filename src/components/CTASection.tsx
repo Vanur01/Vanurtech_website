@@ -1,12 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { Rocket, Phone, MessageSquare, Send, CheckCircle, XCircle } from "lucide-react";
+import {
+  Rocket,
+  Phone,
+  MessageSquare,
+  Send,
+  CheckCircle,
+  XCircle,
+  PhoneCall,
+  Sparkles,
+  ArrowRight,
+  User
+} from "lucide-react";
 import { ctaApi } from "@/api";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function CTASection() {
   const [mobile, setMobile] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<{
     type: "success" | "error";
@@ -20,33 +32,32 @@ export default function CTASection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate mobile number
+
+    if (!name.trim()) {
+      showNotification("error", "Please enter your name");
+      return;
+    }
+
     if (!/^[0-9]{10}$/.test(mobile)) {
       showNotification("error", "Please enter a valid 10-digit mobile number");
       return;
     }
 
-    if (!message.trim()) {
-      showNotification("error", "Please enter a message");
-      return;
-    }
-
     setIsSubmitting(true);
-    
+
     try {
       const response = await ctaApi.submitCTA({
         mobile,
-        message: message.trim(),
+        message: name.trim(), // Sending name in the message field
       });
 
       if (response.success) {
         // Clear form
         setMobile("");
-        setMessage("");
-        
+        setName("");
+
         // Show success message
-        showNotification("success", "Thank you! Your message has been sent successfully. We'll get back to you soon!");
+        showNotification("success", "Thank you! We'll get back to you soon!");
       }
     } catch (error: any) {
       console.error("CTA submission error:", error);
@@ -56,116 +67,162 @@ export default function CTASection() {
     }
   };
 
-  return (
-    <div className=" my-20 w-full bg-[#0B0011] px-4 py-12 sm:px-6 sm:py-16 md:px-8 md:py-20 lg:px-10">
-      {/* Toast Notification */}
-      {notification && (
-        <div className="fixed top-4 right-4 z-[3999] animate-in slide-in-from-top-2 duration-300">
-          <div
-            className={`flex items-center gap-3 rounded-xl px-4 sm:px-6 py-3 sm:py-4 shadow-2xl backdrop-blur-lg border max-w-md ${
-              notification.type === "success"
-                ? "bg-green-500/90 border-green-400/50 text-white"
-                : "bg-red-500/90 border-red-400/50 text-white"
-            }`}
-          >
-            {notification.type === "success" ? (
-              <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
-            ) : (
-              <XCircle className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
-            )}
-            <p className="text-sm sm:text-base font-medium">{notification.message}</p>
-            <button
-              onClick={() => setNotification(null)}
-              className="ml-2 text-white/80 hover:text-white transition-colors"
-            >
-              <XCircle className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      )}
-      
-      <div className="mx-auto max-w-7xl">
-        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-purple-500/30 bg-linear-to-br from-purple-950/50 via-purple-900/30 to-transparent p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20">
-          {/* Glow effect */}
-          <div className="absolute -left-10 -top-10 sm:-left-16 sm:-top-16 md:-left-20 md:-top-20 h-40 w-40 sm:h-48 sm:w-48 md:h-60 md:w-60 rounded-full bg-purple-500/20 blur-3xl"></div>
-          {/* <div className="absolute -bottom-10 -right-10 sm:-bottom-16 sm:-right-16 md:-bottom-20 md:-right-20 h-40 w-40 sm:h-48 sm:w-48 md:h-60 md:w-60 rounded-full bg-purple-500/20 blur-3xl"></div> */}
+  const actionItems = [
+    { icon: <PhoneCall className="w-5 h-5 text-purple-400" />, text: "Talk to Experts" },
+    { icon: <MessageSquare className="w-5 h-5 text-purple-400" />, text: "Get Free Consultation" },
+    { icon: <Rocket className="w-5 h-5 text-purple-400" />, text: "Start Your Project Today" },
+  ];
 
-          {/* Content */}
-          <div className="relative z-10 text-center">
-            <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white">
-              Big Ideas Deserve{" "}
-              <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Bold Execution
+  return (
+    <div id="consultation" className="relative mt-0 mb-10 w-full bg-[#0B0011] px-4 pt-12 md:pt-16 pb-24 md:pb-32 overflow-hidden">
+      {/* Background Orbs */}
+      <div className="absolute top-0 -left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 -right-1/4 w-[500px] h-[500px] bg-pink-600/10 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {notification && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed top-4 right-4 z-[3999]"
+          >
+            <div
+              className={`flex items-center gap-3 rounded-2xl px-6 py-4 shadow-2xl backdrop-blur-xl border border-purple-500/20 ${notification.type === "success"
+                ? "bg-purple-500/10 border-purple-500/20 text-purple-200"
+                : "bg-red-500/10 border-red-500/20 text-red-400"
+                }`}
+            >
+              {notification.type === "success" ? (
+                <CheckCircle className="w-6 h-6" />
+              ) : (
+                <XCircle className="w-6 h-6" />
+              )}
+              <p className="text-sm font-medium pr-4">{notification.message}</p>
+              <button
+                onClick={() => setNotification(null)}
+                className="opacity-60 hover:opacity-100 transition-opacity"
+              >
+                <XCircle className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="mx-auto max-w-7xl relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Content Left */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold mb-6 tracking-wider">
+              <Sparkles className="w-3 h-3" />
+              Upgrade Your Business
+            </div>
+
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+              Let&apos;s Solve Your Business <br />
+              <span className="bg-linear-to-r from-purple-400 via-purple-500 to-pink-400 bg-clip-text text-transparent">
+                Challenges with AI
               </span>
             </h2>
-            
-            <p className="mx-auto mb-6 sm:mb-8 md:mb-10 max-w-2xl text-sm sm:text-base md:text-lg text-gray-300">
-  Have a project in mind? Let’s build something exceptional together.
-</p>
 
+            <p className="text-gray-300 text-lg md:text-xl max-w-xl mb-10 leading-relaxed opacity-80">
+              Get a free consultation and discover how custom software can transform
+              your operations and increase your revenue.
+            </p>
 
-            {/* Contact Form */}
-            <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-4 sm:space-y-6">
-              {/* Mobile Number Input */}
-              <div className="relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400">
-                  <Phone size={20} />
+            <div className="space-y-4">
+              {actionItems.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 + 0.3 }}
+                  className="flex items-center gap-4 group cursor-default"
+                >
+                  <div className="p-3 rounded-xl bg-purple-500/5 border border-purple-500/10 group-hover:bg-purple-500/20 group-hover:border-purple-500/30 transition-all duration-300">
+                    {item.icon}
+                  </div>
+                  <span className="text-gray-300 font-medium group-hover:text-white transition-colors duration-300">
+                    {item.text}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Form Right */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            {/* Form Glow */}
+            <div className="absolute inset-0 bg-purple-500/10 blur-3xl -z-10" />
+
+            <div className="rounded-3xl border border-purple-500/20 bg-purple-950/30 backdrop-blur-md p-8 md:p-10 shadow-2xl">
+              <h3 className="text-2xl font-bold text-white mb-2">Ready to start?</h3>
+              <p className="text-gray-400 mb-6">Tell us about your project and we&apos;ll get back to you.</p>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Name Input */}
+                <div className="relative group">
+                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-purple-400 group-focus-within:text-pink-400 transition-colors">
+                    <User size={20} />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    className="w-full bg-purple-900/20 border border-purple-500/20 rounded-2xl py-4 pl-14 pr-5 text-white focus:outline-none focus:ring-1 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-gray-500"
+                  />
                 </div>
-                <input
-                  type="tel"
-                  placeholder="Mobile Number"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                  required
-                  pattern="[0-9]{10}"
-                  className="w-full rounded-xl sm:rounded-2xl border border-purple-500/30 bg-purple-950/30 px-12 py-3 sm:py-4 text-sm sm:text-base text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
-                />
-              </div>
 
-              {/* Message Input */}
-              <div className="relative">
-                <div className="absolute left-4 top-4 text-purple-400">
-                  <MessageSquare size={20} />
+                {/* Mobile Number Input */}
+                <div className="relative group">
+                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-purple-400 group-focus-within:text-pink-400 transition-colors">
+                    <Phone size={20} />
+                  </div>
+                  <input
+                    type="tel"
+                    placeholder="Mobile Number"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                    required
+                    className="w-full bg-purple-900/20 border border-purple-500/20 rounded-2xl py-4 pl-14 pr-5 text-white focus:outline-none focus:ring-1 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-gray-500"
+                  />
                 </div>
-                <textarea
-                  placeholder="Your Message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  required
-                  rows={4}
-                  className="w-full rounded-xl sm:rounded-2xl border border-purple-500/30 bg-purple-950/30 px-12 py-3 sm:py-4 text-sm sm:text-base text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all resize-none"
-                />
-              </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-white font-semibold text-sm sm:text-base md:text-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {/* Gradient Background */}
-                <span className="absolute inset-0 bg-linear-to-r from-purple-600 to-pink-600"></span>
-                
-                {/* Hover Effect */}
-                <span className="absolute inset-0 bg-linear-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                
-                {/* Button Content */}
-                <span className="relative z-10 flex items-center gap-2">
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <Send size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-                    </>
-                  )}
-                </span>
-              </button>
-            </form>
-          </div>
+                <div className="flex justify-center pt-4">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="group relative flex items-center justify-center gap-3 px-12 py-4 bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 rounded-2xl text-white font-extrabold text-lg transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:scale-95"
+                  >
+                    {isSubmitting ? (
+                      <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <span className="tracking-wide">Submit Request</span>
+                        <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

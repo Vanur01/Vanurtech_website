@@ -21,10 +21,10 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL('https://vanurmedia.com'),
   title: {
-    default: "Vanur Media - Digital Marketing & Web Development Agency",
+    default: "AI-Powered Custom Software, CRM & SaaS Development Company in India | Vanurtech Media",
     template: "%s | Vanur Media"
   },
-  description: "Vanur Media is a leading web development agency specializing in custom web applications , mobile apps, SEO optimization, and innovative digital solutions for businesses worldwide.",
+  description: "Vanurtech Media: Leading AI-powered software development company in India. We automate operations for SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
   keywords: [
     // "digital marketing agency",
     "web development",
@@ -52,8 +52,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://vanurmedia.com",
     siteName: "Vanur Media",
-    title: "Vanur Media - Digital Marketing & Web Development Agency",
-    description: "Transform your digital presence with Vanur Media. Expert web development, mobile apps, SEO, and innovative digital solutions tailored for your business growth.",
+    title: "AI-Powered Custom Software, CRM & SaaS Development Company in India | Vanurtech Media",
+    description: "Vanurtech Media: Leading AI-powered software development company in India. We automate operations for SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
     images: [
       {
         url: "/images/logo-1.png",
@@ -69,8 +69,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@vanurmedia",
     creator: "@vanurmedia",
-    title: "Vanur Media - Digital Marketing & Web Development Agency",
-    description: "Transform your digital presence with expert web development, mobile apps, SEO, and innovative digital solutions.",
+    title: "AI-Powered Custom Software, CRM & SaaS Development Company in India | Vanurtech Media",
+    description: "Vanurtech Media: Leading AI-powered software development company in India. We automate operations for SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
     images: ["/images/logo-1.png"],
   },
 
@@ -145,7 +145,7 @@ export default function RootLayout({
     name: "Vanur Media",
     url: "https://vanurmedia.com",
     logo: "https://vanurmedia.com/images/logo.png",
-    description: "Leading digital marketing and web development agency specializing in custom web applications, mobile apps, and SEO optimization.",
+    description: "Leading AI-powered software development company in India specializing in custom software, CRM, SaaS, and mobile applications.",
     address: {
       "@type": "PostalAddress",
       addressCountry: "US"
@@ -194,10 +194,10 @@ export default function RootLayout({
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://backend.vanurmedia.com"/>
+        <link rel="preconnect" href="https://vanurtech-backend-admin-2-8vsl.onrender.com"/>
         
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://backend.vanurmedia.com" />
+        <link rel="dns-prefetch" href="https://vanurtech-backend-admin-2-8vsl.onrender.com" />
       </head>
       <body
         className={`${montserrat.variable} antialiased`}

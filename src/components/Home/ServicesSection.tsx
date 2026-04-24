@@ -1,35 +1,45 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUpRight, Code, Smartphone, Layers, Zap } from "lucide-react";
+import {
+  ArrowUpRight,
+  Smartphone,
+  Code,
+  Zap,
+  Layers,
+  Sparkles,
+} from "lucide-react";
 import { CometCard } from "@/components/ui/comet-card";
+import Link from "next/link";
 
-export default function ServicesSection() {
+
+export default function ServicesSection({ onConsultClick }: { onConsultClick?: () => void }) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const services = [
     {
       id: 1,
       category: "Creative & Responsive",
-      title: "Website Design",
+      title: "Website Design & Development",
+      link: "/website-development-company-india",
       icon: Code,
       features: [
         {
-          title: "Custom & Responsive Design:",
+          title: "Custom Business Websites:",
           description:
-            "tailored designs that adapt seamlessly across all devices",
+            "high-converting websites designed for your business goals",
         },
         {
-          title: "SEO & Performance Optimization:",
-          description: "fast loading, search-engine friendly architecture",
+          title: "SEO & Performance Optimized:",
+          description: "fast-loading, Google-friendly websites",
         },
         {
-          title: "E-Commerce & CMS Solutions:",
-          description: "secure online stores with easy content management",
+          title: "Lead Generation Focused:",
+          description: "designed to convert visitors into customers",
         },
         {
-          title: "End-to-End Support & Maintenance:",
-          description: "continuous updates, security, and technical assistance",
+          title: "Scalable & Secure:",
+          description: "built with modern technologies for long-term growth",
         },
       ],
     },
@@ -37,6 +47,7 @@ export default function ServicesSection() {
       id: 2,
       category: "Cross-Platform",
       title: "Mobile Application",
+      link: "/mobile-app-development-company-india",
       icon: Smartphone,
       features: [
         {
@@ -59,98 +70,52 @@ export default function ServicesSection() {
     },
     {
       id: 3,
-      category: "Business Intelligence",
-      title: "CRM Solutions",
+      category: "Scale & Automation",
+      title: "CRM & SaaS Solutions",
+      link: "/crm-development-company-india",
       icon: Layers,
       features: [
         {
-          title: "Customizable CRM Solutions:",
-          description: "tailored to your business workflows and processes",
+          title: "Cloud-Native SaaS:",
+          description: "scalable multi-tenant platforms built for global performance",
         },
         {
-          title: "Seamless Software Integration:",
-          description: "connect with existing tools and platforms",
+          title: "Bespoke CRM Systems:",
+          description: "tailored workflows to manage your unique business sales pipeline",
         },
         {
-          title: "Advanced Analytics & Reporting:",
-          description: "data-driven insights for better decisions",
+          title: "Subscription Management:",
+          description: "integrated recurring billing and membership automation systems",
         },
         {
-          title: "Automated Workflows System:",
-          description: "streamline operations and boost productivity",
+          title: "Process Automation:",
+          description: "intelligent tools to eliminate manual data entry and save resources",
         },
       ],
     },
     {
       id: 4,
-      category: "Creative Design",
-      title: "UI/UX",
-      icon: Zap,
-      features: [
-        {
-          title: "User Research & Analysis:",
-          description: "understanding user behavior and needs",
-        },
-        {
-          title: "Wireframing & Prototyping:",
-          description: "interactive mockups and design systems",
-        },
-        {
-          title: "Visual Design & Branding:",
-          description: "stunning interfaces with consistent brand identity",
-        },
-        {
-          title: "Usability Testing & Optimization:",
-          description: "data-driven improvements for better user experience",
-        },
-      ],
-    },
-    {
-      id: 5,
-      category: "Artificial Intelligence",
-      title: "AI/ML Tech",
+      category: "Intelligence",
+      title: "AI Automation",
+      link: "/ai-business-automation-india",
       icon: Code,
       features: [
         {
-          title: "Custom AI Model Development:",
-          description: "tailored machine learning solutions for your needs",
+          title: "Custom AI Growth Engines:",
+          description: "intelligent automation building tailored to your specific business needs",
         },
         {
-          title: "Natural Language Processing (NLP):",
-          description: "chatbots, sentiment analysis & text processing",
+          title: "Workflow Streamlining:",
+          description: "use high-end AI to eliminate repetitive tasks and save human hours",
         },
         {
-          title: "Computer Vision & Image Recognition:",
-          description: "object detection, facial recognition & automation",
+          title: "Smart Interaction Bots:",
+          description: "deploy next-gen AI calling and messaging for 24/7 global support",
         },
         {
-          title: "Predictive Analytics & Data Science:",
-          description: "AI-powered insights for business intelligence",
+          title: "Predictive Analytics:",
+          description: "forecast market trends and optimize strategy with AI-driven data science",
         },
-      ],
-    },
-    {
-      id: 6,
-      category: "Growth & Engagement",
-      title: " Marketing",
-      icon: Smartphone,
-      features: [
-        {
-          title: "Seamless Website to App Conversion:",
-          description: "transform your site into native mobile apps",
-        },
-        {
-          title: "Custom App:",
-          description: "feature-rich apps for iOS and Android",
-        },
-        {
-          title: "Faster Deployment & Scalable Solutions:",
-          description: "quick launch with room to grow",
-        },
-        {
-          title: "Integrated Features & Real-time Sync:",
-          description: "live updates and seamless data synchronization",
-        },  
       ],
     },
   ];
@@ -163,23 +128,22 @@ export default function ServicesSection() {
       <div className="max-w-7xl w-full">
         {/* Header */}
         <div className="mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-purple-500 mb-6 sm:mb-8">
-            <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-            <span className="text-purple-400 italic text-xs sm:text-sm">
-              Our Services
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-md mb-8">
+            <Sparkles size={16} className="text-purple-400" />
+            <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
+              Strategic Service Ecosystem
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight text-white">
-            From pixel-perfect design to
-            <br />
-            data-driven strategies
-          </h1>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white tracking-tight">
+            Comprehensive Solutions <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-500 to-purple-600">
+              Tailored for Global Scaling
+            </span>
+          </h2>
 
-          <p className="text-gray-400 text-lg sm:text-xl">
-            We offer end-to-end website design and development services that
-            cover
-            <p>every stage of your digital journey.</p>
+          <p className="text-gray-400 text-lg sm:text-xl max-w-3xl leading-relaxed">
+            We deliver high-performance software engineering and elite digital strategies that empower brands to dominate the modern landscape.
           </p>
         </div>
 
@@ -189,76 +153,80 @@ export default function ServicesSection() {
           <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
             {/* Card 1 - Website Design */}
             <CometCard className="w-full lg:w-1/2">
-              <div
-                className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 group relative overflow-hidden"
-                onMouseEnter={() => setHoveredCard(1)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="mb-4 sm:mb-6">
-                  <div className="text-purple-400 text-xs sm:text-sm mb-2">
-                    {services[0].category}
+              <Link href={services[0].link} className="block group">
+                <div
+                  className="h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  onMouseEnter={() => setHoveredCard(1)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className="mb-4 sm:mb-6">
+                    <div className="text-purple-400 text-xs sm:text-sm mb-2">
+                      {services[0].category}
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6 group-hover:text-purple-400 transition-colors">
+                      {services[0].title}
+                    </h3>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                    {services[0].title}
-                  </h3>
+
+                  <ul className="space-y-2 sm:space-y-3">
+                    {services[0].features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2 sm:gap-3">
+                        <span className="text-purple-400 mt-1 text-sm">✦</span>
+                        <div className="text-sm sm:text-base">
+                          <span className="text-white font-semibold">
+                            {feature.title}
+                          </span>
+                          <span className="text-gray-400">
+                            {" "}
+                            {feature.description}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
                 </div>
-
-                <ul className="space-y-2 sm:space-y-3">
-                  {services[0].features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-purple-400 mt-1 text-sm">✦</span>
-                      <div className="text-sm sm:text-base">
-                        <span className="text-white font-semibold">
-                          {feature.title}
-                        </span>
-                        <span className="text-gray-400">
-                          {" "}
-                          {feature.description}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
-              </div>
+              </Link>
             </CometCard>
 
             {/* Card 2 - Mobile Application */}
             <CometCard className="w-full lg:w-1/2">
-              <div
-                className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 group relative overflow-hidden"
-                onMouseEnter={() => setHoveredCard(2)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="mb-4 sm:mb-6">
-                  <div className="text-purple-400 text-xs sm:text-sm mb-2">
-                    {services[1].category}
+              <Link href={services[1].link} className="block group">
+                <div
+                  className="h-[480px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  onMouseEnter={() => setHoveredCard(2)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className="mb-4 sm:mb-6">
+                    <div className="text-purple-400 text-xs sm:text-sm mb-2">
+                      {services[1].category}
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6 group-hover:text-purple-400 transition-colors">
+                      {services[1].title}
+                    </h3>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                    {services[1].title}
-                  </h3>
+
+                  <ul className="space-y-2 sm:space-y-3">
+                    {services[1].features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2 sm:gap-3">
+                        <span className="text-purple-400 mt-1 text-sm">✦</span>
+                        <div className="text-sm sm:text-base">
+                          <span className="text-white font-semibold">
+                            {feature.title}
+                          </span>
+                          <span className="text-gray-400">
+                            {" "}
+                            {feature.description}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
                 </div>
-
-                <ul className="space-y-2 sm:space-y-3">
-                  {services[1].features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-purple-400 mt-1 text-sm">✦</span>
-                      <div className="text-sm sm:text-base">
-                        <span className="text-white font-semibold">
-                          {feature.title}
-                        </span>
-                        <span className="text-gray-400">
-                          {" "}
-                          {feature.description}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
-              </div>
+              </Link>
             </CometCard>
           </div>
 
@@ -266,153 +234,82 @@ export default function ServicesSection() {
           <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
             {/* Card 3 - CRM Solutions */}
             <CometCard className="w-full lg:w-[60%]">
-              <div
-                className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 group relative overflow-hidden"
-                onMouseEnter={() => setHoveredCard(3)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="mb-4 sm:mb-6">
-                  <div className="text-purple-400 text-xs sm:text-sm mb-2">
-                    {services[2].category}
+              <Link href={services[2].link} className="block group">
+                <div
+                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  onMouseEnter={() => setHoveredCard(3)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className="mb-4 sm:mb-6">
+                    <div className="text-purple-400 text-xs sm:text-sm mb-2">
+                      {services[2].category}
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6 group-hover:text-purple-400 transition-colors">
+                      {services[2].title}
+                    </h3>
+
                   </div>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                    {services[2].title}
-                  </h3>
+
+                  <ul className="space-y-2 sm:space-y-3">
+                    {services[2].features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2 sm:gap-3">
+                        <span className="text-purple-400 mt-1 text-sm">✦</span>
+                        <div className="text-sm sm:text-base">
+                          <span className="text-white font-semibold">
+                            {feature.title}
+                          </span>
+                          <span className="text-gray-400">
+                            {" "}
+                            {feature.description}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
                 </div>
-
-                <ul className="space-y-2 sm:space-y-3">
-                  {services[2].features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-purple-400 mt-1 text-sm">✦</span>
-                      <div className="text-sm sm:text-base">
-                        <span className="text-white font-semibold">
-                          {feature.title}
-                        </span>
-                        <span className="text-gray-400">
-                          {" "}
-                          {feature.description}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
-              </div>
+              </Link>
             </CometCard>
 
-            {/* Card 4 - Graphics Design */}
+            {/* Card 4 - AI Automation */}
             <CometCard className="w-full lg:w-[40%]">
-              <div
-                className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 group relative overflow-hidden"
-                onMouseEnter={() => setHoveredCard(4)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="mb-4 sm:mb-6">
-                  <div className="text-purple-400 text-xs sm:text-sm mb-2">
-                    {services[3].category}
+              <Link href={services[3].link} className="block group">
+                <div
+                  className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 relative overflow-hidden"
+                  onMouseEnter={() => setHoveredCard(4)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className="mb-4 sm:mb-6">
+                    <div className="text-purple-400 text-xs sm:text-sm mb-2">
+                      {services[3].category}
+                    </div>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6 group-hover:text-purple-400 transition-colors">
+                      {services[3].title}
+                    </h3>
+
                   </div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
-                    {services[3].title}
-                  </h3>
+
+                  <ul className="space-y-2 sm:space-y-3">
+                    {services[3].features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2 sm:gap-3">
+                        <span className="text-purple-400 mt-1 text-sm">✦</span>
+                        <div className="text-xs sm:text-sm">
+                          <span className="text-white font-semibold">
+                            {feature.title}
+                          </span>
+                          <span className="text-gray-400">
+                            {" "}
+                            {feature.description}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
                 </div>
-
-                <ul className="space-y-2 sm:space-y-3">
-                  {services[3].features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-purple-400 mt-1 text-sm">✦</span>
-                      <div className="text-xs sm:text-sm">
-                        <span className="text-white font-semibold">
-                          {feature.title}
-                        </span>
-                        <span className="text-gray-400">
-                          {" "}
-                          {feature.description}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
-              </div>
-            </CometCard>
-          </div>
-
-          {/* Row 3: 40% - 60% */}
-          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
-            {/* Card 5 - SEO Services */}
-            <CometCard className="w-full lg:w-[40%]">
-              <div
-                className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 group relative overflow-hidden"
-                onMouseEnter={() => setHoveredCard(5)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="mb-4 sm:mb-6">
-                  <div className="text-purple-400 text-xs sm:text-sm mb-2">
-                    {services[4].category}
-                  </div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
-                    {services[4].title}
-                  </h3>
-                </div>
-
-                <ul className="space-y-2 sm:space-y-3">
-                  {services[4].features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-purple-400 mt-1 text-sm">✦</span>
-                      <div className="text-xs sm:text-sm">
-                        <span className="text-white font-semibold">
-                          {feature.title}
-                        </span>
-                        <span className="text-gray-400">
-                          {" "}
-                          {feature.description}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
-              </div>
-            </CometCard>
-
-            {/* Card 6 - Digital Marketing */}
-            <CometCard className="w-full lg:w-[60%]">
-              <div
-                className="h-[400px] rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 p-4 sm:p-6 md:p-8 hover:border-purple-600 transition-all duration-500 group relative overflow-hidden"
-                onMouseEnter={() => setHoveredCard(6)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="mb-4 sm:mb-6">
-                  <div className="text-purple-400 text-xs sm:text-sm mb-2">
-                    {services[5].category}
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                    {services[5].title}
-                  </h3>
-                </div>
-
-                <ul className="space-y-2 sm:space-y-3">
-                  {services[5].features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-purple-400 mt-1 text-sm">✦</span>
-                      <div className="text-sm sm:text-base">
-                        <span className="text-white font-semibold">
-                          {feature.title}
-                        </span>
-                        <span className="text-gray-400">
-                          {" "}
-                          {feature.description}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
-              </div>
+              </Link>
             </CometCard>
           </div>
 
@@ -427,8 +324,8 @@ export default function ServicesSection() {
                 Ready to Transform Your Business?
               </h4>
 
-              <a
-                href="/contact"
+              <button
+                onClick={onConsultClick}
                 className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-purple-600 text-white hover:bg-purple-500 transition-all duration-300 group-hover:scale-105 font-semibold text-sm sm:text-base"
               >
                 <span>Get Started Today</span>
@@ -436,7 +333,7 @@ export default function ServicesSection() {
                   size={16}
                   className="group-hover:rotate-45 transition-transform duration-300"
                 />
-              </a>
+              </button>
 
               <div className="absolute inset-0 bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl sm:rounded-3xl"></div>
             </div>

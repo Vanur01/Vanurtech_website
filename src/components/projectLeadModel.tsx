@@ -28,7 +28,7 @@ export default function ProjectLeadModal({ isOpen, onClose, website }: Props) {
         setLoading(true);
 
         // ✅ save lead
-        await axios.post("https://backend.vanurmedia.com/api/v1/lead", {
+        await axios.post("https://vanurtech-backend-admin-2-8vsl.onrender.com/api/v1/lead", {
           name,
           phone,
         });
