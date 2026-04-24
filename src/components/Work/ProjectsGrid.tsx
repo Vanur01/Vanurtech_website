@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { projectApi, Project, categoryApi, Category } from '@/api';
+import { COUNTRIES } from "@/constants/countries";
 
 const API_BASE = "https://vanurtech-backend-admin-2-8vsl.onrender.com";
 
@@ -342,9 +343,24 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
   const [selectedWebsite, setSelectedWebsite] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [countryLabel, setCountryLabel] = useState("IN");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState("");
   const [formSuccess, setFormSuccess] = useState("");
+
+  const selectedCountry = COUNTRIES.find(c => c.label === countryLabel) || COUNTRIES[0];
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleVisitClick = (website: string) => {
     const hasAccess = hasValidLeadAccess();
@@ -367,8 +383,11 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
     return;
   }
 
-  if (!/^[6-9]\d{9}$/.test(phone)) {
-    setFormError("Please enter a valid Indian phone number");
+  const fullMobile = `${selectedCountry.code}${phone}`;
+  const cleanMobile = fullMobile.replace(/[\s\-()]/g, "");
+  
+  if (!/^\+?[0-9]{7,15}$/.test(cleanMobile)) {
+    setFormError("Please enter a valid phone number");
     return;
   }
 
@@ -379,7 +398,7 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
     const res = await fetch(`${API_BASE}/api/v1/lead`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, phone }),
+      body: JSON.stringify({ name, phone: cleanMobile }),
     });
 
     const data = await res.json();
@@ -399,12 +418,12 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
 
     // ✅ WhatsApp redirect
     setTimeout(() => {
-      const whatsappNumber = "917978874959";
+      const whatsappNumber = "7978874959";
 
-      const message = `Hi Vanurmedia! 👋
+      const message = `Hi Vanurtech! 👋
 
-*Name:* ${name}
-*Phone:* ${phone}
+*Name:* ${name.trim()}
+*Phone:* ${cleanMobile}
 
 I'm interested in this project:
 *Project:* ${project.title}
@@ -503,12 +522,51 @@ Please share more details.`;
               className="w-full bg-transparent border-b border-white/30 text-white py-2 outline-none"
             />
 
-            <input
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Phone"
-              className="w-full bg-transparent border-b border-white/30 text-white py-2 outline-none"
-            />
+            <div className="flex items-end gap-3">
+              <div className="relative shrink-0 w-[90px]" ref={dropdownRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="w-full h-[42px] bg-transparent border-b border-white/30 text-white outline-none flex items-center justify-between pb-1 px-1"
+                >
+                  <img src={selectedCountry.flag} alt="flag" className="w-5 h-auto rounded-[2px] object-cover shrink-0" />
+                  <span className="text-sm font-medium">{selectedCountry.code}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60 shrink-0 ml-1"><path d="m6 9 6 6 6-6" /></svg>
+                </button>
+                <AnimatePresence>
+                  {isDropdownOpen && (
+                    <motion.ul
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-[calc(100%+4px)] left-0 w-[160px] max-h-48 overflow-y-auto bg-[#14001f] border border-purple-500/30 rounded-xl shadow-2xl z-[100] p-2 custom-scrollbar"
+                    >
+                      {COUNTRIES.map((c) => (
+                        <li
+                          key={c.label}
+                          onClick={() => {
+                            setCountryLabel(c.label);
+                            setIsDropdownOpen(false);
+                          }}
+                          className="flex items-center gap-3 p-2 hover:bg-purple-500/20 rounded-lg cursor-pointer transition-colors"
+                        >
+                          <img src={c.flag} alt="flag" className="w-6 h-auto rounded-[2px] object-cover" />
+                          <span className="text-white text-sm font-medium">{c.code} ({c.label})</span>
+                        </li>
+                      ))}
+                      <li className="h-2 w-full shrink-0" aria-hidden="true" />
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </div>
+              <input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Phone"
+                type="tel"
+                className="w-full h-[42px] flex-1 bg-transparent border-b border-white/30 text-white outline-none pb-1 px-1"
+              />
+            </div>
 
             {formError && (
               <div className="w-full rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-red-400 text-sm flex items-center gap-2">
