@@ -222,9 +222,9 @@ export const ProductCard = ({
         />
       </Link>
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none transition-opacity duration-200"></div>
-      <h2 className="absolute bottom-2 left-2 md:bottom-4 md:left-4 opacity-0 group-hover/product:opacity-100 text-white text-xs sm:text-sm md:text-base font-medium transition-opacity duration-200">
+      <h3 className="absolute bottom-2 left-2 md:bottom-4 md:left-4 opacity-0 group-hover/product:opacity-100 text-white text-xs sm:text-sm md:text-base font-medium transition-opacity duration-200">
         {product.title}
-      </h2>
+      </h3>
     </motion.div>
   );
 };

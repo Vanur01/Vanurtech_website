@@ -15,7 +15,7 @@ export function HeroSection({ onConsultClick }: { onConsultClick?: () => void })
 export const products = [
   {
     title: "The Materials",
-    link: "https://thematerials.in/",
+    link: "#", // https://thematerials.in/
     thumbnail: "/images/prjtImages/prj1.png",
   },
   {
@@ -50,17 +50,17 @@ export const products = [
   },
   {
     title: "Odisha Bakery House",
-    link: "https://lightgoldenrodyellow-loris-579251.hostingersite.com/",
+    link: "#", // https://lightgoldenrodyellow-loris-579251.hostingersite.com/
     thumbnail: "/images/prjtImages/prj8.png",
   },
   {
     title: "O.M.S. School",
-    link: "https://omsschool.in/",
+    link: "#", // https://omsschool.in/
     thumbnail: "/images/prjtImages/prj9.png",
   },
   {
     title: "Jiana Infrahomes",
-    link: "https://jianainfrahomes.com/",
+    link: "#", // https://jianainfrahomes.com/
     thumbnail: "/images/prjtImages/prj10.png",
   },
   {

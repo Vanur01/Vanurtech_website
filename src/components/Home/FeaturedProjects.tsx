@@ -4,7 +4,30 @@ import React, { useState, useEffect } from "react";
 import { Sparkles, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { projectApi, Project } from "@/api";
+// import { projectApi, Project } from "@/api";
+import productDataJSON from "@/data/productData";
+
+type Category = {
+  _id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+type Project = {
+  _id: string;
+  category: Category | string;
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  website?: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
 
 export default function FeaturedProjects() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -12,7 +35,19 @@ export default function FeaturedProjects() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Fetch projects from API
+  // Load first 6 projects from static data
+  useEffect(() => {
+    try {
+      const all = productDataJSON.result.projects as Project[];
+      setProjects(all.slice(0, 6));
+    } catch (err: any) {
+      setError(err.message || "Failed to load projects");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  /* API call (commented out — using static data above)
   useEffect(() => {
     const fetchProjects = async () => {
       setIsLoading(true);
@@ -21,7 +56,7 @@ export default function FeaturedProjects() {
       try {
         const response = await projectApi.getAllProjects({
           page: 1,
-          limit: 6, // Only fetch 6 projects for featured section
+          limit: 6,
         });
 
         if (response.success) {
@@ -36,6 +71,7 @@ export default function FeaturedProjects() {
 
     fetchProjects();
   }, []);
+  */
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },

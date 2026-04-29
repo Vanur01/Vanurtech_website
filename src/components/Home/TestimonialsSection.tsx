@@ -42,7 +42,11 @@ export default function TestimonialsSection() {
             quote: testimonial.description ? testimonial.description.replace(/—/g, ' ').replace(/–/g, ' ') : "",
             name: testimonial.company,
             designation: testimonial.position,
-            src: testimonial.coverImage,
+            src: testimonial.coverImage
+              ? testimonial.coverImage.startsWith('http')
+                ? testimonial.coverImage
+                : `https://vanurtech-backend-admin-2-8vsl.onrender.com${testimonial.coverImage}`
+              : defaultTestimonials[0].src,
           }));
           setTestimonials(formattedTestimonials);
         } else {
@@ -188,8 +192,26 @@ export default function TestimonialsSection() {
                     </div>
 
                     <div className="relative z-10 flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-white/10 mt-auto">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 border border-purple-500/30">
-                        <img src={item.src} alt={item.name} className="w-full h-full object-cover pointer-events-none" />
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 border border-purple-500/30 bg-purple-900/40 flex items-center justify-center">
+                        {item.src ? (
+                          <img
+                            src={item.src}
+                            alt={item.name}
+                            className="w-full h-full object-cover pointer-events-none"
+                            onError={(e) => {
+                              const target = e.currentTarget;
+                              target.style.display = "none";
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.innerHTML = `<span class="text-purple-300 text-xs font-bold">${item.name?.charAt(0)?.toUpperCase() || "?"}</span>`;
+                              }
+                            }}
+                          />
+                        ) : (
+                          <span className="text-purple-300 text-xs font-bold">
+                            {item.name?.charAt(0)?.toUpperCase() || "?"}
+                          </span>
+                        )}
                       </div>
                       <div>
                         <div className="font-bold tracking-tight text-sm text-white">{item.name}</div>

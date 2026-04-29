@@ -64,6 +64,20 @@ export default function CTASection() {
     setIsSubmitting(true);
 
     try {
+      // ✅ Web3Forms — send email notification
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "c523f882-5e4e-4327-ade4-29b6b02162bf",
+          subject: "New CTA Section Consultation Request",
+          name: name.trim(),
+          phone: cleanMobile,
+          message: `CTA Section submission\nName: ${name.trim()}\nPhone: ${cleanMobile}`,
+        }),
+      });
+
+      // ✅ Save to backend
       const response = await ctaApi.submitCTA({
         mobile: cleanMobile,
         message: name.trim(), // Sending name in the message field
@@ -80,7 +94,7 @@ export default function CTASection() {
         setName("");
 
         // Show success message
-        showNotification("success", "Thank you! We'll get back to you soon!");
+        showNotification("success", "🎉 Thank you! Our team will reach out to you shortly.");
       }
     } catch (error: any) {
       console.error("CTA submission error:", error);

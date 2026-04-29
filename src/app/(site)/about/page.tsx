@@ -1,23 +1,14 @@
-"use client";
-import React from 'react';
-import AboutHero from '@/components/About/AboutHero';
-import CTASection from '@/components/CTASection';
-import OurBeginning from '@/components/About/OurBeginning';
-import AboutStatsSection from '@/components/About/AboutStatsSection';
-import MissionSection from '@/components/About/MissionSection';
-import Partners from '@/components/Partners';
+import type { Metadata } from "next";
+import AboutClient from "./AboutClient";
 
-const AboutPage = () => {
-  return (
-    <div className="bg-[#0B0011]">
-      <AboutHero />
-      <OurBeginning />
-      <MissionSection />
-      <AboutStatsSection />
-      <CTASection />
-      <Partners />
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "About Us | Vanurtech Media - AI Software Development Company India",
+  description: "Learn about Vanurtech Media — our mission, vision, and team behind India's leading AI-powered custom software, CRM & SaaS development company.",
+  alternates: {
+    canonical: "https://vanurmedia.com/about",
+  },
 };
 
-export default AboutPage;
+export default function AboutPage() {
+  return <AboutClient />;
+}

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Check, Send } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Check, Send, CheckCircle, XCircle } from 'lucide-react';
 
 export default function FormContact() {
   const [formData, setFormData] = useState({
@@ -14,6 +14,15 @@ export default function FormContact() {
     interests: [] as string[]
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  const showNotification = (type: "success" | "error", message: string) => {
+    setNotification({ type, message });
+    setTimeout(() => setNotification(null), 5000);
+  };
 
   const interests = [
     'Website Design',
@@ -35,7 +44,41 @@ export default function FormContact() {
   // ✅ Only this function changed redirects to WhatsApp with form data
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate name
+    if (!formData.name.trim()) {
+      showNotification("error", "Please enter your name.");
+      return;
+    }
+
+    // Validate phone number
+    const cleanPhone = formData.phone.replace(/[\s\-()]/g, "");
+    if (!/^\+?[0-9]{7,15}$/.test(cleanPhone)) {
+      showNotification("error", "Please enter a valid phone number (7–15 digits).");
+      return;
+    }
+
     setIsSubmitting(true);
+
+    // ✅ Web3Forms — send email notification
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "c523f882-5e4e-4327-ade4-29b6b02162bf",
+          subject: "New Contact Form Submission",
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email || "",
+          company: formData.company || "",
+          interests: formData.interests.join(", "),
+          message: formData.message || "",
+        }),
+      });
+    } catch (err) {
+      console.error("Web3Forms error:", err);
+    }
 
     const whatsappNumber = "917978874959";
     const message = `Hi Vanurmedia! 👋
@@ -50,6 +93,8 @@ I'd like to know more about your services!`;
     setTimeout(() => {
       window.open(whatsappUrl, "_blank");
       setIsSubmitting(false);
+      setFormData({ name: '', phone: '', email: '', company: '', message: '', interests: [] });
+      showNotification("success", "🎉 Thank you! We've received your message and will get back to you shortly.");
     }, 600);
   };
 
@@ -72,6 +117,35 @@ I'd like to know more about your services!`;
               Fill out the form below and we'll get back to you shortly
             </p>
           </div>
+
+          {/* Notification */}
+          <AnimatePresence>
+            {notification && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${
+                  notification.type === "success"
+                    ? "bg-green-500/10 border-green-500/20 text-green-400"
+                    : "bg-red-500/10 border-red-500/20 text-red-400"
+                }`}
+              >
+                {notification.type === "success" ? (
+                  <CheckCircle className="w-5 h-5 shrink-0" />
+                ) : (
+                  <XCircle className="w-5 h-5 shrink-0" />
+                )}
+                <p className="text-sm font-medium">{notification.message}</p>
+                <button
+                  onClick={() => setNotification(null)}
+                  className="ml-auto opacity-60 hover:opacity-100 transition-opacity"
+                >
+                  <XCircle className="w-4 h-4" />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

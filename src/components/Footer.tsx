@@ -152,16 +152,19 @@ export default function Footer() {
           {/* Find Us Section */}
           <div className="space-y-6">
             <h3 className="text-white text-lg font-bold">Find Us</h3>
-            <div className="rounded-2xl overflow-hidden border border-white/20 aspect-video relative">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.461613126023!2d85.85367567495925!3d20.281151481187703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19098d17fb7bbf%3A0x156cc539fe9c5433!2sVanurtech%20media%20Pvt.%20Ltd.-%20Software%20Development%20Company%20Bhubaneswar%2C%20India!5e0!3m2!1sen!2sin!4v1763795212984!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                className="w-full h-full"
-              ></iframe>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3 group">
+                <MapPin size={20} className="text-purple-300 mt-1 shrink-0 group-hover:text-white transition-colors" />
+                <p className="text-purple-100 text-sm leading-relaxed">
+                  Delhi, India
+                </p>
+              </div>
+              <div className="flex items-start gap-3 group">
+                <MapPin size={20} className="text-purple-300 mt-1 shrink-0 group-hover:text-white transition-colors" />
+                <p className="text-purple-100 text-sm leading-relaxed">
+                  Rashulgarh, Bhubaneswar, Odisha, India
+                </p>
+              </div>
             </div>
             <a
               href="https://maps.app.goo.gl/spJrdpJyv8zwmu7HA"

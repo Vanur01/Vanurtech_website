@@ -3,8 +3,33 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-import { projectApi, Project, categoryApi, Category } from '@/api';
+// import { projectApi, Project, categoryApi, Category } from '@/api';
 import { COUNTRIES } from "@/constants/countries";
+import productDataJSON from '@/data/productData';
+import categoryDataJSON from '@/data/catagoriesData';
+
+// Static types matching the API shape
+type Category = {
+  _id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+type Project = {
+  _id: string;
+  category: Category | string;
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  website?: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
 
 const API_BASE = "https://vanurtech-backend-admin-2-8vsl.onrender.com";
 
@@ -57,7 +82,35 @@ export default function ProjectsGrid() {
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
-  // Fetch categories
+  // Load categories from static data
+  useEffect(() => {
+    if (categoryDataJSON.success) {
+      setCategories(categoryDataJSON.result as Category[]);
+    }
+  }, []);
+
+  // Load projects from static data (filter by search term)
+  useEffect(() => {
+    setIsLoading(true);
+    setError("");
+    try {
+      const projects = productDataJSON.result.projects as Project[];
+      const filtered = debouncedSearch
+        ? projects.filter(
+            (p) =>
+              p.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+              p.description.toLowerCase().includes(debouncedSearch.toLowerCase())
+          )
+        : projects;
+      setAllProjects(filtered);
+    } catch (err: any) {
+      setError(err.message || "Failed to load projects");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [debouncedSearch]);
+
+  /* API calls (commented out — using static data above)
   useEffect(() => {
     const fetchCategories = async () => {
       const res = await categoryApi.getAllCategories({ limit: 100 });
@@ -66,7 +119,6 @@ export default function ProjectsGrid() {
     fetchCategories();
   }, []);
 
-  // Fetch projects
   useEffect(() => {
     const fetchProjects = async () => {
       setIsLoading(true);
@@ -86,6 +138,7 @@ export default function ProjectsGrid() {
     };
     fetchProjects();
   }, [debouncedSearch]);
+  */
 
   // Frontend filtering by category
   const filteredProjects = selectedCategory === 'All'
@@ -394,6 +447,25 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
   try {
     setLoading(true);
 
+    // ✅ Web3Forms — send email notification
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "c523f882-5e4e-4327-ade4-29b6b02162bf",
+          subject: "New Project Lead Submission",
+          name: name.trim(),
+          phone: cleanMobile,
+          project: project.title,
+          website: selectedWebsite || "",
+          message: `Project Lead\nName: ${name.trim()}\nPhone: ${cleanMobile}\nProject: ${project.title}\nWebsite: ${selectedWebsite}`,
+        }),
+      });
+    } catch (web3Err) {
+      console.error("Web3Forms error:", web3Err);
+    }
+
     // ✅ Save lead (optional but good)
     const res = await fetch(`${API_BASE}/api/v1/lead`, {
       method: "POST",
@@ -414,7 +486,7 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
       localStorage.setItem(LEAD_EXPIRY_KEY, (Date.now() + ONE_DAY).toString());
     }
 
-    setFormSuccess("Redirecting to WhatsApp...");
+    setFormSuccess("🎉 Thank you! Redirecting to WhatsApp...");
 
     // ✅ WhatsApp redirect
     setTimeout(() => {
