@@ -22,7 +22,7 @@ interface CTAModalProps {
   onClose: () => void;
 }
 
-// console.log("CTA Modal");
+console.log("CTA Modal");
 export function CTAModal({ isOpen, onClose }: CTAModalProps) {
   const [countryLabel, setCountryLabel] = useState("IN");
   const selectedCountry = COUNTRIES.find(c => c.label === countryLabel) || COUNTRIES[0];
