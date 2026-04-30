@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  
+
   // Open Graph
   openGraph: {
     type: "website",
@@ -189,12 +189,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        
+
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://vanurtech-backend-admin-2-8vsl.onrender.com"/>
-        
+        <link rel="preconnect" href="https://vanurtech-backend-admin-2-8vsl.onrender.com" />
+
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://vanurtech-backend-admin-2-8vsl.onrender.com" />
       </head>
@@ -202,7 +202,7 @@ export default function RootLayout({
         className={`${montserrat.variable} antialiased`}
       >
         {/* ✅ Tracking scripts FIRST */}
-        <GoogleTag/>
+        <GoogleTag />
         <FacebookPixel />
 
         {/* ✅ UI */}

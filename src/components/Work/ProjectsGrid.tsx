@@ -97,10 +97,10 @@ export default function ProjectsGrid() {
       const projects = productDataJSON.result.projects as Project[];
       const filtered = debouncedSearch
         ? projects.filter(
-            (p) =>
-              p.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-              p.description.toLowerCase().includes(debouncedSearch.toLowerCase())
-          )
+          (p) =>
+            p.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+            p.description.toLowerCase().includes(debouncedSearch.toLowerCase())
+        )
         : projects;
       setAllProjects(filtered);
     } catch (err: any) {
@@ -226,8 +226,8 @@ export default function ProjectsGrid() {
               <button
                 onClick={() => { setSelectedCategory('All'); setCurrentPage(1); }}
                 className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${selectedCategory === 'All'
-                    ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
-                    : 'bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white'
+                  ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
+                  : 'bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white'
                   }`}
               >
                 All
@@ -237,8 +237,8 @@ export default function ProjectsGrid() {
                   key={category._id}
                   onClick={() => { setSelectedCategory(category._id); setCurrentPage(1); }}
                   className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${selectedCategory === category._id
-                      ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
-                      : 'bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white'
+                    ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
+                    : 'bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white'
                     }`}
                 >
                   {category.name}
@@ -425,74 +425,74 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
     setOpenPopup(true);
   };
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setFormError("");
-  setFormSuccess("");
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormError("");
+    setFormSuccess("");
 
-  // ✅ Validation
-  if (!name.trim()) {
-    setFormError("Name is required");
-    return;
-  }
-
-  const fullMobile = `${selectedCountry.code}${phone}`;
-  const cleanMobile = fullMobile.replace(/[\s\-()]/g, "");
-  
-  if (!/^\+?[0-9]{7,15}$/.test(cleanMobile)) {
-    setFormError("Please enter a valid phone number");
-    return;
-  }
-
-  try {
-    setLoading(true);
-
-    // ✅ Web3Forms — send email notification
-    try {
-      await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          access_key: "c523f882-5e4e-4327-ade4-29b6b02162bf",
-          subject: "New Project Lead Submission",
-          name: name.trim(),
-          phone: cleanMobile,
-          project: project.title,
-          website: selectedWebsite || "",
-          message: `Project Lead\nName: ${name.trim()}\nPhone: ${cleanMobile}\nProject: ${project.title}\nWebsite: ${selectedWebsite}`,
-        }),
-      });
-    } catch (web3Err) {
-      console.error("Web3Forms error:", web3Err);
-    }
-
-    // ✅ Save lead (optional but good)
-    const res = await fetch(`${API_BASE}/api/v1/lead`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, phone: cleanMobile }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      setFormError(data.message || "Something went wrong");
+    // ✅ Validation
+    if (!name.trim()) {
+      setFormError("Name is required");
       return;
     }
 
-    // ✅ Save token
-    if (data.token) {
-      localStorage.setItem(LEAD_TOKEN_KEY, data.token);
-      localStorage.setItem(LEAD_EXPIRY_KEY, (Date.now() + ONE_DAY).toString());
+    const fullMobile = `${selectedCountry.code}${phone}`;
+    const cleanMobile = fullMobile.replace(/[\s\-()]/g, "");
+
+    if (!/^\+?[0-9]{7,15}$/.test(cleanMobile)) {
+      setFormError("Please enter a valid phone number");
+      return;
     }
 
-    setFormSuccess("🎉 Thank you! Redirecting to WhatsApp...");
+    try {
+      setLoading(true);
 
-    // ✅ WhatsApp redirect
-    setTimeout(() => {
-      const whatsappNumber = "7978874959";
+      // ✅ Web3Forms — send email notification
+      try {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            access_key: "c523f882-5e4e-4327-ade4-29b6b02162bf",
+            subject: "New Project Lead Submission",
+            name: name.trim(),
+            phone: cleanMobile,
+            project: project.title,
+            website: selectedWebsite || "",
+            message: `Project Lead\nName: ${name.trim()}\nPhone: ${cleanMobile}\nProject: ${project.title}\nWebsite: ${selectedWebsite}`,
+          }),
+        });
+      } catch (web3Err) {
+        console.error("Web3Forms error:", web3Err);
+      }
 
-      const message = `Hi Vanurtech! 👋
+      // ✅ Save lead (optional but good)
+      const res = await fetch(`${API_BASE}/api/v1/lead`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone: cleanMobile }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setFormError(data.message || "Something went wrong");
+        return;
+      }
+
+      // ✅ Save token
+      if (data.token) {
+        localStorage.setItem(LEAD_TOKEN_KEY, data.token);
+        localStorage.setItem(LEAD_EXPIRY_KEY, (Date.now() + ONE_DAY).toString());
+      }
+
+      setFormSuccess("🎉 Thank you! Redirecting to WhatsApp...");
+
+      // ✅ WhatsApp redirect
+      setTimeout(() => {
+        const whatsappNumber = "7978874959";
+
+        const message = `Hi Vanurtech! 👋
 
 *Name:* ${name.trim()}
 *Phone:* ${cleanMobile}
@@ -503,23 +503,23 @@ I'm interested in this project:
 
 Please share more details.`;
 
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-      window.open(whatsappUrl, "_blank");
+        window.open(whatsappUrl, "_blank");
 
-      // reset
-      setOpenPopup(false);
-      setName("");
-      setPhone("");
-      setFormSuccess("");
-    }, 1000);
+        // reset
+        setOpenPopup(false);
+        setName("");
+        setPhone("");
+        setFormSuccess("");
+      }, 1000);
 
-  } catch {
-    setFormError("Server error. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+    } catch {
+      setFormError("Server error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div
       className="group relative h-full"

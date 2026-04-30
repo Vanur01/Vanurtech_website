@@ -125,11 +125,10 @@ I'd like to know more about your services!`;
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${
-                  notification.type === "success"
-                    ? "bg-green-500/10 border-green-500/20 text-green-400"
-                    : "bg-red-500/10 border-red-500/20 text-red-400"
-                }`}
+                className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${notification.type === "success"
+                  ? "bg-green-500/10 border-green-500/20 text-green-400"
+                  : "bg-red-500/10 border-red-500/20 text-red-400"
+                  }`}
               >
                 {notification.type === "success" ? (
                   <CheckCircle className="w-5 h-5 shrink-0" />
@@ -157,7 +156,7 @@ I'd like to know more about your services!`;
                   type="text"
                   placeholder="Who's reaching out?"
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
                   className="w-full bg-transparent border-b-2 border-gray-700 text-white placeholder-gray-500 py-3 focus:border-purple-500 focus:outline-none transition-colors"
                 />
@@ -170,7 +169,7 @@ I'd like to know more about your services!`;
                   type="phone"
                   placeholder="Where can we reply?"
                   value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   required
                   className="w-full bg-transparent border-b-2 border-gray-700 text-white placeholder-gray-500 py-3 focus:border-purple-500 focus:outline-none transition-colors"
                 />
@@ -183,7 +182,7 @@ I'd like to know more about your services!`;
                   type="email"
                   placeholder="Where can we reply?"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full bg-transparent border-b-2 border-gray-700 text-white placeholder-gray-500 py-3 focus:border-purple-500 focus:outline-none transition-colors"
                 />
               </div>
@@ -197,7 +196,7 @@ I'd like to know more about your services!`;
                 type="text"
                 placeholder="Your company name"
                 value={formData.company}
-                onChange={(e) => setFormData({...formData, company: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 className="w-full bg-transparent border-b-2 border-gray-700 text-white placeholder-gray-500 py-3 focus:border-purple-500 focus:outline-none transition-colors"
               />
             </div>
@@ -214,11 +213,10 @@ I'd like to know more about your services!`;
                     key={interest}
                     type="button"
                     onClick={() => handleInterestToggle(interest)}
-                    className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full border transition-all duration-300 text-sm sm:text-base ${
-                      formData.interests.includes(interest)
-                        ? 'border-purple-500 bg-purple-600 text-white shadow-lg shadow-purple-500/50'
-                        : 'border-gray-700 bg-transparent text-gray-400 hover:border-purple-500 hover:text-white'
-                    }`}
+                    className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full border transition-all duration-300 text-sm sm:text-base ${formData.interests.includes(interest)
+                      ? 'border-purple-500 bg-purple-600 text-white shadow-lg shadow-purple-500/50'
+                      : 'border-gray-700 bg-transparent text-gray-400 hover:border-purple-500 hover:text-white'
+                      }`}
                   >
                     {interest}
                   </button>
@@ -233,7 +231,7 @@ I'd like to know more about your services!`;
               <textarea
                 placeholder="What's on your mind?"
                 value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 rows={5}
                 className="w-full bg-transparent border-2 border-gray-700 rounded-xl text-white placeholder-gray-500 p-4 focus:border-purple-500 focus:outline-none transition-colors resize-none"
               />
@@ -243,11 +241,10 @@ I'd like to know more about your services!`;
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`group relative px-12 py-4 rounded-full font-semibold text-white transition-all duration-300 bg-linear-to-r from-purple-600 to-pink-600 inline-flex items-center gap-3 ${
-                  isSubmitting
-                    ? 'opacity-70 cursor-not-allowed'
-                    : 'hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50'
-                }`}
+                className={`group relative px-12 py-4 rounded-full font-semibold text-white transition-all duration-300 bg-linear-to-r from-purple-600 to-pink-600 inline-flex items-center gap-3 ${isSubmitting
+                  ? 'opacity-70 cursor-not-allowed'
+                  : 'hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50'
+                  }`}
               >
                 {isSubmitting ? (
                   <>
