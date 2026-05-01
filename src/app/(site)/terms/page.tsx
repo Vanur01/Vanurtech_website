@@ -3,8 +3,8 @@ import { FileText, CheckCircle, AlertCircle, Scale, ShieldAlert, HeartHandshake,
 import PageLoader from '@/components/PageLoader';
 
 export const metadata = {
-  title: "Terms of Service | Vanurtech Media",
-  description: "Read the terms of service for using Vanurtech Media's website and services.",
+  title: "Terms of Service | Vanurtech Media Pvt. Ltd.",
+  description: "Read the terms of service for using Vanurtech Media Pvt. Ltd.'s website and services.",
 };
 
 const TermsOfService = () => {
@@ -35,7 +35,7 @@ const TermsOfService = () => {
               1. Agreement to Terms
             </h2>
             <p className="text-purple-100/80 leading-relaxed">
-              By accessing or using the services provided by Vanurtech Media Pvt. Ltd. ("Vanurtech Media," "we," "us," or "our"), you agree to be bound by these Terms of Service. If you do not agree to all of these terms, do not use our website or services.
+              By accessing or using the services provided by Vanurtech Media Pvt. Ltd. ("Vanurtech Media Pvt. Ltd.," "we," "us," or "our"), you agree to be bound by these Terms of Service. If you do not agree to all of these terms, do not use our website or services.
             </p>
           </section>
 
@@ -68,7 +68,7 @@ const TermsOfService = () => {
               3. Intellectual Property
             </h2>
             <p className="text-purple-100/80 leading-relaxed mb-6">
-              All content on our website, including text, graphics, logos, images, and software, is the property of Vanurtech Media or its content suppliers and is protected by international copyright and intellectual property laws.
+              All content on our website, including text, graphics, logos, images, and software, is the property of Vanurtech Media Pvt. Ltd. or its content suppliers and is protected by international copyright and intellectual property laws.
             </p>
             <div className="flex items-center gap-4 p-4 bg-purple-500/10 border border-purple-500/20 rounded-xl">
               <CheckCircle className="w-5 h-5 text-purple-400 shrink-0" />
@@ -85,7 +85,7 @@ const TermsOfService = () => {
               4. Limitation of Liability
             </h2>
             <p className="text-purple-100/80 leading-relaxed">
-              In no event shall Vanurtech Media, its directors, employees, or partners be liable for any indirect, incidental, special, consequential, or punitive damages arising out of your use of our services or inability to access them.
+              In no event shall Vanurtech Media Pvt. Ltd., its directors, employees, or partners be liable for any indirect, incidental, special, consequential, or punitive damages arising out of your use of our services or inability to access them.
             </p>
           </section>
 

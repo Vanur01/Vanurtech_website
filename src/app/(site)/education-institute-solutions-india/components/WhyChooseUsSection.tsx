@@ -55,7 +55,7 @@ export function WhyChooseUsSection({ onConsultClick }: { onConsultClick?: () => 
             <span className="text-violet-300 text-xs sm:text-sm font-medium tracking-wide">The Education Advantage</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight leading-tight">
-            Why Institutes <span className="text-transparent bg-clip-text bg-linear-to-r from-violet-400 via-indigo-500 to-violet-600">Trust Vanurtech</span>
+            Why Institutes <span className="text-transparent bg-clip-text bg-linear-to-r from-violet-400 via-indigo-500 to-violet-600">Trust Vanurtech Media Pvt. Ltd.</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto font-light">
             We provide the most robust and secure digital infrastructure for Indian educational institutions.

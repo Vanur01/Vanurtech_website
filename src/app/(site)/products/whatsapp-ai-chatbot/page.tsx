@@ -18,7 +18,7 @@ export default function WhatsAppChatbotPage() {
     applicationCategory: "BusinessApplication",
     provider: {
       "@type": "Organization",
-      name: "Vanurtech Media",
+      name: "Vanurtech Media Pvt. Ltd.",
     },
   };
 

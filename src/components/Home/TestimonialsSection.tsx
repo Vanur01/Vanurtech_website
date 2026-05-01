@@ -24,7 +24,7 @@ export default function TestimonialsSection() {
       src: "/images/test/test-2.webp",
     },
     {
-      quote: "Vanurtech did a brilliant job with our design, delivering it with outstanding customization and SEO optimization. Their dedicated approach to every single detail is truly impressive!",
+      quote: "Vanurtech Media Pvt. Ltd. did a brilliant job with our design, delivering it with outstanding customization and SEO optimization. Their dedicated approach to every single detail is truly impressive!",
       name: "Happy Client",
       designation: "Digital Business Services",
       src: "/images/test/test-3.webp",

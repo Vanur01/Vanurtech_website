@@ -16,7 +16,7 @@ export default function AIAutomationPage() {
     "name": "AI Business Automation",
     "provider": {
       "@type": "Organization",
-      "name": "Vanurtech Media"
+      "name": "Vanurtech Media Pvt. Ltd."
     }
   };
 

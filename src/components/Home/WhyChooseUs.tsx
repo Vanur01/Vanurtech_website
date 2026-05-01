@@ -72,7 +72,7 @@ export default function WhyChooseUs({ onConsultClick }: { onConsultClick?: () =>
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 backdrop-blur-sm mb-6"
           >
             <Sparkles size={14} className="text-purple-400" />
-            <span className="text-purple-300 text-xs font-medium tracking-wide">The Vanurtech Edge</span>
+            <span className="text-purple-300 text-xs font-medium tracking-wide">The Vanurtech Media Pvt. Ltd. Edge</span>
           </motion.div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">

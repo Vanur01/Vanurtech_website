@@ -91,7 +91,7 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
 
       if (response.success) {
         const phoneNumber = "7978874959";
-        const whatsappMsg = encodeURIComponent(`Hi Vanurtech! I have submitted my request for a consultation. My name is ${name.trim()} and my contact number is ${cleanMobile}.`);
+        const whatsappMsg = encodeURIComponent(`Hi Vanurtech Media Pvt. Ltd.! I have submitted my request for a consultation. My name is ${name.trim()} and my contact number is ${cleanMobile}.`);
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMsg}`;
         window.open(whatsappUrl, "_blank");
 

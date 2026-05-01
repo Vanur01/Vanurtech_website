@@ -17,7 +17,7 @@ export default function CRMERPDevPage() {
     name: "Custom CRM & ERP Development",
     provider: {
       "@type": "Organization",
-      name: "Vanurtech Media",
+      name: "Vanurtech Media Pvt. Ltd.",
     },
   };
 

@@ -16,7 +16,7 @@ export default function SEOPage() {
     "name": "SEO Services",
     "provider": {
       "@type": "Organization",
-      "name": "Vanurtech Media"
+      "name": "Vanurtech Media Pvt. Ltd."
     }
   };
 

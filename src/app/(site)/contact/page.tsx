@@ -4,8 +4,8 @@ import HeroContact from '@/components/Contact/HeroContact';
 import FormContact from '@/components/Contact/FormContact';
 
 export const metadata: Metadata = {
-  title: "Contact Us | Get a Free Consultation - Vanurtech Media",
-  description: "Get in touch with Vanurtech Media. Contact us for a free consultation on custom software, CRM, SaaS, AI automation, or mobile app development for your business.",
+  title: "Contact Us | Get a Free Consultation - Vanurtech Media Pvt. Ltd.",
+  description: "Get in touch with Vanurtech Media Pvt. Ltd.. Contact us for a free consultation on custom software, CRM, SaaS, AI automation, or mobile app development for your business.",
   alternates: {
     canonical: "https://vanurmedia.com/contact",
   },

@@ -16,7 +16,7 @@ export default function WebDevPage() {
     "name": "Website Development",
     "provider": {
       "@type": "Organization",
-      "name": "Vanurtech Media"
+      "name": "Vanurtech Media Pvt. Ltd."
     }
   };
 

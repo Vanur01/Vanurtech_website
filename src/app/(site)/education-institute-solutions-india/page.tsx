@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import EducationServiceContent from "./EducationServiceContent";
 
 export const metadata: Metadata = {
-  title: "Education & Institute Management Software Solutions India | Vanurtech Media",
+  title: "Education & Institute Management Software Solutions India | Vanurtech Media Pvt. Ltd.",
   description: "Advanced ERP and management solutions for schools, colleges, and coaching institutes. Automate student enrollment, fees, and learning portals.",
   alternates: {
     canonical: "/education-institute-solutions-india",
@@ -16,7 +16,7 @@ export default function EducationDevPage() {
     "name": "Education & Institute Management Software Solutions",
     "provider": {
       "@type": "Organization",
-      "name": "Vanurtech Media"
+      "name": "Vanurtech Media Pvt. Ltd."
     }
   };
 

@@ -3,8 +3,8 @@ import { Shield, Lock, Eye, FileText, Bell, Globe, Mail } from 'lucide-react';
 import PageLoader from '@/components/PageLoader';
 
 export const metadata = {
-  title: "Privacy Policy | Vanurtech Media",
-  description: "Read our privacy policy to understand how Vanurtech Media collects, uses, and protects your personal data.",
+  title: "Privacy Policy | Vanurtech Media Pvt. Ltd.",
+  description: "Read our privacy policy to understand how Vanurtech Media Pvt. Ltd. collects, uses, and protects your personal data.",
 };
 
 const PrivacyPolicy = () => {

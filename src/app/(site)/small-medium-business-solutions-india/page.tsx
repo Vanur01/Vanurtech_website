@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import SMBServiceContent from "./SMBServiceContent";
 
 export const metadata: Metadata = {
-  title: "Business Growth Solutions for SMBs & SMEs in India | Vanurtech Media",
+  title: "Business Growth Solutions for SMBs & SMEs in India | Vanurtech Media Pvt. Ltd.",
   description: "Scale your small or medium business with custom ERP, CRM, and automation solutions. We help SMEs in India digitalize their operations for rapid growth.",
   alternates: {
     canonical: "/small-medium-business-solutions-india",
@@ -16,7 +16,7 @@ export default function SMBDevPage() {
     "name": "SMB Digital Transformation Solutions",
     "provider": {
       "@type": "Organization",
-      "name": "Vanurtech Media"
+      "name": "Vanurtech Media Pvt. Ltd."
     }
   };
 

@@ -17,7 +17,7 @@ export default function SolarManagementPage() {
     "applicationCategory": "BusinessApplication",
     "provider": {
       "@type": "Organization",
-      "name": "Vanurtech Media",
+      "name": "Vanurtech Media Pvt. Ltd.",
     },
   };
 

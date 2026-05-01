@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import HealthcareServiceContent from "./HealthcareServiceContent";
 
 export const metadata: Metadata = {
-  title: "Healthcare & Clinic Management Software India | Vanurtech Media",
+  title: "Healthcare & Clinic Management Software India | Vanurtech Media Pvt. Ltd.",
   description: "Advanced EHR, patient scheduling, and clinic management software solutions. Streamline patient care, billing, and pharmacy workflows for hospitals and clinics.",
   alternates: {
     canonical: "/healthcare-clinic-solutions-india",
@@ -16,7 +16,7 @@ export default function HealthcarePage() {
     "name": "Healthcare & Clinic Management Software Solutions",
     "provider": {
       "@type": "Organization",
-      "name": "Vanurtech Media"
+      "name": "Vanurtech Media Pvt. Ltd."
     }
   };
 

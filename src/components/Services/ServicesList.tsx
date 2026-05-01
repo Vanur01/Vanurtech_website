@@ -234,7 +234,7 @@ export default function ServicesList() {
           </h1>
 
           <p className="text-gray-400 text-lg sm:text-xl max-w-3xl leading-relaxed">
-            Discover VanurTech Media's comprehensive suite of high-performance services, engineered to scale your digital presence.
+            Discover Vanurtech Media Pvt. Ltd.'s comprehensive suite of high-performance services, engineered to scale your digital presence.
           </p>
         </div>
 

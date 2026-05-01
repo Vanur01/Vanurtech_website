@@ -3,7 +3,7 @@ import SolarServiceContent from "./SolarServiceContent";
 
 
 export const metadata: Metadata = {
-  title: "Solar & Renewable Energy Software Solutions India | Vanurtech Media",
+  title: "Solar & Renewable Energy Software Solutions India | Vanurtech Media Pvt. Ltd.",
   description: "Advanced software solutions for solar installers and renewable energy firms. Track installations, manage field teams, and automate energy calculations.",
   alternates: {
     canonical: "/solar-renewable-solutions-india",
@@ -17,7 +17,7 @@ export default function SolarDevPage() {
     "name": "Solar & Renewable Energy Software Solutions",
     "provider": {
       "@type": "Organization",
-      "name": "Vanurtech Media"
+      "name": "Vanurtech Media Pvt. Ltd."
     }
   };
 

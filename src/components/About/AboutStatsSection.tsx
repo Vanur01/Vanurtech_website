@@ -92,7 +92,7 @@ export default function AboutStatsSection() {
             <div className="relative rounded-[2.4rem] overflow-hidden bg-[#0A0012]">
               <img
                 src="/images/about/WhatsApp Image 2026-04-15 at 3.31.34 PM.jpeg"
-                alt="About Vanurtech"
+                alt="About Vanurtech Media Pvt. Ltd."
                 className="w-full h-[260px] sm:h-[350px] md:h-[550px] object-cover transition-all duration-1000 hover:scale-110 shadow-2xl"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#0A0012] via-transparent to-transparent opacity-80" />
@@ -109,7 +109,7 @@ export default function AboutStatsSection() {
                   <div className="h-14 w-14 rounded-2xl overflow-hidden bg-white/10 backdrop-blur-md border border-white/20 p-2 flex items-center justify-center">
                     <img
                       src="/images/logo-1.png"
-                      alt="Vanurtech Logo"
+                      alt="Vanurtech Media Pvt. Ltd. Logo"
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -117,7 +117,7 @@ export default function AboutStatsSection() {
                 <div>
                   <div className="text-white font-bold tracking-tight text-sm sm:text-base">Software Excellence & AI Innovation</div>
                   <div className="text-gray-400 text-[10px] uppercase tracking-[0.2em] font-black">
-                    Vanurtech Media
+                    Vanurtech Media Pvt. Ltd.
                   </div>
                 </div>
               </motion.div>
@@ -136,7 +136,7 @@ export default function AboutStatsSection() {
               >
                 <Sparkles size={16} className="text-purple-400" />
                 <span className="text-purple-300 text-xs sm:text-sm font-medium tracking-wide">
-                  About Vanurtech
+                  About Vanurtech Media Pvt. Ltd.
                 </span>
               </motion.div>
 
@@ -162,7 +162,7 @@ export default function AboutStatsSection() {
               className="space-y-6 text-gray-400 text-base md:text-lg leading-relaxed font-light"
             >
               <p>
-                Vanurtech Media is not just another development agency we are your <span className="text-white font-medium">Strategic Growth Partner</span>. Based in the heart of India’s tech landscape, we empower businesses to leapfrog competition through AI-driven intelligence.
+                Vanurtech Media Pvt. Ltd. is not just another development agency we are your <span className="text-white font-medium">Strategic Growth Partner</span>. Based in the heart of India’s tech landscape, we empower businesses to leapfrog competition through AI-driven intelligence.
               </p>
               <p>
                 From custom CRM ecosystems that close deals faster to SaaS platforms that redefine industries, we build software that <span className="text-purple-400 font-medium italic">actually works</span> for your bottom line.

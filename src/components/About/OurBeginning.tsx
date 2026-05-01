@@ -70,7 +70,7 @@ export default function OurBeginning() {
                   What began as a passionate initiative in 2016 has transformed into a high-impact software powerhouse, empowering <span className="text-white font-medium">200+ global brands</span>. From stealth-mode startups to industrial giants, we refine operations and amplify growth through data-driven precision.
                 </p>
                 <p>
-                  Today, Vanurtech stands at the forefront of the AI revolution, driven by an unwavering commitment to excellence and business transformation.
+                  Today, Vanurtech Media Pvt. Ltd. stands at the forefront of the AI revolution, driven by an unwavering commitment to excellence and business transformation.
                 </p>
               </motion.div>
 

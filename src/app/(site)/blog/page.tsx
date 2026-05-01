@@ -6,8 +6,8 @@ import CTASection from '@/components/CTASection';
 import Partners from '@/components/Partners';
 
 export const metadata: Metadata = {
-  title: "Blog | AI, Software & Digital Growth Insights - Vanurtech Media",
-  description: "Read Vanurtech Media's blog for expert insights on AI automation, custom software development, CRM, SaaS, and digital growth strategies for Indian businesses.",
+  title: "Blog | AI, Software & Digital Growth Insights - Vanurtech Media Pvt. Ltd.",
+  description: "Read Vanurtech Media Pvt. Ltd.'s blog for expert insights on AI automation, custom software development, CRM, SaaS, and digital growth strategies for Indian businesses.",
   alternates: {
     canonical: "https://vanurmedia.com/blog",
   },

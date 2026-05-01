@@ -492,7 +492,7 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
       setTimeout(() => {
         const whatsappNumber = "7978874959";
 
-        const message = `Hi Vanurtech! 👋
+        const message = `Hi Vanurtech Media Pvt. Ltd.! 👋
 
 *Name:* ${name.trim()}
 *Phone:* ${cleanMobile}

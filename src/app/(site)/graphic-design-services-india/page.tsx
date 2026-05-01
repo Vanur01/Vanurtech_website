@@ -17,7 +17,7 @@ export default function GraphicDesignPage() {
     "name": "Graphic Design & Branding",
     "provider": {
       "@type": "Organization",
-      "name": "VanurTech Media"
+      "name": "Vanurtech Media Pvt. Ltd."
     }
   };
 

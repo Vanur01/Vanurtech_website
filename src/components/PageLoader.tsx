@@ -134,7 +134,7 @@ export default function PageLoader() {
                 <div className="relative w-24 h-24 z-10">
                   <Image
                     src="/images/logo-1.png"
-                    alt="VanurTech Media"
+                    alt="Vanurtech Media Pvt. Ltd."
                     fill
                     className="object-contain"
                     priority
@@ -151,7 +151,7 @@ export default function PageLoader() {
               className="mb-8"
             >
               {/* <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-wider">
-                VanurTech Media
+                Vanurtech Media Pvt. Ltd.
               </h1> */}
             </motion.div>
 

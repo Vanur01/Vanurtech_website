@@ -21,10 +21,10 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL('https://vanurmedia.com'),
   title: {
-    default: "AI-Powered Custom Software, CRM & SaaS Development Company India | Vanurtech",
-    template: "%s | Vanurtech"
+    default: "Vanurtech Media Pvt. Ltd. - AI-Powered Custom Software, CRM & SaaS Development Company India",
+    template: "%s - Vanurtech Media Pvt. Ltd."
   },
-  description: "Vanurtech Media: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
+  description: "Vanurtech Media Pvt. Ltd.: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
   keywords: [
     // "digital marketing agency",
     "web development",
@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     "e-commerce solutions",
     "cloud services",
     "digital transformation",
-    "Vanur Media"
+    "Vanurtech Media Pvt. Ltd."
   ],
-  authors: [{ name: "Vanur Media", url: "https://vanurmedia.com" }],
-  creator: "Vanur Media",
-  publisher: "Vanur Media",
+  authors: [{ name: "Vanurtech Media Pvt. Ltd.", url: "https://vanurmedia.com" }],
+  creator: "Vanurtech Media Pvt. Ltd.",
+  publisher: "Vanurtech Media Pvt. Ltd.",
   formatDetection: {
     email: false,
     address: false,
@@ -51,15 +51,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://vanurmedia.com",
-    siteName: "Vanurtech",
-    title: "AI-Powered Custom Software, CRM & SaaS Development Company India | Vanurtech",
-    description: "Vanurtech Media: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
+    siteName: "Vanurtech Media Pvt. Ltd.",
+    title: "AI-Powered Custom Software, CRM & SaaS Development Company India | Vanurtech Media Pvt. Ltd.",
+    description: "Vanurtech Media Pvt. Ltd.: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
     images: [
       {
         url: "/images/logo-1.png",
         width: 1200,
         height: 630,
-        alt: "Vanurtech - Digital Solutions",
+        alt: "Vanurtech Media Pvt. Ltd. - Digital Solutions",
       }
     ],
   },
@@ -69,8 +69,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@vanurmedia",
     creator: "@vanurmedia",
-    title: "AI-Powered Custom Software, CRM & SaaS Development Company India | Vanurtech",
-    description: "Vanurtech Media: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
+    title: "AI-Powered Custom Software, CRM & SaaS Development Company India | Vanurtech Media Pvt. Ltd.",
+    description: "Vanurtech Media Pvt. Ltd.: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
     images: ["/images/logo-1.png"],
   },
 
@@ -141,7 +141,7 @@ export default function RootLayout({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Vanur Media",
+    name: "Vanurtech Media Pvt. Ltd.",
     url: "https://vanurmedia.com",
     logo: "https://vanurmedia.com/images/logo.png",
     description: "Leading AI-powered software development company in India specializing in custom software, CRM, SaaS, and mobile applications.",
@@ -165,7 +165,7 @@ export default function RootLayout({
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Vanur Media",
+    name: "Vanurtech Media Pvt. Ltd.",
     url: "https://vanurmedia.com",
     potentialAction: {
       "@type": "SearchAction",

@@ -16,7 +16,7 @@ export default function SaaSDevPage() {
     "name": "SaaS Development",
     "provider": {
       "@type": "Organization",
-      "name": "Vanurtech Media"
+      "name": "Vanurtech Media Pvt. Ltd."
     }
   };
 

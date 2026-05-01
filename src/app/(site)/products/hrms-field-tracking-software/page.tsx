@@ -18,7 +18,7 @@ export default function HRMSPage() {
     applicationCategory: "BusinessApplication",
     provider: {
       "@type": "Organization",
-      name: "Vanurtech Media",
+      name: "Vanurtech Media Pvt. Ltd.",
     },
   };
 

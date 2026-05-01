@@ -2,10 +2,10 @@ import { Metadata } from "next";
 import UIUXServiceContent from "./UIUXServiceContent";
 
 export const metadata: Metadata = {
-  title: "Best UI/UX Design Services in India | VanurTech Media",
+  title: "Best UI/UX Design Services in India | Vanurtech Media Pvt. Ltd.",
   description: "Elite UI/UX design studio in India. We create intuitive, conversion-focused user experiences for web and mobile apps. Figma experts.",
   alternates: {
-    canonical: "https://vanurtech.com/ui-ux-design-services-india",
+    canonical: "https://Vanurtech Media Pvt. Ltd..com/ui-ux-design-services-india",
   },
 };
 
@@ -17,8 +17,8 @@ export default function UIUXServicePage() {
     "description": "Professional user experience and interface design services for digital products.",
     "provider": {
       "@type": "Organization",
-      "name": "VanurTech Media",
-      "url": "https://vanurtech.com"
+      "name": "Vanurtech Media Pvt. Ltd.",
+      "url": "https://Vanurtech Media Pvt. Ltd..com"
     },
     "serviceType": "UI/UX Design",
     "areaServed": {

@@ -41,7 +41,7 @@ export default function Footer() {
               />
               <div>
                 <h3 className="text-2xl font-bold text-white leading-tight">
-                  VanurTech Media
+                  Vanurtech Media Pvt. Ltd.
                 </h3>
                 <p className="text-purple-200 text-sm font-medium tracking-wider uppercase">
                   Fuel Your Growth
