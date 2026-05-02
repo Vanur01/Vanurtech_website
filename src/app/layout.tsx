@@ -3,8 +3,6 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import FacebookPixel from "../components/FacebookPixel";
-import GoogleTag from "@/components/GoogleTag";
 
 
 
@@ -201,10 +199,6 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} antialiased`}
       >
-        {/* ✅ Tracking scripts FIRST */}
-        <GoogleTag />
-        <FacebookPixel />
-
         {/* ✅ UI */}
         <Navbar />
 
