@@ -5,7 +5,7 @@ import GoogleTag from "@/components/GoogleTag";
 
 export const metadata: Metadata = {
   title: {
-    default: "Vanurtech Media Pvt. Ltd. | AI-Powered Custom Software, CRM & SaaS Development Company",
+    default: "AI-Powered Custom Software, CRM & SaaS Development Company",
     template: "%s | Vanurtech Media Pvt. Ltd."
   },
   description: "Vanurtech Media Pvt. Ltd.: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
