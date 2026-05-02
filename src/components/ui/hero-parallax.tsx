@@ -58,7 +58,7 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="h-[160vh] sm:h-[180vh] md:h-[230vh] lg:h-[270vh] overflow-hidden antialiased relative flex flex-col self-auto perspective-[1000px] transform-3d"
+      className="h-[200vh] sm:h-[220vh] md:h-[240vh] lg:h-[270vh] overflow-hidden antialiased relative flex flex-col self-auto perspective-[1000px] transform-3d"
     >
       <Header onConsultClick={onConsultClick} />
       <motion.div

@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Sparkles, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 // import { projectApi, Project } from "@/api";
 import productDataJSON from "@/data/productData";
+import { COUNTRIES } from "@/constants/countries";
 
 type Category = {
   _id: string;
@@ -27,6 +28,27 @@ type Project = {
   createdAt: string;
   updatedAt: string;
   __v: number;
+};
+
+const API_BASE = "https://vanurtech-backend-admin-2-8vsl.onrender.com";
+
+const LEAD_TOKEN_KEY = "leadToken";
+const LEAD_EXPIRY_KEY = "leadTokenExpiry";
+const ONE_DAY = 24 * 60 * 60 * 1000;
+
+const hasValidLeadAccess = (): boolean => {
+  const token = localStorage.getItem(LEAD_TOKEN_KEY);
+  const expiry = localStorage.getItem(LEAD_EXPIRY_KEY);
+
+  if (!token || !expiry) return false;
+
+  if (Date.now() > Number(expiry)) {
+    localStorage.removeItem(LEAD_TOKEN_KEY);
+    localStorage.removeItem(LEAD_EXPIRY_KEY);
+    return false;
+  }
+
+  return true;
 };
 
 export default function FeaturedProjects() {
@@ -369,15 +391,127 @@ function ProjectCard({
   hoveredCard,
   setHoveredCard,
 }: ProjectCardProps) {
+  const [openPopup, setOpenPopup] = useState(false);
+  const [selectedWebsite, setSelectedWebsite] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [countryLabel, setCountryLabel] = useState("IN");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [formSuccess, setFormSuccess] = useState("");
+
+  const selectedCountry = COUNTRIES.find(c => c.label === countryLabel) || COUNTRIES[0];
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleVisitClick = (website: string) => {
+    const hasAccess = hasValidLeadAccess();
+    if (hasAccess) {
+      window.open(website, "_blank");
+      return;
+    }
+    setSelectedWebsite(website);
+    setOpenPopup(true);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormError("");
+    setFormSuccess("");
+
+    if (!name.trim()) {
+      setFormError("Name is required");
+      return;
+    }
+
+    const fullMobile = `${selectedCountry.code}${phone}`;
+    const cleanMobile = fullMobile.replace(/[\s\-()]/g, "");
+
+    if (!/^\+?[0-9]{7,15}$/.test(cleanMobile)) {
+      setFormError("Please enter a valid phone number");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      try {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            access_key: "c523f882-5e4e-4327-ade4-29b6b02162bf",
+            subject: "New Project Lead Submission",
+            name: name.trim(),
+            phone: cleanMobile,
+            project: project.title,
+            website: selectedWebsite || "",
+            message: `Project Lead\nName: ${name.trim()}\nPhone: ${cleanMobile}\nProject: ${project.title}\nWebsite: ${selectedWebsite}`,
+          }),
+        });
+      } catch (web3Err) {
+        console.error("Web3Forms error:", web3Err);
+      }
+
+      const res = await fetch(`${API_BASE}/api/v1/lead`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone: cleanMobile }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setFormError(data.message || "Something went wrong");
+        return;
+      }
+
+      if (data.token) {
+        localStorage.setItem(LEAD_TOKEN_KEY, data.token);
+        localStorage.setItem(LEAD_EXPIRY_KEY, (Date.now() + ONE_DAY).toString());
+      }
+
+      setFormSuccess("🎉 Thank you! Redirecting to WhatsApp...");
+
+      setTimeout(() => {
+        const whatsappNumber = "7978874959";
+
+        const message = `Hi Vanurtech Media Pvt. Ltd.! 👋\n\n*Name:* ${name.trim()}\n*Phone:* ${cleanMobile}\n\nI'm interested in this project:\n*Project:* ${project.title}\n*Website:* ${selectedWebsite}\n\nPlease share more details.`;
+
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappUrl, "_blank");
+
+        setOpenPopup(false);
+        setName("");
+        setPhone("");
+        setFormSuccess("");
+      }, 1000);
+
+    } catch {
+      setFormError("Server error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div
       className="group relative h-full"
       onMouseEnter={() => setHoveredCard(project._id)}
       onMouseLeave={() => setHoveredCard(null)}
     >
-      {/* Card Container */}
       <div className="h-full rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/20 to-transparent overflow-hidden hover:border-purple-600 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20">
-        {/* Content Section */}
         <div className="p-4 sm:p-6 md:p-8">
           <div className="text-xs text-purple-400 mb-3 sm:mb-4">
             {typeof project.category === "string"
@@ -391,7 +525,6 @@ function ProjectCard({
             {project.description}
           </p>
 
-          {/* Tags */}
           <div className="flex items-center gap-2 flex-wrap mb-4">
             {project.tags && project.tags.length > 0 ? (
               project.tags.map((tag, index) => (
@@ -411,23 +544,19 @@ function ProjectCard({
             )}
           </div>
 
-          {/* Visit Website Button */}
           {project.website && (
             <div>
-              <a
-                href={project.website}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => handleVisitClick(project.website!)}
                 className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
               >
                 <span>Visit Website</span>
                 <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-              </a>
+              </button>
             </div>
           )}
         </div>
 
-        {/* Image Section */}
         <div className="relative overflow-hidden px-4 sm:px-6 md:px-8 pb-4 sm:pb-6 md:pb-8">
           <div
             className="rounded-xl sm:rounded-2xl overflow-hidden transform transition-transform duration-700 group-hover:scale-105"
@@ -447,11 +576,99 @@ function ProjectCard({
         </div>
       </div>
 
-      {/* Glow Effect on Hover */}
       <div
         className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none"
         style={{ zIndex: -1 }}
       ></div>
+
+      {openPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+          <form onSubmit={handleSubmit} className="w-full max-w-md rounded-2xl bg-[#14001f] p-8 space-y-6 shadow-[0_0_40px_rgba(168,85,247,0.3)]">
+            <h2 className="text-2xl font-bold text-white">Enter your details</h2>
+
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Name"
+              className="w-full bg-transparent border-b border-white/30 text-white py-2 outline-none focus:border-purple-500 transition-colors"
+            />
+
+            <div className="flex items-end gap-3">
+              <div className="relative shrink-0 w-[90px]" ref={dropdownRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="w-full h-[42px] bg-transparent border-b border-white/30 text-white outline-none flex items-center justify-between pb-1 px-1 focus:border-purple-500 transition-colors"
+                >
+                  <img src={selectedCountry.flag} alt="flag" className="w-5 h-auto rounded-[2px] object-cover shrink-0" />
+                  <span className="text-sm font-medium">{selectedCountry.code}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60 shrink-0 ml-1"><path d="m6 9 6 6 6-6" /></svg>
+                </button>
+                <AnimatePresence>
+                  {isDropdownOpen && (
+                    <motion.ul
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-[calc(100%+4px)] left-0 w-[160px] max-h-48 overflow-y-auto bg-[#14001f] border border-purple-500/30 rounded-xl shadow-2xl z-[100] p-2 custom-scrollbar"
+                    >
+                      {COUNTRIES.map((c) => (
+                        <li
+                          key={c.label}
+                          onClick={() => {
+                            setCountryLabel(c.label);
+                            setIsDropdownOpen(false);
+                          }}
+                          className="flex items-center gap-3 p-2 hover:bg-purple-500/20 rounded-lg cursor-pointer transition-colors"
+                        >
+                          <img src={c.flag} alt="flag" className="w-6 h-auto rounded-[2px] object-cover" />
+                          <span className="text-white text-sm font-medium">{c.code} ({c.label})</span>
+                        </li>
+                      ))}
+                      <li className="h-2 w-full shrink-0" aria-hidden="true" />
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </div>
+              <input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Phone"
+                type="tel"
+                className="w-full h-[42px] flex-1 bg-transparent border-b border-white/30 text-white outline-none pb-1 px-1 focus:border-purple-500 transition-colors"
+              />
+            </div>
+
+            {formError && (
+              <div className="w-full rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-red-400 text-sm flex items-center gap-2">
+                <span>✖</span> {formError}
+              </div>
+            )}
+
+            {formSuccess && (
+              <div className="w-full rounded-xl bg-green-500/10 border border-green-500/30 px-4 py-3 text-green-400 text-sm flex items-center gap-2">
+                <span>✔</span> {formSuccess}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-full bg-purple-600 py-3 text-white font-semibold hover:bg-purple-500 transition-colors disabled:opacity-60"
+            >
+              {loading ? "Submitting..." : "Submit & Continue"}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setOpenPopup(false)}
+              className="w-full text-sm text-white/60 hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }

@@ -21,8 +21,8 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL('https://vanurmedia.com'),
   title: {
-    default: "Vanurtech Media Pvt. Ltd. - AI-Powered Custom Software, CRM & SaaS Development Company India",
-    template: "%s - Vanurtech Media Pvt. Ltd."
+    default: "Vanurtech Media Pvt. Ltd. | AI-Powered Custom Software, CRM & SaaS Development Company",
+    template: "%s | Vanurtech Media Pvt. Ltd."
   },
   description: "Vanurtech Media Pvt. Ltd.: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
   keywords: [
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://vanurmedia.com",
     siteName: "Vanurtech Media Pvt. Ltd.",
-    title: "AI-Powered Custom Software, CRM & SaaS Development Company India | Vanurtech Media Pvt. Ltd.",
+    title: "Vanurtech Media Pvt. Ltd. | AI-Powered Custom Software, CRM & SaaS Development Company",
     description: "Vanurtech Media Pvt. Ltd.: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
     images: [
       {
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@vanurmedia",
     creator: "@vanurmedia",
-    title: "AI-Powered Custom Software, CRM & SaaS Development Company India | Vanurtech Media Pvt. Ltd.",
+    title: "Vanurtech Media Pvt. Ltd. | AI-Powered Custom Software, CRM & SaaS Development Company",
     description: "Vanurtech Media Pvt. Ltd.: Leading AI-powered software development company in India. We automate SMEs with custom CRM, SaaS & mobile apps. Scale faster now!",
     images: ["/images/logo-1.png"],
   },

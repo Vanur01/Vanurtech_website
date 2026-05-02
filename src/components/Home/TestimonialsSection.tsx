@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { testimonialApi, Testimonial } from "@/api";
-import { Sparkles, Star } from "lucide-react";
+import { Sparkles, Star, Quote } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function TestimonialsSection() {
@@ -12,18 +12,21 @@ export default function TestimonialsSection() {
 
   const defaultTestimonials = [
     {
+      id: "def-1",
       quote: "Vanurtech Media Pvt. Ltd. delivered our website in a few days with exceptional customization, seamless SEO optimization, and a stunning custom brochure truly unmatched level of quality and service!",
       name: "Jagannatha Constructions",
       designation: "Construction & Design Company",
       src: "/images/test/test-1.webp",
     },
     {
+      id: "def-2",
       quote: "The data-driven approach changed everything for our digital marketing. Seeing how our systems actually affected operations made it easy to scale further. I've found a level of efficiency I thought was gone.",
       name: "Running Notations",
       designation: "Software & Digital Partner",
       src: "/images/test/test-2.webp",
     },
     {
+      id: "def-3",
       quote: "Vanurtech Media Pvt. Ltd. did a brilliant job with our design, delivering it with outstanding customization and SEO optimization. Their dedicated approach to every single detail is truly impressive!",
       name: "Happy Client",
       designation: "Digital Business Services",
@@ -38,7 +41,8 @@ export default function TestimonialsSection() {
       try {
         const response = await testimonialApi.getAllTestimonials();
         if (response.success && response.result) {
-          const formattedTestimonials = response.result.map((testimonial: Testimonial) => ({
+          const formattedTestimonials = response.result.map((testimonial: any, idx: number) => ({
+            id: testimonial._id || `api-${idx}`,
             quote: testimonial.description ? testimonial.description.replace(/—/g, ' ').replace(/–/g, ' ') : "",
             name: testimonial.company,
             designation: testimonial.position,
@@ -160,7 +164,7 @@ export default function TestimonialsSection() {
             <AnimatePresence mode="popLayout" initial={false}>
               {visibleItems.map((item, idx) => (
                 <motion.div
-                  key={item.name}
+                  key={item.id || `${item.name}-${idx}`}
                   layout
                   initial={{ opacity: 0, x: 50, scale: 0.9 }}
                   animate={{
@@ -174,52 +178,61 @@ export default function TestimonialsSection() {
                     duration: 0.6,
                     ease: [0.32, 0.72, 0, 1]
                   }}
-                  className={`group ${idx !== 0 ? "hidden md:block" : ""}`}
+                  className={`group h-full ${idx !== 0 ? "hidden md:block" : ""}`}
                 >
-                  <div className={`relative p-5 sm:p-8 rounded-3xl flex flex-col justify-between border transition-all duration-300 ${idx === 1
-                    ? "bg-white/10 border-purple-500/40 shadow-2xl shadow-purple-500/10 md:scale-105 z-10"
-                    : "bg-white/5 border-white/10 opacity-60 z-0"
-                    }`}>
-                    <div className="relative z-10">
-                      <div className="flex gap-1 mb-4 sm:mb-6">
+                  <div className={`relative h-full p-6 sm:p-8 lg:p-10 rounded-[2rem] flex flex-col justify-between border backdrop-blur-sm transition-all duration-500 overflow-hidden
+                    ${idx === 1
+                      ? "md:bg-[#1a0b2e]/80 md:border-purple-500/40 md:shadow-[0_0_40px_-15px_rgba(168,85,247,0.5)] md:scale-105 md:z-10 md:opacity-100"
+                      : "md:bg-white/5 md:border-white/10 md:opacity-40 md:z-0 md:scale-95 hover:md:opacity-60"
+                    }
+                    ${idx === 0
+                      ? "max-md:bg-[#1a0b2e]/80 max-md:border-purple-500/40 max-md:shadow-[0_0_40px_-15px_rgba(168,85,247,0.5)] max-md:z-10 max-md:opacity-100"
+                      : ""
+                    }
+                    `}>
+                    
+                    {/* Background Decorative Elements */}
+                    <div className="absolute -top-6 -right-6 text-purple-500/10 rotate-12 transform group-hover:scale-110 transition-transform duration-500">
+                      <Quote size={140} fill="currentColor" />
+                    </div>
+                    
+                    <div className="relative z-10 flex-grow">
+                      <div className="flex gap-1.5 mb-6 sm:mb-8">
                         {[1, 2, 3, 4, 5].map((star) => (
-                          <Star key={star} size={12} fill="#EAB308" className="text-yellow-500" />
+                          <Star key={star} size={14} fill="#EAB308" className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]" />
                         ))}
                       </div>
-                      <p className="text-gray-200 text-sm sm:text-base leading-relaxed mb-6 sm:mb-10 font-medium line-clamp-6">
-                        &ldquo;{item.quote}&rdquo;
+                      <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-10 font-medium line-clamp-6 relative z-10">
+                        "{item.quote}"
                       </p>
                     </div>
 
-                    <div className="relative z-10 flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-white/10 mt-auto">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 border border-purple-500/30 bg-purple-900/40 flex items-center justify-center">
-                        {item.src ? (
+                    <div className="relative z-10 flex items-center gap-4 sm:gap-5 pt-5 sm:pt-6 border-t border-purple-500/20 mt-auto">
+                      <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 border-2 border-purple-500/50 bg-purple-900/40 flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.4)]">
+                        {/* Fallback Initial */}
+                        <span className="absolute inset-0 flex items-center justify-center text-purple-300 text-sm font-bold">
+                          {item.name ? item.name.charAt(0).toUpperCase() : "?"}
+                        </span>
+                        
+                        {/* Image (hidden on error) */}
+                        {item.src && (
                           <img
                             src={item.src}
                             alt={item.name}
-                            className="w-full h-full object-cover pointer-events-none"
+                            className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10"
                             onError={(e) => {
-                              const target = e.currentTarget;
-                              target.style.display = "none";
-                              const parent = target.parentElement;
-                              if (parent) {
-                                parent.innerHTML = `<span class="text-purple-300 text-xs font-bold">${item.name?.charAt(0)?.toUpperCase() || "?"}</span>`;
-                              }
+                              e.currentTarget.style.display = "none";
                             }}
                           />
-                        ) : (
-                          <span className="text-purple-300 text-xs font-bold">
-                            {item.name?.charAt(0)?.toUpperCase() || "?"}
-                          </span>
                         )}
                       </div>
                       <div>
-                        <div className="font-bold tracking-tight text-sm text-white">{item.name}</div>
-                        <div className="text-[10px] font-semibold uppercase tracking-wider text-purple-400">{item.designation}</div>
+                        <div className="font-bold tracking-wide text-sm sm:text-base text-white">{item.name}</div>
+                        <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-purple-400 mt-0.5">{item.designation}</div>
                       </div>
                     </div>
-                    {idx === 1 && (
-                      <div className="absolute inset-x-0 bottom-0 top-1/2 bg-linear-to-t from-purple-600/10 to-transparent z-0 rounded-3xl" />
+                    {((idx === 1) || (idx === 0)) && (
+                      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-purple-600/10 to-transparent z-0 pointer-events-none" />
                     )}
                   </div>
                 </motion.div>
@@ -233,7 +246,7 @@ export default function TestimonialsSection() {
                 key={i}
                 onPointerDownCapture={(e) => e.stopPropagation()}
                 onClick={() => setActive(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${active === i ? "w-8 bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]" : "w-2 bg-white/20 hover:bg-white/40"}`}
+                className={`h-2 rounded-full transition-all duration-300 ${active === i ? "w-8 bg-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.8)]" : "w-2 bg-white/20 hover:bg-white/40"}`}
                 aria-label={`Go to testimonial ${i + 1}`}
               />
             ))}

@@ -1,21 +1,14 @@
-"use client";
-import React from "react";
-import HeroProducts from "@/components/Products/HeroProducts";
-import ProductsList from "@/components/Products/ProductsList";
-import ProductsUSPSection from "@/components/Products/ProductsUSPSection";
-import CTASection from "@/components/CTASection";
-import Partners from "@/components/Partners";
+import type { Metadata } from "next";
+import ProductsClient from "./ProductsClient";
 
-const page = () => {
-  return (
-    <div>
-      <HeroProducts />
-      <ProductsList />
-      <ProductsUSPSection />
-      <CTASection />
-      <Partners />
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Our Products | Custom Software & SaaS Solutions - Vanurtech Media Pvt. Ltd.",
+  description: "Discover Vanurtech Media Pvt. Ltd.'s digital products and SaaS solutions, designed to automate your business, streamline CRM, and drive AI-powered growth in India.",
+  alternates: {
+    canonical: "https://vanurmedia.com/products",
+  },
 };
 
-export default page;
+export default function ProductsPage() {
+  return <ProductsClient />;
+}

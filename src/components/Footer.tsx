@@ -44,7 +44,7 @@ export default function Footer() {
                   Vanurtech Media Pvt. Ltd.
                 </h3>
                 <p className="text-purple-200 text-sm font-medium tracking-wider uppercase">
-                  Fuel Your Growth
+                  Designing Digital Legacies
                 </p>
               </div>
             </Link>
@@ -67,12 +67,7 @@ export default function Footer() {
             <h3 className="text-white text-lg font-bold">Contact Us</h3>
 
             <div className="space-y-4">
-              <div className="flex items-start gap-3 group">
-                <MapPin size={20} className="text-purple-300 mt-1 shrink-0 group-hover:text-white transition-colors" />
-                <p className="text-purple-100 text-sm leading-relaxed">
-                  Rashulgarh Bhubaneswar, Odisha, India
-                </p>
-              </div>
+
 
               <div className="flex items-center gap-3 group">
                 <Phone size={20} className="text-purple-300 shrink-0 group-hover:text-white transition-colors" />
@@ -162,7 +157,7 @@ export default function Footer() {
               <div className="flex items-start gap-3 group">
                 <MapPin size={20} className="text-purple-300 mt-1 shrink-0 group-hover:text-white transition-colors" />
                 <p className="text-purple-100 text-sm leading-relaxed">
-                  Rashulgarh, Bhubaneswar, Odisha, India
+                  Bhubaneswar, Odisha, India.
                 </p>
               </div>
             </div>

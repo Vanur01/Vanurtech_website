@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import React from 'react';
-import HeroContact from '@/components/Contact/HeroContact';
-import FormContact from '@/components/Contact/FormContact';
+import ContactClient from "./ContactClient";
 
 export const metadata: Metadata = {
   title: "Contact Us | Get a Free Consultation - Vanurtech Media Pvt. Ltd.",
@@ -12,10 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return (
-    <>
-      <HeroContact />
-      <FormContact />
-    </>
-  );
+  return <ContactClient />;
 }

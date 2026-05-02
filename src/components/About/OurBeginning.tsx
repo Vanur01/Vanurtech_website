@@ -17,7 +17,7 @@ export default function OurBeginning() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="relative shrink-0"
+            className="hidden lg:block relative shrink-0"
           >
             <div className="absolute -inset-px bg-linear-to-r from-purple-500 via-pink-500 to-purple-500 rounded-[2.5rem] opacity-100 blur-[1px]" />
             <div className="relative rounded-[2.4rem] overflow-hidden bg-[#0A0012]">

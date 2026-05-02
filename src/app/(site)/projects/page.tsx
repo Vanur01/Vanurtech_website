@@ -1,19 +1,14 @@
-"use client";
-import React from 'react';
-import WorkHero from '@/components/Work/WorkHero';
-import ProjectsGrid from '@/components/Work/ProjectsGrid';
-import Partners from '@/components/Partners';
-import CTASection from '@/components/CTASection';
+import type { Metadata } from "next";
+import ProjectsClient from "./ProjectsClient";
 
-const WorkPage = () => {
-  return (
-    <div className="bg-[#0B0011]">
-      <WorkHero />
-      <ProjectsGrid />
-      <CTASection/>
-      <Partners/>
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Our Projects | AI & Custom Software Portfolio - Vanurtech Media Pvt. Ltd.",
+  description: "View our successful AI automation, custom CRM, SaaS, and web development projects. See how Vanurtech Media Pvt. Ltd. transforms Indian businesses.",
+  alternates: {
+    canonical: "https://vanurmedia.com/projects",
+  },
 };
 
-export default WorkPage;
+export default function ProjectsPage() {
+  return <ProjectsClient />;
+}

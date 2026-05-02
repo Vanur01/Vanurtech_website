@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import React from "react";
-import HeroServices from "@/components/Services/HeroServices";
-import CTASection from "@/components/CTASection";
-import Partners from "@/components/Partners";
-import ServicesList from "@/components/Services/ServicesList";
-import AIUSPSection from "@/components/Services/AIUSPSection";
+import ServicesClient from "./ServicesClient";
 
 export const metadata: Metadata = {
   title: "Our Services | Custom Software, CRM, SaaS & AI Development - Vanurtech Media Pvt. Ltd.",
@@ -14,16 +9,6 @@ export const metadata: Metadata = {
   },
 };
 
-const page = () => {
-  return (
-    <div>
-      <HeroServices />
-      <ServicesList />
-      <AIUSPSection />
-      <CTASection />
-      <Partners />
-    </div>
-  );
-};
-
-export default page;
+export default function ServicesPage() {
+  return <ServicesClient />;
+}
