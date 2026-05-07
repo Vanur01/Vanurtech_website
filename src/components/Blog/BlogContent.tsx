@@ -62,6 +62,7 @@ const BlogContent = ({ content, slug }: BlogContentProps) => {
       }),
     [html]
   );
+  console.log(sanitizedHtml);
 
   return (
     <div
