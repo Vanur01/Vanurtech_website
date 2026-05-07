@@ -1,0 +1,322 @@
+"use client";
+
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Check, Send, CheckCircle, XCircle } from 'lucide-react';
+
+export default function FormContact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    company: '',
+    message: '',
+    interests: [] as string[]
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  const showNotification = (type: "success" | "error", message: string) => {
+    setNotification({ type, message });
+    setTimeout(() => setNotification(null), 5000);
+  };
+
+  const interests = [
+    'Website Design',
+    'Mobile Application',
+    'CRM Solutions',
+    'Graphics Design',
+    'SEO Services',
+  ];
+
+  const handleInterestToggle = (interest: string) => {
+    setFormData(prev => ({
+      ...prev,
+      interests: prev.interests.includes(interest)
+        ? prev.interests.filter(i => i !== interest)
+        : [...prev.interests, interest]
+    }));
+  };
+
+  // ✅ Only this function changed redirects to WhatsApp with form data
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate name
+    if (!formData.name.trim()) {
+      showNotification("error", "Please enter your name.");
+      return;
+    }
+
+    // Validate phone number
+    const cleanPhone = formData.phone.replace(/[\s\-()]/g, "");
+    if (!/^\+?[0-9]{7,15}$/.test(cleanPhone)) {
+      showNotification("error", "Please enter a valid phone number (7–15 digits).");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // ✅ Web3Forms — send email notification
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "c523f882-5e4e-4327-ade4-29b6b02162bf",
+          subject: "New Contact Form Submission",
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email || "",
+          company: formData.company || "",
+          interests: formData.interests.join(", "),
+          message: formData.message || "",
+        }),
+      });
+    } catch (err) {
+      console.error("Web3Forms error:", err);
+    }
+
+    const whatsappNumber = "917978874959";
+    const message = `Hi Vanurmedia! 👋
+
+*Name:* ${formData.name}
+*Phone:* ${formData.phone}${formData.email ? `\n*Email:* ${formData.email}` : ''}${formData.company ? `\n*Company:* ${formData.company}` : ''}${formData.interests.length > 0 ? `\n*Interested In:* ${formData.interests.join(', ')}` : ''}${formData.message ? `\n*Message:* ${formData.message}` : ''}
+
+I'd like to know more about your services!`;
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    setTimeout(() => {
+      window.open(whatsappUrl, "_blank");
+      setIsSubmitting(false);
+      setFormData({ name: '', phone: '', email: '', company: '', message: '', interests: [] });
+      showNotification("success", "🎉 Thank you! We've received your message and will get back to you shortly.");
+    }, 600);
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 py-12 sm:py-16 md:py-20" style={{ backgroundColor: '#0A0012' }}>
+      <div className="max-w-4xl w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/20 to-transparent p-6 sm:p-8 md:p-12"
+        >
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+              <span className="text-white">Get in </span>
+              <span className="text-purple-500">Touch</span>
+            </h2>
+            <p className="text-gray-400 text-sm sm:text-base">
+              Fill out the form below and we'll get back to you shortly
+            </p>
+          </div>
+
+          {/* Notification */}
+          <AnimatePresence>
+            {notification && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${notification.type === "success"
+                  ? "bg-green-500/10 border-green-500/20 text-green-400"
+                  : "bg-red-500/10 border-red-500/20 text-red-400"
+                  }`}
+              >
+                {notification.type === "success" ? (
+                  <CheckCircle className="w-5 h-5 shrink-0" />
+                ) : (
+                  <XCircle className="w-5 h-5 shrink-0" />
+                )}
+                <p className="text-sm font-medium">{notification.message}</p>
+                <button
+                  onClick={() => setNotification(null)}
+                  className="ml-auto opacity-60 hover:opacity-100 transition-opacity"
+                >
+                  <XCircle className="w-4 h-4" />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-white text-sm mb-3 font-medium">
+                  Name <span className="text-purple-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Who's reaching out?"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  className="w-full bg-transparent border-b-2 border-gray-700 text-white placeholder-gray-500 py-3 focus:border-purple-500 focus:outline-none transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-white text-sm mb-3 font-medium">
+                  Phone <span className="text-purple-500">*</span>
+                </label>
+                <input
+                  type="phone"
+                  placeholder="Where can we reply?"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  required
+                  className="w-full bg-transparent border-b-2 border-gray-700 text-white placeholder-gray-500 py-3 focus:border-purple-500 focus:outline-none transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-white text-sm mb-3 font-medium">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  placeholder="Where can we reply?"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full bg-transparent border-b-2 border-gray-700 text-white placeholder-gray-500 py-3 focus:border-purple-500 focus:outline-none transition-colors"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-white text-sm mb-3 font-medium">
+                Company / Brand <span className="text-gray-500">(Optional)</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your company name"
+                value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                className="w-full bg-transparent border-b-2 border-gray-700 text-white placeholder-gray-500 py-3 focus:border-purple-500 focus:outline-none transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-white text-sm mb-3 sm:mb-4 font-medium">
+
+                What's in your mind
+
+              </label>
+              <div className="flex flex-wrap gap-2 sm:gap-3">
+                {interests.map((interest) => (
+                  <button
+                    key={interest}
+                    type="button"
+                    onClick={() => handleInterestToggle(interest)}
+                    className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full border transition-all duration-300 text-sm sm:text-base ${formData.interests.includes(interest)
+                      ? 'border-purple-500 bg-purple-600 text-white shadow-lg shadow-purple-500/50'
+                      : 'border-gray-700 bg-transparent text-gray-400 hover:border-purple-500 hover:text-white'
+                      }`}
+                  >
+                    {interest}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-white text-sm mb-3 font-medium">
+                Message
+              </label>
+              <textarea
+                placeholder="What's on your mind?"
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                rows={5}
+                className="w-full bg-transparent border-2 border-gray-700 rounded-xl text-white placeholder-gray-500 p-4 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+              />
+            </div>
+
+            <div className="text-center pt-4">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`group relative px-12 py-4 rounded-full font-semibold text-white transition-all duration-300 bg-linear-to-r from-purple-600 to-pink-600 inline-flex items-center gap-3 ${isSubmitting
+                  ? 'opacity-70 cursor-not-allowed'
+                  : 'hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50'
+                  }`}
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Let's Talk
+                    <Send size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+
+              <div className="mt-3 flex items-center justify-center gap-2 text-green-400 text-sm">
+                <Check size={16} />
+                <span>We usually reply within a few hours</span>
+              </div>
+            </div>
+          </form>
+        </motion.div>
+
+        {/* Contact Info Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-purple-900/30 bg-purple-950/10"
+          >
+            <div className="text-purple-500 text-xl sm:text-2xl mb-2 sm:mb-3">📧</div>
+            <h3 className="text-white font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Email</h3>
+            <p className="text-gray-400 text-xs sm:text-sm">
+              <a href="mailto:info@vanurmedia.com" className="hover:text-purple-400">info@vanurmedia.com</a>
+              <br />
+              <a href="mailto:vanurtechmedia@gmail.com" className="hover:text-purple-400">vanurtechmedia@gmail.com</a>
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-purple-900/30 bg-purple-950/10"
+          >
+            <div className="text-purple-500 text-xl sm:text-2xl mb-2 sm:mb-3">📱</div>
+            <h3 className="text-white font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Phone</h3>
+            <p className="text-gray-400 text-xs sm:text-sm">
+              <a href="tel:+917077004890" className="hover:text-purple-400">+91-7077004890</a>
+              <br />
+              <a href="tel:+917978874959" className="hover:text-purple-400">+91-7978874959</a>
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-purple-900/30 bg-purple-950/10 sm:col-span-2 lg:col-span-1"
+          >
+            <div className="text-purple-500 text-xl sm:text-2xl mb-2 sm:mb-3">📍</div>
+            <h3 className="text-white font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Location</h3>
+            <p className="text-gray-400 text-xs sm:text-sm">Bhubaneswar, Odisha<br />751006</p>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}

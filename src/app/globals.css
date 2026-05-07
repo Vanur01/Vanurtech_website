@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0B0011;
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-montserrat);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0B0011;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  background: #0B0011;
+  color: var(--foreground);
+  font-family: var(--font-montserrat), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 5s linear infinite;
+}
+
+.animate-scroll-right {
+  animation: scroll-right 5s linear infinite;
+}
+
+@media (max-width: 640px) {
+  .animate-scroll-left {
+    animation-duration: 8s;
+  }
+  .animate-scroll-right {
+    animation-duration: 8s;
+  }
+}
+
+.pause-on-hover:hover {
+  animation-play-state: paused;
+}
