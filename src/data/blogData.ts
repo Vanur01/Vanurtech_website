@@ -1,17 +1,17 @@
 const blogDataJSON = {
-    "success": true,
-    "statusCode": 200,
-    "message": "Blogs fetched successfully",
-    "result": {
-        "blogs": [
-            {
-                "_id": "69fb1aa530911d7327b16305",
-                "category": {
-                    "_id": "69997d6438a505ae18d76f84",
-                    "name": "Article"
-                },
-                "title": "Why Google Isn’t Finding Your Website (And How to Fix It)",
-                "content": `
+  success: true,
+  statusCode: 200,
+  message: "Blogs fetched successfully",
+  result: {
+    blogs: [
+      {
+        _id: "69fb1aa530911d7327b16305",
+        category: {
+          _id: "69997d6438a505ae18d76f84",
+          name: "Article",
+        },
+        title: "Why Google Isn’t Finding Your Website (And How to Fix It)",
+        content: `
                     <p>Starting a website is a big milestone for any business or individual. You spend time designing it, creating content, and launching it online. But when you search for your website on Google, it doesn’t appear. This situation can be frustrating and confusing.</p>
                     
                     <p>The truth is that many websites don’t appear on Google immediately, and there are several common reasons behind it. The good news is that most of these issues are easy to fix. In this guide, we will explain why Google might not be finding your website and what you can do to solve the problem.</p>
@@ -58,31 +58,36 @@ const blogDataJSON = {
                         <p class="mt-4">SEO takes time, but with consistent effort and improvements, your website will start appearing in Google search results and attract more visitors.</p>
                     </div>
                 `,
-                "tags": [
-                    "SEO", "Google Search", "Digital Marketing", "Indexing", "Web Visibility"
-                ],
-                "coverImage": "/images/blogs/seo-indexing-new.png",
-                "readingTime": 1,
-                "status": "published",
-                "author": {
-                    "_id": "699d34062df6bae0c65b58c9",
-                    "name": "Vanurtech",
-                    "email": "vanurtechmediaofficial@gmail.com"
-                },
-                "slug": "whygoogleisntfindingyourwebsiteandhowtofixit",
-                "publishedAt": "2026-05-06T11:00:00.388Z",
-                "createdAt": "2026-05-06T11:00:00.388Z",
-                "updatedAt": "2026-05-06T11:00:00.388Z",
-                "__v": 0
-            },
-            {
-                "_id": "69fb1aa530911d7327b16306",
-                "category": {
-                    "_id": "69997d6438a505ae18d76f84",
-                    "name": "Article"
-                },
-                "title": "Why Every Business Needs a Professional Website Design Company in India (Especially in Odisha)",
-                "content": `
+        tags: [
+          "SEO",
+          "Google Search",
+          "Digital Marketing",
+          "Indexing",
+          "Web Visibility",
+        ],
+        coverImage: "/images/blogs/seo-indexing-new.png",
+        readingTime: 1,
+        status: "published",
+        author: {
+          _id: "699d34062df6bae0c65b58c9",
+          name: "Vanurtech",
+          email: "vanurtechmediaofficial@gmail.com",
+        },
+        slug: "whygoogleisntfindingyourwebsiteandhowtofixit",
+        publishedAt: "2026-05-06T11:00:00.388Z",
+        createdAt: "2026-05-06T11:00:00.388Z",
+        updatedAt: "2026-05-06T11:00:00.388Z",
+        __v: 0,
+      },
+      {
+        _id: "69fb1aa530911d7327b16306",
+        category: {
+          _id: "69997d6438a505ae18d76f84",
+          name: "Article",
+        },
+        title:
+          "Why Every Business Needs a Professional Website Design Company in India (Especially in Odisha)",
+        content: `
                     <p>In today’s digital world, having an online presence is no longer optional for businesses. Whether you run a small shop, a startup, or a large company, customers expect to find your business online. A professional website helps build trust, attract customers, and grow your brand.</p>
                     
                     <p>Many businesses in India, especially in growing markets like Odisha, are realizing the importance of having a well-designed website. In this article, we will explore why every business needs a professional website design company.</p>
@@ -113,31 +118,29 @@ const blogDataJSON = {
                         <p>Working with a professional website design company in India ensures your website is visually appealing, SEO-friendly, secure, and optimized for performance. For businesses in Odisha, this can open new opportunities and help your business grow online.</p>
                     </div>
                 `,
-                "tags": [
-                    "Website Design", "India", "Odisha", "Business Growth"
-                ],
-                "coverImage": "/images/blogs/web-design-new.png",
-                "readingTime": 5,
-                "status": "published",
-                "author": {
-                    "_id": "699d34062df6bae0c65b58c9",
-                    "name": "Vanurtech",
-                    "email": "vanurtechmediaofficial@gmail.com"
-                },
-                "slug": "whyeverybusinessneedsaprofessionalwebsitedesigncompanyinindia",
-                "publishedAt": "2026-05-06T12:00:00.000Z",
-                "createdAt": "2026-05-06T12:00:00.000Z",
-                "updatedAt": "2026-05-06T12:00:00.000Z",
-                "__v": 0
-            },
-            {
-                "_id": "69fb1aa530911d7327b16307",
-                "category": {
-                    "_id": "69997d6438a505ae18d76f84",
-                    "name": "Article"
-                },
-                "title": "Why Mobile Optimization Matters for Your Website",
-                "content": `
+        tags: ["Website Design", "India", "Odisha", "Business Growth"],
+        coverImage: "/images/blogs/web-design-new.png",
+        readingTime: 5,
+        status: "published",
+        author: {
+          _id: "699d34062df6bae0c65b58c9",
+          name: "Vanurtech",
+          email: "vanurtechmediaofficial@gmail.com",
+        },
+        slug: "whyeverybusinessneedsaprofessionalwebsitedesigncompanyinindia",
+        publishedAt: "2026-05-06T12:00:00.000Z",
+        createdAt: "2026-05-06T12:00:00.000Z",
+        updatedAt: "2026-05-06T12:00:00.000Z",
+        __v: 0,
+      },
+      {
+        _id: "69fb1aa530911d7327b16307",
+        category: {
+          _id: "69997d6438a505ae18d76f84",
+          name: "Article",
+        },
+        title: "Why Mobile Optimization Matters for Your Website",
+        content: `
                     <p>Today, more than half of all global web traffic comes from smartphones and tablets. If your website is not optimized for mobile devices, you could lose potential customers and reduce your search engine rankings.</p>
 
                     <h2 class="text-2xl font-bold mt-8 mb-4 text-purple-400">1. Most Internet Users Are on Mobile Devices</h2>
@@ -160,31 +163,29 @@ const blogDataJSON = {
                         <p>Mobile optimization is essential for every website. It improves user experience, boosts search engine rankings, increases conversions, and builds trust with your audience.</p>
                     </div>
                 `,
-                "tags": [
-                    "Mobile Optimization", "User Experience"
-                ],
-                "coverImage": "/images/blogs/mobile-optimization-new.png",
-                "readingTime": 4,
-                "status": "published",
-                "author": {
-                    "_id": "699d34062df6bae0c65b58c9",
-                    "name": "Vanurtech",
-                    "email": "vanurtechmediaofficial@gmail.com"
-                },
-                "slug": "whymobileoptimizationmattersforyourwebsite",
-                "publishedAt": "2026-05-06T12:15:00.000Z",
-                "createdAt": "2026-05-06T12:15:00.000Z",
-                "updatedAt": "2026-05-06T12:15:00.000Z",
-                "__v": 0
-            },
-            {
-                "_id": "69fb1aa530911d7327b16308",
-                "category": {
-                    "_id": "69997d6438a505ae18d76f84",
-                    "name": "Article"
-                },
-                "title": "The 10 Best IT and Software Companies in Bhubaneswar in 2026",
-                "content": `
+        tags: ["Mobile Optimization", "User Experience"],
+        coverImage: "/images/blogs/mobile-optimization-new.png",
+        readingTime: 4,
+        status: "published",
+        author: {
+          _id: "699d34062df6bae0c65b58c9",
+          name: "Vanurtech",
+          email: "vanurtechmediaofficial@gmail.com",
+        },
+        slug: "whymobileoptimizationmattersforyourwebsite",
+        publishedAt: "2026-05-06T12:15:00.000Z",
+        createdAt: "2026-05-06T12:15:00.000Z",
+        updatedAt: "2026-05-06T12:15:00.000Z",
+        __v: 0,
+      },
+      {
+        _id: "69fb1aa530911d7327b16308",
+        category: {
+          _id: "69997d6438a505ae18d76f84",
+          name: "Article",
+        },
+        title: "The 10 Best IT and Software Companies in Bhubaneswar in 2026",
+        content: `
                     <p>Bhubaneswar, the capital of Odisha, is gradually becoming one of the most prominent tech hubs in Eastern India. This article talks about the Top 10 IT and Software Companies in Bhubaneswar in 2026.</p>
 
                     <h2 class="text-2xl font-bold mt-8 mb-4 text-purple-400">1. Infosys</h2>
@@ -222,31 +223,35 @@ const blogDataJSON = {
                         <p>With top schools (IIT, KIIT), government IT parks, and lower operational costs, Bhubaneswar has become a vibrant tech ecosystem.</p>
                     </div>
                 `,
-                "tags": [
-                    "IT Companies", "Bhubaneswar", "Odisha", "Software Industry", "Vanurtech"
-                ],
-                "coverImage": "/images/blogs/bhubaneswar-it-new.png",
-                "readingTime": 6,
-                "status": "published",
-                "author": {
-                    "_id": "699d34062df6bae0c65b58c9",
-                    "name": "Vanurtech",
-                    "email": "vanurtechmediaofficial@gmail.com"
-                },
-                "slug": "the10bestitandsoftwarecompaniesinbhubaneswarin2026",
-                "publishedAt": "2026-05-06T12:30:00.000Z",
-                "createdAt": "2026-05-06T12:30:00.000Z",
-                "updatedAt": "2026-05-06T12:30:00.000Z",
-                "__v": 0
-            },
-            {
-                "_id": "69fb1aa530911d7327b16309",
-                "category": {
-                    "_id": "69997d6438a505ae18d76f84",
-                    "name": "Article"
-                },
-                "title": "Role of Automation in Modern IT Solutions",
-                "content": `
+        tags: [
+          "IT Companies",
+          "Bhubaneswar",
+          "Odisha",
+          "Software Industry",
+          "Vanurtech",
+        ],
+        coverImage: "/images/blogs/bhubaneswar-it-new.png",
+        readingTime: 6,
+        status: "published",
+        author: {
+          _id: "699d34062df6bae0c65b58c9",
+          name: "Vanurtech",
+          email: "vanurtechmediaofficial@gmail.com",
+        },
+        slug: "the10bestitandsoftwarecompaniesinbhubaneswarin2026",
+        publishedAt: "2026-05-06T12:30:00.000Z",
+        createdAt: "2026-05-06T12:30:00.000Z",
+        updatedAt: "2026-05-06T12:30:00.000Z",
+        __v: 0,
+      },
+      {
+        _id: "69fb1aa530911d7327b16309",
+        category: {
+          _id: "69997d6438a505ae18d76f84",
+          name: "Article",
+        },
+        title: "Role of Automation in Modern IT Solutions",
+        content: `
                     <p>Automation has become a core part of modern IT solutions. It helps businesses improve efficiency, reduce operational costs, and deliver better customer experiences.</p>
 
                     <h2 class="text-2xl font-bold mt-8 mb-4 text-purple-400">What Is Automation in IT?</h2>
@@ -265,31 +270,35 @@ const blogDataJSON = {
                         <p>Automation is a strategic necessity for organizations looking to grow and succeed in the future of technology.</p>
                     </div>
                 `,
-                "tags": [
-                    "Automation", "IT Solutions", "AI", "Efficiency", "Cloud Computing"
-                ],
-                "coverImage": "/images/blogs/automation-it-new.png",
-                "readingTime": 7,
-                "status": "published",
-                "author": {
-                    "_id": "699d34062df6bae0c65b58c9",
-                    "name": "Vanurtech",
-                    "email": "vanurtechmediaofficial@gmail.com"
-                },
-                "slug": "roleofautomationinmodernitsolutions",
-                "publishedAt": "2026-05-06T12:45:00.000Z",
-                "createdAt": "2026-05-06T12:45:00.000Z",
-                "updatedAt": "2026-05-06T12:45:00.000Z",
-                "__v": 0
-            },
-            {
-                "_id": "69fb1aa530911d7327b16310",
-                "category": {
-                    "_id": "69997d6438a505ae18d76f84",
-                    "name": "Article"
-                },
-                "title": "How Fast Loading Websites Increase Sales",
-                "content": `
+        tags: [
+          "Automation",
+          "IT Solutions",
+          "AI",
+          "Efficiency",
+          "Cloud Computing",
+        ],
+        coverImage: "/images/blogs/automation-it-new.png",
+        readingTime: 7,
+        status: "published",
+        author: {
+          _id: "699d34062df6bae0c65b58c9",
+          name: "Vanurtech",
+          email: "vanurtechmediaofficial@gmail.com",
+        },
+        slug: "roleofautomationinmodernitsolutions",
+        publishedAt: "2026-05-06T12:45:00.000Z",
+        createdAt: "2026-05-06T12:45:00.000Z",
+        updatedAt: "2026-05-06T12:45:00.000Z",
+        __v: 0,
+      },
+      {
+        _id: "69fb1aa530911d7327b16310",
+        category: {
+          _id: "69997d6438a505ae18d76f84",
+          name: "Article",
+        },
+        title: "How Fast Loading Websites Increase Sales",
+        content: `
                     <p>In today’s digital world, website speed has become one of the most important factors for online business success. A fast-loading website not only improves customer satisfaction but also directly impacts sales and revenue.</p>
 
                     <h2 class="text-2xl font-bold mt-8 mb-4 text-purple-400">1. First Impressions Matter</h2>
@@ -312,32 +321,30 @@ const blogDataJSON = {
                         <p>Whether you run an e-commerce store, service business, or corporate website, investing in website speed optimization can significantly improve your revenue and customer satisfaction.</p>
                     </div>
                 `,
-                "tags": [
-                    "Website Speed", "Sales Growth"
-                ],
-                "coverImage": "/images/blogs/website-speed-sales-new.png",
-                "readingTime": 8,
-                "status": "published",
-                "author": {
-                    "_id": "699d34062df6bae0c65b58c9",
-                    "name": "Vanurtech",
-                    "email": "vanurtechmediaofficial@gmail.com"
-                },
-                "slug": "howfastloadingwebsitesincreasesales",
-                "publishedAt": "2026-05-06T13:00:00.000Z",
-                "createdAt": "2026-05-06T13:00:00.000Z",
-                "updatedAt": "2026-05-06T13:00:00.000Z",
-                "__v": 0
-            }
-        ],
-        "pagination": {
-            "currentPage": 1,
-            "totalPages": 1,
-            "totalBlogs": 6,
-            "hasNext": false,
-            "hasPrev": false
-        }
-    }
+        tags: ["Website Speed", "Sales Growth"],
+        coverImage: "/images/blogs/website-speed-sales-new.png",
+        readingTime: 8,
+        status: "published",
+        author: {
+          _id: "699d34062df6bae0c65b58c9",
+          name: "Vanurtech",
+          email: "vanurtechmediaofficial@gmail.com",
+        },
+        slug: "howfastloadingwebsitesincreasesales",
+        publishedAt: "2026-05-06T13:00:00.000Z",
+        createdAt: "2026-05-06T13:00:00.000Z",
+        updatedAt: "2026-05-06T13:00:00.000Z",
+        __v: 0,
+      },
+    ],
+    pagination: {
+      currentPage: 1,
+      totalPages: 1,
+      totalBlogs: 6,
+      hasNext: false,
+      hasPrev: false,
+    },
+  },
 };
 
 export default blogDataJSON;

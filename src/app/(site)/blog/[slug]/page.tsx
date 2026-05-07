@@ -2,14 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Calendar,
-  Clock,
-  Tag,
-  ArrowLeft,
-  BookOpen,
-  Flame,
-} from "lucide-react";
+import { Calendar, Clock, Tag, ArrowLeft, BookOpen, Flame } from "lucide-react";
 import Link from "next/link";
 import { SparklesCore } from "@/components/ui/sparkles";
 import CTASection from "@/components/CTASection";
@@ -34,11 +27,7 @@ interface RecentActivity {
 /* ─────────────────────────────────────────
    Recent Activity Sidebar
 ───────────────────────────────────────── */
-const RecentActivitySidebar = ({
-  currentSlug,
-}: {
-  currentSlug: string;
-}) => {
+const RecentActivitySidebar = ({ currentSlug }: { currentSlug: string }) => {
   const [activities, setActivities] = useState<RecentActivity[]>([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState("");
@@ -59,7 +48,7 @@ const RecentActivitySidebar = ({
             readingTime: b.readingTime || 3,
             publishedAt: b.publishedAt || b.createdAt,
             trending: false,
-          }))
+          })),
         );
       } else {
         setFetchError("No blogs found");
@@ -77,24 +66,34 @@ const RecentActivitySidebar = ({
     if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
     if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
     if (diff < 7 * 86400) return `${Math.floor(diff / 86400)}d ago`;
-    return new Date(dateStr).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    return new Date(dateStr).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
   };
 
   const formatPublishedDate = (dateStr: string) => {
     const d = new Date(dateStr);
-    return d.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }) + " · " + d.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+    return (
+      d.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }) +
+      " · " +
+      d.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    );
   };
 
   return (
     <aside className="w-full">
-      <div className="lg:sticky lg:top-24 flex flex-col" style={{ maxHeight: 'calc(100vh - 7rem)' }}>
+      <div
+        className="lg:sticky lg:top-24 flex flex-col"
+        style={{ maxHeight: "calc(100vh - 7rem)" }}
+      >
         {/* Header */}
         <div className="flex items-center gap-2 mb-5 shrink-0">
           <span className="relative flex h-2.5 w-2.5">
@@ -110,17 +109,25 @@ const RecentActivitySidebar = ({
         </div>
 
         {/* Activity list */}
-        <div className="space-y-[6px] overflow-y-auto flex-1 pr-1" style={{ scrollbarWidth: 'none' }}>
+        <div
+          className="space-y-[6px] overflow-y-auto flex-1 pr-1"
+          style={{ scrollbarWidth: "none" }}
+        >
           {loading ? (
             Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-[78px] rounded-xl bg-purple-900/20 animate-pulse" />
+              <div
+                key={i}
+                className="h-[78px] rounded-xl bg-purple-900/20 animate-pulse"
+              />
             ))
           ) : fetchError ? (
             <div className="text-[11px] text-red-400 bg-red-900/20 border border-red-800/40 rounded-xl p-3">
               ⚠ {fetchError}
             </div>
           ) : activities.filter((a) => a.slug !== currentSlug).length === 0 ? (
-            <div className="text-[11px] text-gray-500 text-center py-4">No recent blogs found.</div>
+            <div className="text-[11px] text-gray-500 text-center py-4">
+              No recent blogs found.
+            </div>
           ) : (
             activities
               .filter((a) => a.slug !== currentSlug)
@@ -176,7 +183,9 @@ const RecentActivitySidebar = ({
                         <div className="flex items-center gap-1 mt-1 text-[10px] text-purple-500/70">
                           <Calendar size={9} />
                           <span>{formatPublishedDate(item.publishedAt)}</span>
-                          <span className="ml-auto text-gray-600">{timeAgo(item.publishedAt)}</span>
+                          <span className="ml-auto text-gray-600">
+                            {timeAgo(item.publishedAt)}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -221,7 +230,9 @@ const BlogDetailPage = () => {
     setIsLoading(true);
     setError("");
     try {
-      const foundPost = blogDataJSON.result.blogs.find((b: any) => b.slug === slug);
+      const foundPost = blogDataJSON.result.blogs.find(
+        (b: any) => b.slug === slug,
+      );
       if (foundPost) {
         setPost(foundPost as Blog);
       } else {
@@ -266,7 +277,6 @@ const BlogDetailPage = () => {
 
   return (
     <div className="bg-[#0B0011]">
-
       {/* ── HERO ── */}
       <div className="relative w-full overflow-hidden bg-[#0A0012]">
         <div className="absolute inset-0 pointer-events-none">
@@ -283,7 +293,6 @@ const BlogDetailPage = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-10">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-
             {/* LEFT: blog meta */}
             <div className="flex-1 min-w-0">
               <Link
@@ -310,7 +319,9 @@ const BlogDetailPage = () => {
                   <div className="text-white font-medium">
                     {post.author?.name || "Unknown Author"}
                   </div>
-                  <div className="text-xs sm:text-sm">{post.author?.email || "No Email"}</div>
+                  <div className="text-xs sm:text-sm">
+                    {post.author?.email || "No Email"}
+                  </div>
                 </div>
                 <span className="flex items-center gap-1">
                   <Calendar size={14} /> {formatDate(post.publishedAt)}
@@ -331,11 +342,11 @@ const BlogDetailPage = () => {
                 ))}
               </div>
 
-              <div className="mt-6 sm:mt-8 w-full rounded-xl sm:rounded-2xl overflow-hidden aspect-video bg-[#0d0020]">
+              <div className="mt-6 sm:mt-8 w-full rounded-xl sm:rounded-2xl overflow-hidden aspect-video">
                 <img
                   src={post.coverImage}
                   alt={post.title}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
@@ -344,7 +355,6 @@ const BlogDetailPage = () => {
             <div className="hidden lg:block w-[340px] shrink-0">
               <RecentActivitySidebar currentSlug={slug} />
             </div>
-
           </div>
 
           {/* Mobile sidebar — shown below hero on small screens */}
