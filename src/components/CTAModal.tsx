@@ -21,7 +21,7 @@ interface CTAModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
+console.log(CTAModal);
 console.log("CTA Modal");
 export function CTAModal({ isOpen, onClose }: CTAModalProps) {
   const [countryLabel, setCountryLabel] = useState("IN");
