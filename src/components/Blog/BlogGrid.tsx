@@ -11,10 +11,10 @@ import blogDataJSON from "@/data/blogData";
 export default function BlogGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  // Initialize states directly from hardcoded data
-  const [allBlogs] = useState<Blog[]>(blogDataJSON.result.blogs as Blog[]);
+  // Read directly from data — no useState so changes always reflect
+  const allBlogs = blogDataJSON.result.blogs as Blog[];
 
-  const [categories] = useState<Category[]>(() => {
+  const categories: Category[] = (() => {
     const uniqueCategoriesMap = new Map();
     blogDataJSON.result.blogs.forEach((blog) => {
       if (blog.category && typeof blog.category === "object") {
@@ -22,7 +22,7 @@ export default function BlogGrid() {
       }
     });
     return Array.from(uniqueCategoriesMap.values());
-  });
+  })();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");

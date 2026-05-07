@@ -12,7 +12,9 @@ const BlogContent = ({ content, slug }: BlogContentProps) => {
 
   // 1. Extract <style> blocks and scope all CSS rules
   const { css, html } = useMemo(() => {
-    const styleMatches = [...content.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)];
+    const styleMatches = [
+      ...content.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi),
+    ];
     const rawCss = styleMatches.map((m) => m[1]).join("\n");
 
     // Scope every CSS rule with #blog-{slug} to avoid leaking into the page
@@ -25,7 +27,7 @@ const BlogContent = ({ content, slug }: BlogContentProps) => {
           .map((s: string) => `#blog-${slug} ${s.trim()}`)
           .join(", ");
         return `${scoped}${suffix}`;
-      }
+      },
     );
 
     // Remove <style> tags from HTML
@@ -58,9 +60,19 @@ const BlogContent = ({ content, slug }: BlogContentProps) => {
     () =>
       DOMPurify.sanitize(html, {
         ADD_ATTR: ["style", "class"],
+        ADD_TAGS: [
+          "table",
+          "thead",
+          "tbody",
+          "tr",
+          "th",
+          "td",
+          "colgroup",
+          "col",
+        ],
         FORBID_TAGS: ["script"],
       }),
-    [html]
+    [html],
   );
   console.log(sanitizedHtml);
 
