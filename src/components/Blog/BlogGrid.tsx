@@ -152,7 +152,7 @@ export default function BlogGrid() {
                               <img
                                 src={blog.coverImage}
                                 alt={blog.title}
-                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
                               />
 
                               {/* Dark vignette so text is always readable */}
