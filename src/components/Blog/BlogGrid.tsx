@@ -6,17 +6,35 @@ import { Calendar, Clock, ArrowRight, Tag } from 'lucide-react';
 import Link from 'next/link';
 import { CometCard } from '@/components/ui/comet-card';
 import { blogApi, Blog, categoryApi, Category } from '@/api';
+import blogDataJSON from '@/data/blogData';
 
 export default function BlogGrid() {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [allBlogs, setAllBlogs] = useState<Blog[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+
+  // Initialize states directly from hardcoded data
+  const [allBlogs] = useState<Blog[]>(blogDataJSON.result.blogs as Blog[]);
+
+  const [categories] = useState<Category[]>(() => {
+    const uniqueCategoriesMap = new Map();
+    blogDataJSON.result.blogs.forEach(blog => {
+      if (blog.category && typeof blog.category === 'object') {
+        uniqueCategoriesMap.set(blog.category._id, blog.category);
+      }
+    });
+    return Array.from(uniqueCategoriesMap.values());
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
 
-  // Fetch all data once
+  // No longer need useEffect for hardcoded data loading
+  useEffect(() => {
+    // Keeping this for any future side effects if needed
+  }, []);
+
+  /* Commented out API fetching logic
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -51,6 +69,7 @@ export default function BlogGrid() {
 
     fetchData();
   }, []);
+  */
 
   // Frontend filtering
   const filteredBlogs = selectedCategory === 'All'
@@ -82,40 +101,9 @@ export default function BlogGrid() {
     html.replace(/<[^>]*>?/gm, '');
 
   return (
-    <div className="min-h-screen py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8" style={{ backgroundColor: '#0A0012' }}>
+    <div className="min-h-screen py-4 sm:py-6 md:py-8 px-4 sm:px-6 md:px-8" style={{ backgroundColor: '#0A0012' }}>
       <div className="max-w-7xl mx-auto">
-        {/* Category Filter */}
-        <div className="mb-8 sm:mb-12">
-          <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
-            <button
-              onClick={() => {
-                setSelectedCategory('All');
-                setCurrentPage(1);
-              }}
-              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${selectedCategory === 'All'
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-purple-900/20 text-gray-400 hover:bg-purple-900/40 hover:text-white'
-                }`}
-            >
-              All
-            </button>
-            {categories.map((category) => (
-              <button
-                key={category._id}
-                onClick={() => {
-                  setSelectedCategory(category._id);
-                  setCurrentPage(1);
-                }}
-                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${selectedCategory === category._id
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-purple-900/20 text-gray-400 hover:bg-purple-900/40 hover:text-white'
-                  }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* Category Filter - Hidden */}
 
         {/* Loading State */}
         {isLoading && (
@@ -145,7 +133,7 @@ export default function BlogGrid() {
                 <p className="text-gray-400 text-lg">No blog posts found in this category.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                 {blogs
                   .map((blog, index) => (
                     <motion.div
@@ -157,58 +145,68 @@ export default function BlogGrid() {
                       <CometCard className="h-full">
                         <Link href={`/blog/${blog.slug}`}>
 
-                          <div className="h-full rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 overflow-hidden hover:border-purple-600 transition-all duration-500 group cursor-pointer">
-                            {/* Image */}
-                            <div className="relative h-48 sm:h-56 overflow-hidden">
+                          <div className="h-full rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/30 to-purple-900/10 overflow-hidden hover:border-purple-600 hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] transition-all duration-500 group cursor-pointer">
+                            {/* Thumbnail */}
+                            <div className="relative aspect-video overflow-hidden bg-[#0d0020]">
+                              {/* Actual image — cover fill */}
                               <img
                                 src={blog.coverImage}
                                 alt={blog.title}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
                               />
-                              <div className="absolute inset-0 bg-[#0A0012]/20"></div>
-                              <div className="absolute top-4 left-4">
-                                <span className="px-3 py-1 rounded-full bg-purple-600 text-white text-xs sm:text-sm font-medium">
+
+                              {/* Dark vignette so text is always readable */}
+                              <div className="absolute inset-0 bg-linear-to-t from-[#0A0012] via-[#0A0012]/40 to-transparent"></div>
+
+                              {/* Subtle purple tint on hover */}
+                              <div className="absolute inset-0 bg-purple-900/0 group-hover:bg-purple-900/20 transition-colors duration-500"></div>
+
+                              {/* Category badge — top left */}
+                              <div className="absolute top-3 left-3">
+                                <span className="px-3 py-1 rounded-full bg-purple-600/90 backdrop-blur-sm text-white text-xs font-semibold tracking-wide shadow-lg">
                                   {typeof blog.category === 'string' ? blog.category : blog.category?.name || 'Uncategorized'}
                                 </span>
                               </div>
-                              <div className="absolute inset-0 bg-linear-to-t from-[#0A0012] via-transparent to-transparent"></div>
+
+                              {/* Reading time badge — top right */}
+                              <div className="absolute top-3 right-3">
+                                <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm text-gray-300 text-xs font-medium">
+                                  <Clock size={11} />
+                                  {blog.readingTime} min
+                                </span>
+                              </div>
+
+
                             </div>
 
                             {/* Content */}
-                            <div className="p-4 sm:p-6">
-                              <h3 className="text-lg sm:text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-purple-400 transition-colors">
+                            <div className="p-4 sm:p-5">
+                              <h3 className="text-base sm:text-lg font-bold text-white mb-2 line-clamp-2 leading-snug group-hover:text-purple-300 transition-colors duration-300">
                                 {blog.title}
                               </h3>
-
-                              {/* <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">
-                              {blog.content.substring(0, 100)}...
-                            </p><p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-2">
-  {stripHtml(blog.content).substring(0, 100)}...
-</p> */}
+                              <p className="text-gray-400 text-sm mb-3 line-clamp-2 leading-relaxed">
+                                {stripHtml(blog.content).substring(0, 110)}...
+                              </p>
 
                               {/* Tags */}
-                              <div className="flex flex-wrap gap-2 mb-4">
+                              <div className="flex flex-wrap gap-1.5 mb-4">
                                 {blog.tags.slice(0, 3).map((tag) => (
-                                  <span key={tag} className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-purple-900/30 text-purple-400 text-xs">
-                                    <Tag size={12} />
+                                  <span key={tag} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-900/40 border border-purple-800/40 text-purple-400 text-xs">
+                                    <Tag size={10} />
                                     {tag}
                                   </span>
                                 ))}
                               </div>
 
                               {/* Meta Info */}
-                              <div className="flex items-center justify-between text-gray-500 text-xs sm:text-sm border-t border-purple-900/30 pt-4">
-                                <div className="flex items-center gap-4">
-                                  <span className="flex items-center gap-1">
-                                    <Calendar size={14} />
-                                    {formatDate(blog.publishedAt)}
-                                  </span>
-                                  <span className="flex items-center gap-1">
-                                    <Clock size={14} />
-                                    {blog.readingTime} min read
-                                  </span>
-                                </div>
-                                <ArrowRight size={16} className="text-purple-500 group-hover:translate-x-1 transition-transform" />
+                              <div className="flex items-center justify-between text-gray-500 text-xs border-t border-purple-900/30 pt-3">
+                                <span className="flex items-center gap-1.5">
+                                  <Calendar size={13} />
+                                  {formatDate(blog.publishedAt)}
+                                </span>
+                                <span className="flex items-center gap-1.5 text-purple-400 font-medium group-hover:gap-2.5 transition-all duration-300">
+                                  Read more <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-300" />
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -221,21 +219,21 @@ export default function BlogGrid() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-4 mt-12">
+              <div className="flex justify-center items-center gap-2 sm:gap-4 mt-10 sm:mt-12 flex-wrap">
                 <button
                   onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                   disabled={currentPage === 1}
-                  className="px-6 py-2 rounded-full bg-purple-900/20 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-900/40 transition-colors"
+                  className="px-4 sm:px-6 py-2 rounded-full bg-purple-900/20 text-white text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-900/40 transition-colors"
                 >
                   Previous
                 </button>
-                <span className="text-gray-400">
+                <span className="text-gray-400 text-sm">
                   Page {currentPage} of {totalPages}
                 </span>
                 <button
                   onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-6 py-2 rounded-full bg-purple-900/20 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-900/40 transition-colors"
+                  className="px-4 sm:px-6 py-2 rounded-full bg-purple-900/20 text-white text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-900/40 transition-colors"
                 >
                   Next
                 </button>

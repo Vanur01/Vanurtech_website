@@ -15,6 +15,7 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import CTASection from "@/components/CTASection";
 import { useParams } from "next/navigation";
 import { blogApi, Blog } from "@/api";
+import blogDataJSON from "@/data/blogData";
 import BlogContent from "@/components/Blog/BlogContent"; // ← NEW IMPORT
 
 /* ─────────────────────────────────────────
@@ -43,37 +44,32 @@ const RecentActivitySidebar = ({
   const [fetchError, setFetchError] = useState("");
 
   useEffect(() => {
-    const fetchRecent = async () => {
-      try {
-        const res = await blogApi.getAllBlogs({ page: 1, limit: 10 });
-
-        if (res.success && res.result?.blogs?.length > 0) {
-          setActivities(
-            res.result.blogs.map((b: Blog) => ({
-              id: b._id,
-              title: b.title,
-              slug: b.slug,
-              category:
-                typeof b.category === "string"
-                  ? b.category
-                  : (b.category as any)?.name || "General",
-              readingTime: b.readingTime || 3,
-              publishedAt: b.publishedAt || b.createdAt,
-              trending: false,
-            }))
-          );
-        } else {
-          setFetchError("No blogs found");
-        }
-      } catch (err: any) {
-        console.error("RecentActivity fetch error:", err);
-        setFetchError(err?.message || "Failed to load recent blogs");
-      } finally {
-        setLoading(false);
+    setLoading(true);
+    try {
+      if (blogDataJSON.success && blogDataJSON.result?.blogs?.length > 0) {
+        setActivities(
+          blogDataJSON.result.blogs.map((b: any) => ({
+            id: b._id,
+            title: b.title,
+            slug: b.slug,
+            category:
+              typeof b.category === "string"
+                ? b.category
+                : (b.category as any)?.name || "General",
+            readingTime: b.readingTime || 3,
+            publishedAt: b.publishedAt || b.createdAt,
+            trending: false,
+          }))
+        );
+      } else {
+        setFetchError("No blogs found");
       }
-    };
-
-    fetchRecent();
+    } catch (err: any) {
+      console.error("RecentActivity data error:", err);
+      setFetchError(err?.message || "Failed to load recent blogs");
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const timeAgo = (dateStr: string) => {
@@ -98,9 +94,9 @@ const RecentActivitySidebar = ({
 
   return (
     <aside className="w-full">
-      <div className="sticky top-24 space-y-3">
+      <div className="lg:sticky lg:top-24 flex flex-col" style={{ maxHeight: 'calc(100vh - 7rem)' }}>
         {/* Header */}
-        <div className="flex items-center gap-2 mb-5">
+        <div className="flex items-center gap-2 mb-5 shrink-0">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-purple-500" />
@@ -114,7 +110,7 @@ const RecentActivitySidebar = ({
         </div>
 
         {/* Activity list */}
-        <div className="space-y-[6px]">
+        <div className="space-y-[6px] overflow-y-auto flex-1 pr-1" style={{ scrollbarWidth: 'none' }}>
           {loading ? (
             Array.from({ length: 5 }).map((_, i) => (
               <div key={i} className="h-[78px] rounded-xl bg-purple-900/20 animate-pulse" />
@@ -197,7 +193,7 @@ const RecentActivitySidebar = ({
             mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl
             border border-purple-700/40 text-purple-400 text-[12px] font-semibold
             tracking-wide hover:bg-purple-900/30 hover:border-purple-500
-            transition-all duration-200
+            transition-all duration-200 shrink-0
           "
           style={{ fontFamily: "'Space Mono', monospace" }}
         >
@@ -222,24 +218,20 @@ const BlogDetailPage = () => {
   useEffect(() => {
     if (!slug) return;
 
-    const fetchBlog = async () => {
-      try {
-        setIsLoading(true);
-        setError("");
-        const response = await blogApi.getBlogBySlug(slug);
-        if (response.success) {
-          setPost(response.result);
-        } else {
-          setError("Blog not found");
-        }
-      } catch (err: any) {
-        setError(err.message || "Failed to fetch blog post");
-      } finally {
-        setIsLoading(false);
+    setIsLoading(true);
+    setError("");
+    try {
+      const foundPost = blogDataJSON.result.blogs.find((b: any) => b.slug === slug);
+      if (foundPost) {
+        setPost(foundPost as Blog);
+      } else {
+        setError("Blog not found");
       }
-    };
-
-    fetchBlog();
+    } catch (err: any) {
+      setError(err.message || "Failed to find blog post");
+    } finally {
+      setIsLoading(false);
+    }
   }, [slug]);
 
   const formatDate = (dateString: string) =>
@@ -289,78 +281,83 @@ const BlogDetailPage = () => {
           />
         </div>
 
-        <div className="relative top-20 z-10 max-w-7xl mx-auto px-6 py-10">
-          <div className="flex flex-col lg:flex-row gap-12 items-start">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-10">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
 
             {/* LEFT: blog meta */}
             <div className="flex-1 min-w-0">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 text-purple-400 mb-8"
+                className="inline-flex items-center gap-2 text-purple-400 mb-5 sm:mb-8 text-sm sm:text-base"
               >
-                <ArrowLeft size={20} /> Back to Blog
+                <ArrowLeft size={18} /> Back to Blog
               </Link>
 
               <div className="block">
-                <span className="px-4 py-2 rounded-full bg-purple-600 text-white text-sm">
+                <span className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-600 text-white text-xs sm:text-sm">
                   {typeof post.category === "string"
                     ? post.category
                     : post.category?.name || "Uncategorized"}
                 </span>
               </div>
 
-              <h1 className="text-4xl font-bold text-white mt-6 mb-6">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-4 sm:mt-6 mb-4 sm:mb-6 leading-tight">
                 {post.title}
               </h1>
 
-              <div className="flex items-center gap-6 text-gray-400 mb-8 flex-wrap">
+              <div className="flex items-start sm:items-center gap-3 sm:gap-6 text-gray-400 mb-6 sm:mb-8 flex-wrap text-sm">
                 <div>
                   <div className="text-white font-medium">
                     {post.author?.name || "Unknown Author"}
                   </div>
-                  <div className="text-sm">{post.author?.email || "No Email"}</div>
+                  <div className="text-xs sm:text-sm">{post.author?.email || "No Email"}</div>
                 </div>
                 <span className="flex items-center gap-1">
-                  <Calendar size={16} /> {formatDate(post.publishedAt)}
+                  <Calendar size={14} /> {formatDate(post.publishedAt)}
                 </span>
                 <span className="flex items-center gap-1">
-                  <Clock size={16} /> {post.readingTime} min read
+                  <Clock size={14} /> {post.readingTime} min read
                 </span>
               </div>
 
-              <div className="flex gap-2 flex-wrap">
+              <div className="flex gap-1.5 sm:gap-2 flex-wrap">
                 {post.tags?.map((tag) => (
                   <span
                     key={tag}
-                    className="flex items-center gap-1 px-3 py-1 rounded-md bg-purple-900/30 text-purple-400 text-sm"
+                    className="flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-purple-900/30 text-purple-400 text-xs sm:text-sm"
                   >
-                    <Tag size={14} /> {tag}
+                    <Tag size={12} /> {tag}
                   </span>
                 ))}
               </div>
 
-              <div className="mt-8">
+              <div className="mt-6 sm:mt-8 w-full rounded-xl sm:rounded-2xl overflow-hidden aspect-video bg-[#0d0020]">
                 <img
                   src={post.coverImage}
                   alt={post.title}
-                  className="w-full h-80 object-cover rounded-2xl"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </div>
 
-            {/* RIGHT: sidebar */}
-            <div className="w-full lg:w-[340px] shrink-0">
+            {/* RIGHT: sidebar — hidden on mobile, shown on lg+ */}
+            <div className="hidden lg:block w-[340px] shrink-0">
               <RecentActivitySidebar currentSlug={slug} />
             </div>
 
+          </div>
+
+          {/* Mobile sidebar — shown below hero on small screens */}
+          <div className="block lg:hidden mt-8">
+            <RecentActivitySidebar currentSlug={slug} />
           </div>
         </div>
       </div>
 
       {/* ── ARTICLE BODY ── */}
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row gap-12">
-          <article className="flex-1 min-w-0 py-10">
+          <article className="flex-1 min-w-0 py-6 sm:py-10">
             {/* ↓ ONLY CHANGE: replaced dangerouslySetInnerHTML div with BlogContent */}
             <BlogContent content={post.content} slug={post.slug} />
           </article>

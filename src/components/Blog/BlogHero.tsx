@@ -6,7 +6,7 @@ import { SparklesCore } from '@/components/ui/sparkles';
 
 export default function BlogHero() {
   return (
-    <div className="relative w-full py-10 overflow-hidden" style={{ backgroundColor: '#0A0012' }}>
+    <div className="relative w-full py-6 sm:py-8 md:py-10 overflow-hidden" style={{ backgroundColor: '#0A0012' }}>
       {/* Sparkles Background */}
       <div className="absolute inset-0 w-full h-full">
         <SparklesCore
@@ -25,14 +25,14 @@ export default function BlogHero() {
       <div className="absolute inset-0 bg-linear-to-t from-[#0A0012] via-transparent to-transparent"></div>
 
       {/* Content */}
-      <div className="relative z-10 flex items-center justify-center mt-20 px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-10 ">
+      <div className="relative z-10 flex items-center justify-center mt-16 sm:mt-20 px-4 sm:px-6 md:px-8 py-4">
         <div className="text-center max-w-4xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight">
               <span className="text-white">Blog & Insights</span>
             </h1>
           </motion.div>
@@ -41,7 +41,7 @@ export default function BlogHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-gray-400 text-sm sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto px-4"
+            className="text-gray-400 text-xs sm:text-base md:text-xl mb-5 sm:mb-6 md:mb-8 max-w-2xl mx-auto px-2 sm:px-4"
           >
             Discover the latest trends, tips, and insights in digital innovation
           </motion.p>
@@ -57,7 +57,7 @@ export default function BlogHero() {
       </div>
 
       {/* Bottom Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-linear-to-t from-[#0A0012] to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-10 bg-linear-to-t from-[#0A0012] to-transparent"></div>
     </div>
   );
 }
