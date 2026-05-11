@@ -11,7 +11,7 @@ import {
   PhoneCall,
   Sparkles,
   ArrowRight,
-  User
+  User,
 } from "lucide-react";
 import { ctaApi } from "@/api";
 import { motion, AnimatePresence } from "framer-motion";
@@ -19,14 +19,18 @@ import { COUNTRIES } from "@/constants/countries";
 
 export default function CTASection() {
   const [countryLabel, setCountryLabel] = useState("IN");
-  const selectedCountry = COUNTRIES.find(c => c.label === countryLabel) || COUNTRIES[0];
+  const selectedCountry =
+    COUNTRIES.find((c) => c.label === countryLabel) || COUNTRIES[0];
   const [mobile, setMobile] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     }
@@ -84,8 +88,10 @@ export default function CTASection() {
       });
 
       if (response.success) {
-        const phoneNumber = "7978874959";
-        const whatsappMsg = encodeURIComponent(`Hi Vanurtech Media Pvt. Ltd.! I have submitted my request for a consultation. My name is ${name.trim()} and my contact number is ${cleanMobile}.`);
+        const phoneNumber = "919114667215";
+        const whatsappMsg = encodeURIComponent(
+          `Hi Vanurtech Media Pvt. Ltd.! 👋\n\n*Name:* ${name.trim()}\n*Phone:* ${cleanMobile}\n\nI'd like to get a free consultation. Please get in touch!`,
+        );
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMsg}`;
         window.open(whatsappUrl, "_blank");
 
@@ -94,24 +100,42 @@ export default function CTASection() {
         setName("");
 
         // Show success message
-        showNotification("success", "🎉 Thank you! Our team will reach out to you shortly.");
+        showNotification(
+          "success",
+          "🎉 Thank you! Our team will reach out to you shortly.",
+        );
       }
     } catch (error: any) {
       console.error("CTA submission error:", error);
-      showNotification("error", error.message || "Failed to send message. Please try again.");
+      showNotification(
+        "error",
+        error.message || "Failed to send message. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const actionItems = [
-    { icon: <PhoneCall className="w-5 h-5 text-purple-400" />, text: "Talk to Experts" },
-    { icon: <MessageSquare className="w-5 h-5 text-purple-400" />, text: "Get Free Consultation" },
-    { icon: <Rocket className="w-5 h-5 text-purple-400" />, text: "Start Your Project Today" },
+    {
+      icon: <PhoneCall className="w-5 h-5 text-purple-400" />,
+      text: "Talk to Experts",
+    },
+    {
+      icon: <MessageSquare className="w-5 h-5 text-purple-400" />,
+      text: "Get Free Consultation",
+    },
+    {
+      icon: <Rocket className="w-5 h-5 text-purple-400" />,
+      text: "Start Your Project Today",
+    },
   ];
 
   return (
-    <div id="consultation" className="relative mt-0 mb-6 w-full bg-[#0B0011] px-4 pt-8 md:pt-10 pb-10 sm:pb-14 md:pb-20">
+    <div
+      id="consultation"
+      className="relative mt-0 mb-6 w-full bg-[#0B0011] px-4 pt-8 md:pt-10 pb-10 sm:pb-14 md:pb-20"
+    >
       {/* Background Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 -left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[100px]" />
@@ -128,10 +152,11 @@ export default function CTASection() {
             className="fixed top-4 right-4 z-[3999]"
           >
             <div
-              className={`flex items-center gap-3 rounded-2xl px-6 py-4 shadow-2xl backdrop-blur-xl border border-purple-500/20 ${notification.type === "success"
-                ? "bg-purple-500/10 border-purple-500/20 text-purple-200"
-                : "bg-red-500/10 border-red-500/20 text-red-400"
-                }`}
+              className={`flex items-center gap-3 rounded-2xl px-6 py-4 shadow-2xl backdrop-blur-xl border border-purple-500/20 ${
+                notification.type === "success"
+                  ? "bg-purple-500/10 border-purple-500/20 text-purple-200"
+                  : "bg-red-500/10 border-red-500/20 text-red-400"
+              }`}
             >
               {notification.type === "success" ? (
                 <CheckCircle className="w-6 h-6" />
@@ -172,8 +197,8 @@ export default function CTASection() {
             </h2>
 
             <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-xl mb-8 sm:mb-10 leading-relaxed opacity-80">
-              Get a free consultation and discover how custom software can transform
-              your operations and increase your revenue.
+              Get a free consultation and discover how custom software can
+              transform your operations and increase your revenue.
             </p>
 
             <div className="space-y-3 sm:space-y-4">
@@ -209,8 +234,12 @@ export default function CTASection() {
             <div className="absolute inset-0 bg-purple-500/10 blur-3xl -z-10" />
 
             <div className="rounded-2xl sm:rounded-3xl border border-purple-500/20 bg-purple-950/30 backdrop-blur-md p-5 sm:p-8 md:p-10 shadow-2xl">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">Ready to start?</h3>
-              <p className="text-gray-400 text-sm sm:text-base mb-5 sm:mb-6">Tell us about your project and we&apos;ll get back to you.</p>
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">
+                Ready to start?
+              </h3>
+              <p className="text-gray-400 text-sm sm:text-base mb-5 sm:mb-6">
+                Tell us about your project and we&apos;ll get back to you.
+              </p>
 
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 {/* Name Input */}
@@ -230,7 +259,10 @@ export default function CTASection() {
 
                 {/* Mobile Number Input */}
                 <div className="flex gap-2 sm:gap-3">
-                  <div className="relative w-[100px] sm:w-[115px] shrink-0" ref={dropdownRef}>
+                  <div
+                    className="relative w-[100px] sm:w-[115px] shrink-0"
+                    ref={dropdownRef}
+                  >
                     <button
                       type="button"
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -241,8 +273,23 @@ export default function CTASection() {
                         alt="flag"
                         className="w-5 sm:w-6 h-auto rounded-[2px] object-cover shrink-0"
                       />
-                      <span className="font-medium tracking-tight mx-1">{selectedCountry.code}</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-400 shrink-0"><path d="m6 9 6 6 6-6" /></svg>
+                      <span className="font-medium tracking-tight mx-1">
+                        {selectedCountry.code}
+                      </span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-purple-400 shrink-0"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
                     </button>
 
                     <AnimatePresence>
@@ -262,12 +309,21 @@ export default function CTASection() {
                               }}
                               className="flex items-center gap-3 p-3 hover:bg-purple-500/20 rounded-lg cursor-pointer transition-colors"
                             >
-                              <img src={c.flag} alt="flag" className="w-6 h-auto rounded-[2px] object-cover" />
-                              <span className="text-white text-sm font-medium">{c.code} ({c.label})</span>
+                              <img
+                                src={c.flag}
+                                alt="flag"
+                                className="w-6 h-auto rounded-[2px] object-cover"
+                              />
+                              <span className="text-white text-sm font-medium">
+                                {c.code} ({c.label})
+                              </span>
                             </li>
                           ))}
                           {/* Spacer to ensure the last item is fully visible and not cut off by padding */}
-                          <li className="h-2 w-full shrink-0" aria-hidden="true" />
+                          <li
+                            className="h-2 w-full shrink-0"
+                            aria-hidden="true"
+                          />
                         </motion.ul>
                       )}
                     </AnimatePresence>

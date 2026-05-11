@@ -11,7 +11,7 @@ import {
   Sparkles,
   CheckCircle,
   XCircle,
-  User
+  User,
 } from "lucide-react";
 import { ctaApi } from "@/api";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,14 +25,18 @@ console.log(CTAModal);
 console.log("CTA Modal");
 export function CTAModal({ isOpen, onClose }: CTAModalProps) {
   const [countryLabel, setCountryLabel] = useState("IN");
-  const selectedCountry = COUNTRIES.find(c => c.label === countryLabel) || COUNTRIES[0];
+  const selectedCountry =
+    COUNTRIES.find((c) => c.label === countryLabel) || COUNTRIES[0];
   const [mobile, setMobile] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     }
@@ -90,14 +94,19 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
       });
 
       if (response.success) {
-        const phoneNumber = "7978874959";
-        const whatsappMsg = encodeURIComponent(`Hi Vanurtech Media Pvt. Ltd.! I have submitted my request for a consultation. My name is ${name.trim()} and my contact number is ${cleanMobile}.`);
+        const phoneNumber = "919114667215";
+        const whatsappMsg = encodeURIComponent(
+          `Hi Vanurtech Media Pvt. Ltd.! 👋\n\n*Name:* ${name.trim()}\n*Phone:* ${cleanMobile}\n\nI'd like to get a free consultation. Please get in touch!`,
+        );
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMsg}`;
         window.open(whatsappUrl, "_blank");
 
         setMobile("");
         setName("");
-        showNotification("success", "🎉 Thank you! Our team will reach out to you shortly.");
+        showNotification(
+          "success",
+          "🎉 Thank you! Our team will reach out to you shortly.",
+        );
         setTimeout(() => onClose(), 2000);
       }
     } catch (error: any) {
@@ -142,7 +151,9 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">
                   Let&apos;s Build Something <br />
-                  <span className="bg-linear-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Great Together</span>
+                  <span className="bg-linear-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                    Great Together
+                  </span>
                 </h2>
               </div>
               <button
@@ -160,12 +171,17 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${notification.type === "success"
-                    ? "bg-green-500/10 border-green-500/20 text-green-400"
-                    : "bg-red-500/10 border-red-500/20 text-red-400"
-                    }`}
+                  className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${
+                    notification.type === "success"
+                      ? "bg-green-500/10 border-green-500/20 text-green-400"
+                      : "bg-red-500/10 border-red-500/20 text-red-400"
+                  }`}
                 >
-                  {notification.type === "success" ? <CheckCircle className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
+                  {notification.type === "success" ? (
+                    <CheckCircle className="w-5 h-5" />
+                  ) : (
+                    <XCircle className="w-5 h-5" />
+                  )}
                   <p className="text-sm">{notification.message}</p>
                 </motion.div>
               )}
@@ -187,7 +203,10 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
               </div>
 
               <div className="flex gap-2 sm:gap-3">
-                <div className="relative w-[100px] sm:w-[115px] shrink-0" ref={dropdownRef}>
+                <div
+                  className="relative w-[100px] sm:w-[115px] shrink-0"
+                  ref={dropdownRef}
+                >
                   <button
                     type="button"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -198,8 +217,23 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
                       alt="flag"
                       className="w-5 sm:w-6 h-auto rounded-[2px] object-cover shrink-0"
                     />
-                    <span className="font-medium tracking-tight mx-1">{selectedCountry.code}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-400 shrink-0"><path d="m6 9 6 6 6-6" /></svg>
+                    <span className="font-medium tracking-tight mx-1">
+                      {selectedCountry.code}
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-purple-400 shrink-0"
+                    >
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
                   </button>
 
                   <AnimatePresence>
@@ -219,12 +253,21 @@ export function CTAModal({ isOpen, onClose }: CTAModalProps) {
                             }}
                             className="flex items-center gap-3 p-3 hover:bg-purple-500/20 rounded-lg cursor-pointer transition-colors"
                           >
-                            <img src={c.flag} alt="flag" className="w-6 h-auto rounded-[2px] object-cover" />
-                            <span className="text-white text-sm font-medium">{c.code} ({c.label})</span>
+                            <img
+                              src={c.flag}
+                              alt="flag"
+                              className="w-6 h-auto rounded-[2px] object-cover"
+                            />
+                            <span className="text-white text-sm font-medium">
+                              {c.code} ({c.label})
+                            </span>
                           </li>
                         ))}
                         {/* Spacer to ensure the last item is fully visible and not cut off by padding */}
-                        <li className="h-2 w-full shrink-0" aria-hidden="true" />
+                        <li
+                          className="h-2 w-full shrink-0"
+                          aria-hidden="true"
+                        />
                       </motion.ul>
                     )}
                   </AnimatePresence>

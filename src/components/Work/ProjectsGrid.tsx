@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 // import { projectApi, Project, categoryApi, Category } from '@/api';
 import { COUNTRIES } from "@/constants/countries";
-import productDataJSON from '@/data/productData';
-import categoryDataJSON from '@/data/catagoriesData';
+import productDataJSON from "@/data/productData";
+import categoryDataJSON from "@/data/catagoriesData";
 
 // Static types matching the API shape
 type Category = {
@@ -97,10 +97,12 @@ export default function ProjectsGrid() {
       const projects = productDataJSON.result.projects as Project[];
       const filtered = debouncedSearch
         ? projects.filter(
-          (p) =>
-            p.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-            p.description.toLowerCase().includes(debouncedSearch.toLowerCase())
-        )
+            (p) =>
+              p.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+              p.description
+                .toLowerCase()
+                .includes(debouncedSearch.toLowerCase()),
+          )
         : projects;
       setAllProjects(filtered);
     } catch (err: any) {
@@ -141,22 +143,25 @@ export default function ProjectsGrid() {
   */
 
   // Frontend filtering by category
-  const filteredProjects = selectedCategory === 'All'
-    ? allProjects
-    : allProjects.filter(project => {
-      const categoryId = typeof project.category === 'string'
-        ? project.category
-        : project.category?._id;
-      return categoryId === selectedCategory;
-    });
+  const filteredProjects =
+    selectedCategory === "All"
+      ? allProjects
+      : allProjects.filter((project) => {
+          const categoryId =
+            typeof project.category === "string"
+              ? project.category
+              : project.category?._id;
+          return categoryId === selectedCategory;
+        });
 
   // Count projects per category
   const categoryCountMap = React.useMemo(() => {
     const map: Record<string, number> = {};
     allProjects.forEach((project) => {
-      const categoryId = typeof project.category === 'string'
-        ? project.category
-        : project.category?._id;
+      const categoryId =
+        typeof project.category === "string"
+          ? project.category
+          : project.category?._id;
       if (!categoryId) return;
       map[categoryId] = (map[categoryId] || 0) + 1;
     });
@@ -192,7 +197,10 @@ export default function ProjectsGrid() {
   };
 
   return (
-    <div className="flex items-center justify-center p-4 sm:p-6 md:p-8 py-12 sm:py-16 md:py-20" style={{ backgroundColor: '#0B0011' }}>
+    <div
+      className="flex items-center justify-center p-4 sm:p-6 md:p-8 py-12 sm:py-16 md:py-20"
+      style={{ backgroundColor: "#0B0011" }}
+    >
       <div className="max-w-7xl w-full">
         {/* Header */}
         <div className="mb-12 sm:mb-16">
@@ -224,22 +232,30 @@ export default function ProjectsGrid() {
             {/* Category Filter */}
             <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide w-full lg:w-auto">
               <button
-                onClick={() => { setSelectedCategory('All'); setCurrentPage(1); }}
-                className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${selectedCategory === 'All'
-                  ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
-                  : 'bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white'
-                  }`}
+                onClick={() => {
+                  setSelectedCategory("All");
+                  setCurrentPage(1);
+                }}
+                className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
+                  selectedCategory === "All"
+                    ? "bg-purple-600 text-white shadow-lg shadow-purple-500/50"
+                    : "bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white"
+                }`}
               >
                 All
               </button>
               {sortedCategories.map((category) => (
                 <button
                   key={category._id}
-                  onClick={() => { setSelectedCategory(category._id); setCurrentPage(1); }}
-                  className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${selectedCategory === category._id
-                    ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
-                    : 'bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white'
-                    }`}
+                  onClick={() => {
+                    setSelectedCategory(category._id);
+                    setCurrentPage(1);
+                  }}
+                  className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
+                    selectedCategory === category._id
+                      ? "bg-purple-600 text-white shadow-lg shadow-purple-500/50"
+                      : "bg-purple-900/20 text-gray-400 border border-purple-900/50 hover:border-purple-600 hover:text-white"
+                  }`}
                 >
                   {category.name}
                 </button>
@@ -255,16 +271,36 @@ export default function ProjectsGrid() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-4 py-2.5 pl-10 bg-purple-900/20 border border-purple-900/50 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50 transition-all"
               />
-              <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <svg
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
               {searchTerm && (
                 <button
-                  onClick={() => setSearchTerm('')}
+                  onClick={() => setSearchTerm("")}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               )}
@@ -273,13 +309,20 @@ export default function ProjectsGrid() {
 
           {/* Search Info */}
           {debouncedSearch && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 text-sm text-gray-400">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-4 text-sm text-gray-400"
+            >
               {isLoading ? (
                 <span>🔍 Searching...</span>
               ) : (
                 <span>
-                  Found {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} for "{debouncedSearch}"
-                  {filteredProjects.length > 0 && ` (showing page ${currentPage} of ${totalPages})`}
+                  Found {filteredProjects.length} project
+                  {filteredProjects.length !== 1 ? "s" : ""} for "
+                  {debouncedSearch}"
+                  {filteredProjects.length > 0 &&
+                    ` (showing page ${currentPage} of ${totalPages})`}
                 </span>
               )}
             </motion.div>
@@ -312,47 +355,60 @@ export default function ProjectsGrid() {
             {projects.length === 0 ? (
               <div className="text-center py-12 sm:py-20">
                 <p className="text-gray-400 text-lg sm:text-xl">
-                  {debouncedSearch || selectedCategory !== 'All'
-                    ? 'No projects found matching your criteria.'
-                    : 'No projects available yet.'}
+                  {debouncedSearch || selectedCategory !== "All"
+                    ? "No projects found matching your criteria."
+                    : "No projects available yet."}
                 </p>
               </div>
             ) : (
               <>
-                {Array.from({ length: Math.ceil(projects.length / 2) }).map((_, rowIndex) => {
-                  const project1 = projects[rowIndex * 2];
-                  const project2 = projects[rowIndex * 2 + 1];
-                  const isEvenRow = rowIndex % 2 === 0;
+                {Array.from({ length: Math.ceil(projects.length / 2) }).map(
+                  (_, rowIndex) => {
+                    const project1 = projects[rowIndex * 2];
+                    const project2 = projects[rowIndex * 2 + 1];
+                    const isEvenRow = rowIndex % 2 === 0;
 
-                  return (
-                    <div key={rowIndex} className="flex flex-col lg:flex-row gap-6 sm:gap-8">
-                      {project1 && (
-                        <motion.div
-                          custom={rowIndex * 2}
-                          initial="hidden"
-                          whileInView="visible"
-                          viewport={{ once: true, amount: 0.3 }}
-                          variants={cardVariants}
-                          className={`w-full ${isEvenRow ? 'lg:w-[40%]' : 'lg:w-[60%]'}`}
-                        >
-                          <ProjectCard project={project1} hoveredCard={hoveredCard} setHoveredCard={setHoveredCard} />
-                        </motion.div>
-                      )}
-                      {project2 && (
-                        <motion.div
-                          custom={rowIndex * 2 + 1}
-                          initial="hidden"
-                          whileInView="visible"
-                          viewport={{ once: true, amount: 0.3 }}
-                          variants={cardVariants}
-                          className={`w-full ${isEvenRow ? 'lg:w-[60%]' : 'lg:w-[40%]'}`}
-                        >
-                          <ProjectCard project={project2} hoveredCard={hoveredCard} setHoveredCard={setHoveredCard} />
-                        </motion.div>
-                      )}
-                    </div>
-                  );
-                })}
+                    return (
+                      <div
+                        key={rowIndex}
+                        className="flex flex-col lg:flex-row gap-6 sm:gap-8"
+                      >
+                        {project1 && (
+                          <motion.div
+                            custom={rowIndex * 2}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.3 }}
+                            variants={cardVariants}
+                            className={`w-full ${isEvenRow ? "lg:w-[40%]" : "lg:w-[60%]"}`}
+                          >
+                            <ProjectCard
+                              project={project1}
+                              hoveredCard={hoveredCard}
+                              setHoveredCard={setHoveredCard}
+                            />
+                          </motion.div>
+                        )}
+                        {project2 && (
+                          <motion.div
+                            custom={rowIndex * 2 + 1}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.3 }}
+                            variants={cardVariants}
+                            className={`w-full ${isEvenRow ? "lg:w-[60%]" : "lg:w-[40%]"}`}
+                          >
+                            <ProjectCard
+                              project={project2}
+                              hoveredCard={hoveredCard}
+                              setHoveredCard={setHoveredCard}
+                            />
+                          </motion.div>
+                        )}
+                      </div>
+                    );
+                  },
+                )}
               </>
             )}
 
@@ -360,15 +416,21 @@ export default function ProjectsGrid() {
             {totalPages > 1 && (
               <div className="flex justify-center items-center gap-4 mt-12">
                 <button
-                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(1, prev - 1))
+                  }
                   disabled={currentPage === 1}
                   className="px-6 py-2 rounded-full bg-purple-900/20 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-900/40 transition-colors"
                 >
                   Previous
                 </button>
-                <span className="text-gray-400">Page {currentPage} of {totalPages}</span>
+                <span className="text-gray-400">
+                  Page {currentPage} of {totalPages}
+                </span>
                 <button
-                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+                  }
                   disabled={currentPage === totalPages}
                   className="px-6 py-2 rounded-full bg-purple-900/20 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-900/40 transition-colors"
                 >
@@ -391,7 +453,11 @@ interface ProjectCardProps {
   setHoveredCard: (id: number | null) => void;
 }
 
-function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps) {
+function ProjectCard({
+  project,
+  hoveredCard,
+  setHoveredCard,
+}: ProjectCardProps) {
   const [openPopup, setOpenPopup] = useState(false);
   const [selectedWebsite, setSelectedWebsite] = useState<string | null>(null);
   const [name, setName] = useState("");
@@ -403,11 +469,15 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
   const [formError, setFormError] = useState("");
   const [formSuccess, setFormSuccess] = useState("");
 
-  const selectedCountry = COUNTRIES.find(c => c.label === countryLabel) || COUNTRIES[0];
+  const selectedCountry =
+    COUNTRIES.find((c) => c.label === countryLabel) || COUNTRIES[0];
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     }
@@ -483,14 +553,17 @@ function ProjectCard({ project, hoveredCard, setHoveredCard }: ProjectCardProps)
       // ✅ Save token
       if (data.token) {
         localStorage.setItem(LEAD_TOKEN_KEY, data.token);
-        localStorage.setItem(LEAD_EXPIRY_KEY, (Date.now() + ONE_DAY).toString());
+        localStorage.setItem(
+          LEAD_EXPIRY_KEY,
+          (Date.now() + ONE_DAY).toString(),
+        );
       }
 
       setFormSuccess("🎉 Thank you! Redirecting to WhatsApp...");
 
       // ✅ WhatsApp redirect
       setTimeout(() => {
-        const whatsappNumber = "7978874959";
+        const whatsappNumber = "919114667215";
 
         const message = `Hi Vanurtech Media Pvt. Ltd.! 👋
 
@@ -513,7 +586,6 @@ Please share more details.`;
         setPhone("");
         setFormSuccess("");
       }, 1000);
-
     } catch {
       setFormError("Server error. Please try again.");
     } finally {
@@ -529,7 +601,9 @@ Please share more details.`;
       <div className="h-full rounded-2xl sm:rounded-3xl border border-purple-900/50 bg-linear-to-br from-purple-950/20 to-transparent overflow-hidden hover:border-purple-600 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20">
         <div className="p-4 sm:p-6 md:p-8">
           <div className="text-xs text-purple-400 mb-3 sm:mb-4">
-            {typeof project.category === 'string' ? project.category : project.category?.name || 'Uncategorized'}
+            {typeof project.category === "string"
+              ? project.category
+              : project.category?.name || "Uncategorized"}
           </div>
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4 group-hover:text-purple-400 transition-colors">
             {project.title}
@@ -540,11 +614,15 @@ Please share more details.`;
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-4">
-            {project.tags && project.tags.map((tag) => (
-              <span key={tag} className="px-3 sm:px-4 py-1 rounded-full bg-purple-900/30 text-purple-400 text-xs sm:text-sm font-semibold">
-                {tag}
-              </span>
-            ))}
+            {project.tags &&
+              project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 sm:px-4 py-1 rounded-full bg-purple-900/30 text-purple-400 text-xs sm:text-sm font-semibold"
+                >
+                  {tag}
+                </span>
+              ))}
           </div>
 
           {/* Visit Website Button */}
@@ -564,9 +642,10 @@ Please share more details.`;
           <div
             className="rounded-xl sm:rounded-2xl overflow-hidden transform transition-transform duration-700 group-hover:scale-105"
             style={{
-              boxShadow: hoveredCard === parseInt(project._id.slice(-4), 16)
-                ? '0 20px 60px rgba(168, 85, 247, 0.4)'
-                : '0 10px 30px rgba(0, 0, 0, 0.5)',
+              boxShadow:
+                hoveredCard === parseInt(project._id.slice(-4), 16)
+                  ? "0 20px 60px rgba(168, 85, 247, 0.4)"
+                  : "0 10px 30px rgba(0, 0, 0, 0.5)",
             }}
           >
             <img
@@ -579,13 +658,21 @@ Please share more details.`;
       </div>
 
       {/* Glow */}
-      <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none" style={{ zIndex: -1 }} />
+      <div
+        className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-linear-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none"
+        style={{ zIndex: -1 }}
+      />
 
       {/* Lead Popup */}
       {openPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <form onSubmit={handleSubmit} className="w-full max-w-md rounded-2xl bg-[#14001f] p-8 space-y-6">
-            <h2 className="text-2xl font-bold text-white">Enter your details</h2>
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-md rounded-2xl bg-[#14001f] p-8 space-y-6"
+          >
+            <h2 className="text-2xl font-bold text-white">
+              Enter your details
+            </h2>
 
             <input
               value={name}
@@ -601,9 +688,28 @@ Please share more details.`;
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="w-full h-[42px] bg-transparent border-b border-white/30 text-white outline-none flex items-center justify-between pb-1 px-1"
                 >
-                  <img src={selectedCountry.flag} alt="flag" className="w-5 h-auto rounded-[2px] object-cover shrink-0" />
-                  <span className="text-sm font-medium">{selectedCountry.code}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60 shrink-0 ml-1"><path d="m6 9 6 6 6-6" /></svg>
+                  <img
+                    src={selectedCountry.flag}
+                    alt="flag"
+                    className="w-5 h-auto rounded-[2px] object-cover shrink-0"
+                  />
+                  <span className="text-sm font-medium">
+                    {selectedCountry.code}
+                  </span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-white/60 shrink-0 ml-1"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
                 </button>
                 <AnimatePresence>
                   {isDropdownOpen && (
@@ -622,8 +728,14 @@ Please share more details.`;
                           }}
                           className="flex items-center gap-3 p-2 hover:bg-purple-500/20 rounded-lg cursor-pointer transition-colors"
                         >
-                          <img src={c.flag} alt="flag" className="w-6 h-auto rounded-[2px] object-cover" />
-                          <span className="text-white text-sm font-medium">{c.code} ({c.label})</span>
+                          <img
+                            src={c.flag}
+                            alt="flag"
+                            className="w-6 h-auto rounded-[2px] object-cover"
+                          />
+                          <span className="text-white text-sm font-medium">
+                            {c.code} ({c.label})
+                          </span>
                         </li>
                       ))}
                       <li className="h-2 w-full shrink-0" aria-hidden="true" />

@@ -137,7 +137,8 @@ export default function FeaturedProjects() {
             <span className="text-white">Our Work That</span>
             <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">
-              {" "}Speaks{" "}
+              {" "}
+              Speaks{" "}
             </span>
             <span className="text-white">for Itself</span>
           </motion.h2>
@@ -332,7 +333,6 @@ export default function FeaturedProjects() {
           className="text-center mt-12 mb-6"
         >
           <div className="flex flex-col items-center text-center px-4">
-
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
               <span className="text-white">Glide Through Our</span>
               <br />
@@ -342,8 +342,9 @@ export default function FeaturedProjects() {
             </h2>
 
             <p className="mt-4 text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl">
-              Every scroll reveals thoughtful design, intuitive UX, and purposeful
-              development crafted to keep users engaged and businesses ahead.
+              Every scroll reveals thoughtful design, intuitive UX, and
+              purposeful development crafted to keep users engaged and
+              businesses ahead.
             </p>
           </div>
 
@@ -402,11 +403,15 @@ function ProjectCard({
   const [formError, setFormError] = useState("");
   const [formSuccess, setFormSuccess] = useState("");
 
-  const selectedCountry = COUNTRIES.find(c => c.label === countryLabel) || COUNTRIES[0];
+  const selectedCountry =
+    COUNTRIES.find((c) => c.label === countryLabel) || COUNTRIES[0];
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     }
@@ -478,13 +483,16 @@ function ProjectCard({
 
       if (data.token) {
         localStorage.setItem(LEAD_TOKEN_KEY, data.token);
-        localStorage.setItem(LEAD_EXPIRY_KEY, (Date.now() + ONE_DAY).toString());
+        localStorage.setItem(
+          LEAD_EXPIRY_KEY,
+          (Date.now() + ONE_DAY).toString(),
+        );
       }
 
       setFormSuccess("🎉 Thank you! Redirecting to WhatsApp...");
 
       setTimeout(() => {
-        const whatsappNumber = "7978874959";
+        const whatsappNumber = "919114667215";
 
         const message = `Hi Vanurtech Media Pvt. Ltd.! 👋\n\n*Name:* ${name.trim()}\n*Phone:* ${cleanMobile}\n\nI'm interested in this project:\n*Project:* ${project.title}\n*Website:* ${selectedWebsite}\n\nPlease share more details.`;
 
@@ -497,7 +505,6 @@ function ProjectCard({
         setPhone("");
         setFormSuccess("");
       }, 1000);
-
     } catch {
       setFormError("Server error. Please try again.");
     } finally {
@@ -583,8 +590,13 @@ function ProjectCard({
 
       {openPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-          <form onSubmit={handleSubmit} className="w-full max-w-md rounded-2xl bg-[#14001f] p-8 space-y-6 shadow-[0_0_40px_rgba(168,85,247,0.3)]">
-            <h2 className="text-2xl font-bold text-white">Enter your details</h2>
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-md rounded-2xl bg-[#14001f] p-8 space-y-6 shadow-[0_0_40px_rgba(168,85,247,0.3)]"
+          >
+            <h2 className="text-2xl font-bold text-white">
+              Enter your details
+            </h2>
 
             <input
               value={name}
@@ -600,9 +612,28 @@ function ProjectCard({
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="w-full h-[42px] bg-transparent border-b border-white/30 text-white outline-none flex items-center justify-between pb-1 px-1 focus:border-purple-500 transition-colors"
                 >
-                  <img src={selectedCountry.flag} alt="flag" className="w-5 h-auto rounded-[2px] object-cover shrink-0" />
-                  <span className="text-sm font-medium">{selectedCountry.code}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60 shrink-0 ml-1"><path d="m6 9 6 6 6-6" /></svg>
+                  <img
+                    src={selectedCountry.flag}
+                    alt="flag"
+                    className="w-5 h-auto rounded-[2px] object-cover shrink-0"
+                  />
+                  <span className="text-sm font-medium">
+                    {selectedCountry.code}
+                  </span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-white/60 shrink-0 ml-1"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
                 </button>
                 <AnimatePresence>
                   {isDropdownOpen && (
@@ -621,8 +652,14 @@ function ProjectCard({
                           }}
                           className="flex items-center gap-3 p-2 hover:bg-purple-500/20 rounded-lg cursor-pointer transition-colors"
                         >
-                          <img src={c.flag} alt="flag" className="w-6 h-auto rounded-[2px] object-cover" />
-                          <span className="text-white text-sm font-medium">{c.code} ({c.label})</span>
+                          <img
+                            src={c.flag}
+                            alt="flag"
+                            className="w-6 h-auto rounded-[2px] object-cover"
+                          />
+                          <span className="text-white text-sm font-medium">
+                            {c.code} ({c.label})
+                          </span>
                         </li>
                       ))}
                       <li className="h-2 w-full shrink-0" aria-hidden="true" />
