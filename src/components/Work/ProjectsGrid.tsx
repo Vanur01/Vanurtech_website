@@ -565,7 +565,7 @@ function ProjectCard({
       setTimeout(() => {
         const whatsappNumber = "919114667215";
 
-        const message = `Hi Vanurtech Media Pvt. Ltd.! 👋
+        const message = `Hi Vanurtech Media Pvt. Ltd.!
 
 *Name:* ${name.trim()}
 *Phone:* ${cleanMobile}

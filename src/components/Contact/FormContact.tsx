@@ -84,7 +84,7 @@ export default function FormContact() {
     }
 
     const whatsappNumber = "919114667215";
-    const message = `Hi Vanurmedia! 👋
+    const message = `Hi Vanurmedia!
 
 *Name:* ${formData.name}
 *Phone:* ${formData.phone}${formData.email ? `\n*Email:* ${formData.email}` : ""}${formData.company ? `\n*Company:* ${formData.company}` : ""}${formData.interests.length > 0 ? `\n*Interested In:* ${formData.interests.join(", ")}` : ""}${formData.message ? `\n*Message:* ${formData.message}` : ""}

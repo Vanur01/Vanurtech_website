@@ -494,7 +494,7 @@ function ProjectCard({
       setTimeout(() => {
         const whatsappNumber = "919114667215";
 
-        const message = `Hi Vanurtech Media Pvt. Ltd.! 👋\n\n*Name:* ${name.trim()}\n*Phone:* ${cleanMobile}\n\nI'm interested in this project:\n*Project:* ${project.title}\n*Website:* ${selectedWebsite}\n\nPlease share more details.`;
+        const message = `Hi Vanurtech Media Pvt. Ltd.!\n\n*Name:* ${name.trim()}\n*Phone:* ${cleanMobile}\n\nI'm interested in this project:\n*Project:* ${project.title}\n*Website:* ${selectedWebsite}\n\nPlease share more details.`;
 
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 

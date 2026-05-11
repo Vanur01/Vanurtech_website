@@ -90,7 +90,7 @@ export default function CTASection() {
       if (response.success) {
         const phoneNumber = "919114667215";
         const whatsappMsg = encodeURIComponent(
-          `Hi Vanurtech Media Pvt. Ltd.! 👋\n\n*Name:* ${name.trim()}\n*Phone:* ${cleanMobile}\n\nI'd like to get a free consultation. Please get in touch!`,
+          `Hi Vanurtech Media Pvt. Ltd.!\n\n*Name:* ${name.trim()}\n*Phone:* ${cleanMobile}\n\nI'd like to get a free consultation. Please get in touch!`,
         );
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMsg}`;
         window.open(whatsappUrl, "_blank");
