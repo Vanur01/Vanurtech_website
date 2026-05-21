@@ -76,12 +76,12 @@ export default function BlogGrid() {
     selectedCategory === "All"
       ? allBlogs
       : allBlogs.filter((blog) => {
-          const categoryId =
-            typeof blog.category === "string"
-              ? blog.category
-              : blog.category?._id;
-          return categoryId === selectedCategory;
-        });
+        const categoryId =
+          typeof blog.category === "string"
+            ? blog.category
+            : blog.category?._id;
+        return categoryId === selectedCategory;
+      });
 
   // Pagination
   const totalPages = Math.ceil(filteredBlogs.length / itemsPerPage);
